@@ -4,133 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تسجيل الدخول - DigiNest</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            background-color: #0b111e;
-            color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .login-container {
-            background-color: #121b2d;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-            border: 1px solid #1e2d4a;
-        }
-        h2 {
-            color: #00ffcc;
-            margin-bottom: 25px;
-        }
-        .input-group {
-            margin-bottom: 20px;
-            text-align: right;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #a0aec0;
-            font-size: 14px;
-        }
-        input {
-            width: 100%;
-            padding: 12px;
-            border-radius: 6px;
-            border: 1px solid #2d3748;
-            background-color: #1a202c;
-            color: #fff;
-            box-sizing: border-box;
-            font-size: 16px;
-        }
-        input:focus {
-            outline: none;
-            border-color: #00ffcc;
-        }
-        .btn {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: 0.3s;
-        }
-        .btn-submit {
-            background-color: #00ffcc;
-            color: #0b111e;
-        }
-        .btn-submit:hover {
-            background-color: #00cc99;
-        }
-        .btn-wallet {
-            background-color: transparent;
-            border: 1px solid #00ffcc;
-            color: #00ffcc;
-        }
-        .btn-wallet:hover {
-            background-color: rgba(0, 255, 204, 0.1);
-        }
-        .divider {
-            margin: 20px 0;
-            color: #a0aec0;
-            font-size: 14px;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+        body { background-color: #0b111e; color: #ffffff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        .login-container { background-color: #121b2d; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); width: 90%; max-width: 400px; padding: 30px; text-align: center; border: 1px solid #1e293b; }
+        h2 { color: #00ffaa; margin-bottom: 25px; font-size: 24px; }
+        .form-group { margin-bottom: 18px; text-align: right; }
+        label { font-size: 14px; color: #94a3b8; display: block; margin-bottom: 6px; }
+        input[type="text"], input[type="email"], input[type="password"] { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #1e2d42; background-color: #0b1321; color: #ffffff; font-size: 14px; outline: none; }
+        input:focus { border-color: #00ffaa; }
+        .submit-btn { width: 100%; padding: 12px; border-radius: 8px; border: none; background-color: #00ffaa; color: #0b111e; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.3s; }
+        .submit-btn:hover { background-color: #00cc88; }
+        .links-container { margin-top: 20px; font-size: 14px; color: #94a3b8; line-height: 1.8; }
+        .links-container a { color: #00ffaa; text-decoration: none; }
+        .links-container a:hover { text-decoration: underline; }
+        .admin-link { margin-top: 15px; padding-top: 15px; border-top: 1px solid #1e293b; font-size: 13px; }
+        .admin-link a { color: #64748b; font-weight: 500; }
+        .admin-link a:hover { color: #f59e0b; }
     </style>
 </head>
 <body>
 
-<div class="login-container">
-    <h2>تسجيل الدخول</h2>
-    
-    <form id="loginForm">
-        <div class="input-group">
-            <label for="username">اسم المستخدم أو البريد الإلكتروني</label>
-            <input type="text" id="username" required placeholder="أدخل اسم المستخدم">
+    <div class="login-container">
+        <h2>تسجيل الدخول</h2>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label>البريد الإلكتروني أو اسم المستخدم</label>
+                <input type="text" placeholder="أدخل اسم المستخدم" required>
+            </div>
+
+            <div class="form-group">
+                <label>كلمة المرور</label>
+                <input type="password" placeholder="أدخل كلمة المرور" required>
+            </div>
+
+            <button type="submit" class="submit-btn">دخول</button>
+        </form>
+
+        <div class="links-container">
+            ليس لديك حساب؟ <a href="register.html">إنشاء حساب جديد</a>
+            
+            <div class="admin-link">
+                <a href="admin.html"><i class="fa-solid fa-user-shield"></i> دخول المالك / الإدارة</a>
+            </div>
         </div>
-        
-        <div class="input-group">
-            <label for="password">كلمة المرور</label>
-            <input type="password" id="password" required placeholder="أدخل كلمة المرور">
-        </div>
-        
-        <button type="submit" class="btn btn-submit">دخول</button>
-    </form>
-
-    <div class="divider">أو عبر الويب 3</div>
-
-    <button id="connectWalletBtn" class="btn btn-wallet">ربط المحفظة الرقمية</button>
-</div>
-
-<script>
-    // برمجة زر إرسال النموذج التقليدي
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('تم الضغط على تسجيل الدخول! يمكنك ربطها بقاعدة بياناتك الآن.');
-    });
-
-    // برمجة زر ربط المحفظة الأساسي كبداية تجريبية
-    document.getElementById('connectWalletBtn').addEventListener('click', async () => {
-        if (typeof window.ethereum !== 'undefined') {
-            try {
-                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                alert('تم الاتصال بنجاح! المحفظة: ' + accounts[0]);
-            } catch (error) {
-                alert('رفض المستخدم الاتصال أو حدث خطأ.');
-            }
-        } else {
-            alert('لم يتم العثور على محفظة. يرجى فتح الموقع من داخل تطبيق Trust Wallet أو MetaMask.');
-        }
-    });
-</script>
+    </div>
 
 </body>
 </html>
