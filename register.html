@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنشاء حساب جديد - DigiNest</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+        body { background-color: #0f172a; color: #f8fafc; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        .card { background-color: #1e293b; border: 1px solid #334155; border-radius: 12px; width: 100%; max-width: 400px; padding: 32px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        .title { font-size: 24px; color: #10b981; margin-bottom: 24px; text-align: center; font-weight: bold; }
+        .form-group { margin-bottom: 16px; }
+        label { display: block; margin-bottom: 8px; font-size: 14px; color: #94a3b8; }
+        input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #334155; background-color: #0f172a; color: #fff; font-size: 14px; outline: none; }
+        input:focus { border-color: #10b981; }
+        .btn { width: 100%; padding: 12px; border-radius: 8px; border: none; background-color: #10b981; color: #0f172a; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 8px; }
+        .btn:hover { background-color: #059669; }
+        .links { margin-top: 20px; text-align: center; font-size: 14px; color: #94a3b8; }
+        .links a { color: #10b981; text-decoration: none; }
+        .links a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1 class="title">إنشاء حساب جديد</h1>
+        
+        <form id="registerForm">
+            <div class="form-group">
+                <label>الاسم الكامل</label>
+                <input type="text" placeholder="أدخل اسمك الكامل" required>
+            </div>
+            
+            <div class="form-group">
+                <label>البريد الإلكتروني</label>
+                <input type="email" placeholder="example@mail.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label>كلمة المرور</label>
+                <input type="password" placeholder="أدخل كلمة المرور" required>
+            </div>
+
+            <button type="submit" class="btn">إنشاء الحساب</button>
+        </form>
+
+        <div class="links">
+            لديك حساب بالفعل؟ <a href="login.html">تسجيل الدخول</a>
+        </div>
+    </div>
+
+</body>
+</html>
