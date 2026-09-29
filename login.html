@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DigiNest - مكون تسجيل دخول المالك والعميل</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <style>
+    :root {
+      --bg-dark: #07090E;
+      --bg-surface: #0E131F;
+      --bg-card: #141B2D;
+      --border-subtle: #242E47;
+      --amber-primary: #F59E0B;
+      --emerald-primary: #10B981;
+      --text-main: #F9FAFB;
+      --text-muted: #94A3B8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 20px;
+    }
+
+    /* شريط المعاينة العلوي للزر */
+    .demo-bar {
+      max-width: 800px;
+      width: 100%;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .brand-title {
+      font-size: 16px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* زر تسجيل الدخول الرئيسي */
+    .btn-login-trigger {
+      background: linear-gradient(135deg, #F59E0B, #D97706);
+      color: #0F172A;
+      border: none;
+      padding: 9px 18px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.25);
+      transition: all 0.2s ease;
+    }
+    .btn-login-trigger:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35);
+    }
+
+    /* كبسولة المستخدم النشط بعد الدخول */
+    .user-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid #334155;
+      padding: 5px 12px;
+      border-radius: 14px;
+    }
+    .user-role-badge {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+    .role-admin {
+      background: rgba(245, 158, 11, 0.2);
+      color: #FBBF24;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+    .role-customer {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34D399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+
+    .btn-logout {
+      background: transparent;
+      border: none;
+      color: #94A3B8;
+      cursor: pointer;
+      font-size: 14px;
+      padding: 4px;
+      transition: color 0.2s;
+    }
+    .btn-logout:hover {
+      color: #F43F5E;
+    }
+
+    /* شاشة عرض الحالة الموجهة */
+    .status-panel {
+      max-width: 800px;
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+    }
+
+    /* نافذة تسجيل الدخول المنبثقة (Modal) */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 7, 13, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-box {
+      background: #0E131F;
+      border: 1px solid #242E47;
+      border-radius: 22px;
+      max-width: 400px;
+      width: 100%;
+      padding: 26px;
+      position: relative;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8);
+      animation: modalFadeIn 0.2s ease-out;
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      background: rgba(36, 46, 71, 0.5);
+      border: none;
+      color: #94A3B8;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-close-btn:hover { color: #FFF; background: #242E47; }
+
+    .modal-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .modal-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: rgba(245, 158, 11, 0.15);
+      color: #F59E0B;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+      font-size: 20px;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .btn-google {
+      width: 100%;
+      background: #FFFFFF;
+      color: #111827;
+      border: none;
+      padding: 11px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      transition: background 0.2s;
+    }
+    .btn-google:hover { background: #F1F5F9; }
+
+    .quick-logins {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .btn-quick {
+      flex: 1;
+      padding: 8px;
+      font-size: 11px;
+      font-weight: 800;
+      border-radius: 10px;
+      cursor: pointer;
+      background: #141B2D;
+      border: 1px solid #242E47;
+      color: #CBD5E1;
+      transition: all 0.2s;
+    }
+    .btn-quick:hover { background: #1E293B; border-color: #384566; }
+    .btn-quick.admin { color: #FBBF24; border-color: rgba(245, 158, 11, 0.4); }
+
+    .divider {
+      position: relative;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .divider hr { border: none; border-top: 1px solid #242E47; }
+    .divider span {
+      position: absolute;
+      top: -10px;
+      background: #0E131F;
+      padding: 0 10px;
+      font-size: 11px;
+      color: #64748B;
+      right: 50%;
+      transform: translateX(50%);
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+      text-align: right;
+    }
+    .form-group label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: #94A3B8;
+      margin-bottom: 5px;
+    }
+    .form-control {
+      width: 100%;
+      background: #07090E;
+      border: 1px solid #242E47;
+      border-radius: 10px;
+      padding: 10px 12px;
+      color: #FFF;
+      font-size: 13px;
+      outline: none;
+    }
+    .form-control:focus {
+      border-color: #F59E0B;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, #F59E0B, #D97706);
+      color: #0F172A;
+      border: none;
+      padding: 12px;
+      border-radius: 12px;
+      font-weight: 900;
+      font-size: 13px;
+      cursor: pointer;
+      margin-top: 6px;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #10B981;
+      color: #064E3B;
+      font-weight: 800;
+      font-size: 13px;
+      padding: 10px 22px;
+      border-radius: 30px;
+      box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+      display: none;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- شريط المعاينة العلوي للزر -->
+  <div class="demo-bar">
+    <div class="brand-title">
+      <i class="fa-solid fa-cube text-amber-500"></i>
+      <span>DigiNest Auth Header Demo</span>
+    </div>
+
+    <!-- مكان ظهور زر تسجيل الدخول أو كبسولة المستخدم -->
+    <div id="auth-header-slot">
+      <button class="btn-login-trigger" onclick="openAuthModal()">
+        <i class="fa-solid fa-right-to-bracket"></i>
+        <span>تسجيل الدخول</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- لوحة التوجيه والعرض حسب الصلاحية -->
+  <div class="status-panel">
+    <div id="view-guest">
+      <i class="fa-solid fa-user-lock" style="font-size: 40px; color: #64748B; margin-bottom: 15px;"></i>
+      <h3 style="font-size: 20px; font-weight: 900; margin-bottom: 8px;">أنت تتصفح كزائر عادي الآن</h3>
+      <p style="color: var(--text-muted); font-size: 13px; max-width: 500px; margin: 0 auto;">
+        اضغط على زر <strong>تسجيل الدخول</strong> في الأعلى لتجربة الدخول كمالك للمنصة (Admin) أو كعميل مشترٍ (Customer) وملاحظة التوجيه التلقائي للصلاحيات.
+      </p>
+    </div>
+
+    <div id="view-admin" style="display: none; border-top: 3px solid #F59E0B; padding-top: 20px;">
+      <i class="fa-solid fa-crown" style="font-size: 40px; color: #F59E0B; margin-bottom: 15px;"></i>
+      <h3 style="font-size: 22px; font-weight: 900; color: #FBBF24; margin-bottom: 8px;">لوحة تحكم المالك (Admin Dashboard)</h3>
+      <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 20px;">
+        مرحباً بك يا مسؤول المنصة (saermohamad820@gmail.com). تم فتح لوحة المالك لك لإدارة المنتجات، ضبط العمولات، ومراقبة المبيعات.
+      </p>
+      <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+        <span style="background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); color: #FBBF24; padding: 8px 16px; border-radius: 12px; font-size: 13px; font-weight: 700;">
+          💰 أرباح المنصة: $1,420.50
+        </span>
+        <span style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); color: #34D399; padding: 8px 16px; border-radius: 12px; font-size: 13px; font-weight: 700;">
+          ⚙️ عمولة المنصة: 3.0%
+        </span>
+      </div>
+    </div>
+
+    <div id="view-customer" style="display: none; border-top: 3px solid #10B981; padding-top: 20px;">
+      <i class="fa-solid fa-bag-shopping" style="font-size: 40px; color: #10B981; margin-bottom: 15px;"></i>
