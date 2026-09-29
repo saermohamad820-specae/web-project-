@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - DigiNest</title>
+    <style>
+        body {
+            background-color: #0b111e;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background-color: #121b2d;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            border: 1px solid #1e2d4a;
+        }
+        h2 {
+            color: #00ffcc;
+            margin-bottom: 25px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #a0aec0;
+            font-size: 14px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #2d3748;
+            background-color: #1a202c;
+            color: #fff;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        input:focus {
+            outline: none;
+            border-color: #00ffcc;
+        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+        .btn-submit {
+            background-color: #00ffcc;
+            color: #0b111e;
+        }
+        .btn-submit:hover {
+            background-color: #00cc99;
+        }
+        .btn-wallet {
+            background-color: transparent;
+            border: 1px solid #00ffcc;
+            color: #00ffcc;
+        }
+        .btn-wallet:hover {
+            background-color: rgba(0, 255, 204, 0.1);
+        }
+        .divider {
+            margin: 20px 0;
+            color: #a0aec0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>تسجيل الدخول</h2>
+    
+    <form id="loginForm">
+        <div class="input-group">
+            <label for="username">اسم المستخدم أو البريد الإلكتروني</label>
+            <input type="text" id="username" required placeholder="أدخل اسم المستخدم">
+        </div>
+        
+        <div class="input-group">
+            <label for="password">كلمة المرور</label>
+            <input type="password" id="password" required placeholder="أدخل كلمة المرور">
+        </div>
+        
+        <button type="submit" class="btn btn-submit">دخول</button>
+    </form>
+
+    <div class="divider">أو عبر الويب 3</div>
+
+    <button id="connectWalletBtn" class="btn btn-wallet">ربط المحفظة الرقمية</button>
+</div>
+
+<script>
+    // برمجة زر إرسال النموذج التقليدي
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('تم الضغط على تسجيل الدخول! يمكنك ربطها بقاعدة بياناتك الآن.');
+    });
+
+    // برمجة زر ربط المحفظة الأساسي كبداية تجريبية
+    document.getElementById('connectWalletBtn').addEventListener('click', async () => {
+        if (typeof window.ethereum !== 'undefined') {
+            try {
+                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                alert('تم الاتصال بنجاح! المحفظة: ' + accounts[0]);
+            } catch (error) {
+                alert('رفض المستخدم الاتصال أو حدث خطأ.');
+            }
+        } else {
+            alert('لم يتم العثور على محفظة. يرجى فتح الموقع من داخل تطبيق Trust Wallet أو MetaMask.');
+        }
+    });
+</script>
+
+</body>
+</html>
