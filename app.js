@@ -32,4 +32,35 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-});
+});// 3. جلب المنتجات وعرضها في الصفحة
+async function fetchProducts() {
+  const productsContainer = document.getElementById("products-container");
+  if (!productsContainer) return;
+
+  const { data: products, error } = await supabase
+    .from("products")
+    .select("*");
+
+  if (error) {
+    console.error("خطأ في جلب المنتجات:", error.message);
+    return;
+  }
+
+  productsContainer.innerHTML = "";
+
+  products.forEach((product) => {
+    const productCard = `
+      <div class="product-card">
+        <img src="${product.image_url}" alt="${product.title}">
+        <h3>${product.title}</h3>
+        <p>${product.description}</p>
+        <span class="price">${product.price} ETH</span>
+        <button onclick="buyProduct('${product.id}', '${product.price}')">شراء الآن</button>
+      </div>
+    `;
+    productsContainer.innerHTML += productCard;
+  });
+}
+
+document.addEventListener("DOMContentLoaded", fetchProducts);
+
