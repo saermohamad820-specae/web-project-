@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DigiNest - تسجيل دخول المالك</title>
+    <title>DigiNest - لوحة التحكم</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -58,7 +58,6 @@
             font-size: 16px;
             margin-top: 10px;
         }
-        .btn-submit:hover { background-color: #0284c7; color: #fff; }
         .error-msg {
             color: #ef4444;
             font-size: 14px;
@@ -66,13 +65,12 @@
             text-align: center;
             display: none;
         }
-        /* إخفاء لوحة التحكم في البداية */
         #adminPanel { display: none; }
     </style>
 </head>
 <body>
 
-    <!-- 1. نموذج تسجيل الدخول -->
+    <!-- 1. نموذج تسجيل دخول المالك -->
     <div class="card" id="loginCard">
         <h2>تسجيل دخول المالك</h2>
         <div class="error-msg" id="loginError">اسم المستخدم أو كلمة السر غير صحيحة!</div>
@@ -89,7 +87,7 @@
         </form>
     </div>
 
-    <!-- 2. لوحة التحكم (تظهر فقط بعد تسجيل الدخول) -->
+    <!-- 2. لوحة التحكم تضيف المنتج (تظهر بعد الدخول الصحيح) -->
     <div class="card" id="adminPanel">
         <h2>لوحة تحكم المالك</h2>
         <form id="addProductForm">
@@ -106,28 +104,27 @@
     </div>
 
     <script>
-        // تحديد بيانات الدخول الخاصة بالمالك (يمكنك تغييرها)
-        const OWNER_USER = "admin";
+        // تحديد البيانات المطلوبة
+        const OWNER_USER = "Saer";
         const OWNER_PASS = "123456";
 
-        // التعامل مع تسجيل الدخول
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const user = document.getElementById('username').value;
-            const pass = document.getElementById('password').value;
+            
+            // قراءة المدخلات مع تحويل الاسم لحروف صغيرة لتفادي أخطاء الأحرف الكبيرة
+            const user = document.getElementById('username').value.trim();
+            const pass = document.getElementById('password').value.trim();
             const errorDiv = document.getElementById('loginError');
 
-            if (user === OWNER_USER && pass === OWNER_PASS) {
-                // دخول ناجح: إخفاء نموذج الدخول وإظهار لوحة التحكم
+            if (user.toLowerCase() === OWNER_USER.toLowerCase() && pass === OWNER_PASS) {
+                errorDiv.style.display = 'none';
                 document.getElementById('loginCard').style.display = 'none';
                 document.getElementById('adminPanel').style.display = 'block';
             } else {
-                // دخول خاطئ
                 errorDiv.style.display = 'block';
             }
         });
 
-        // التعامل مع إضافة المنتجات
         document.getElementById('addProductForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const name = document.getElementById('productName').value;
