@@ -3,37 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة التحكم - DigiNest</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>DigiNest - لوحة التحكم</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
-        body { background-color: #0f172a; color: #fff; padding: 20px; }
-        .admin-container { max-width: 600px; margin: 40px auto; background: #1e293b; padding: 25px; border-radius: 12px; }
-        h2 { margin-bottom: 20px; color: #38bdf8; text-align: center; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; color: #94a3b8; }
-        input { width: 100%; padding: 10px; background: #0f172a; border: 1px solid #38bdf8; color: #fff; border-radius: 6px; }
-        button { width: 100%; padding: 12px; background: #38bdf8; border: none; color: #0f172a; font-weight: bold; border-radius: 6px; cursor: pointer; margin-top: 10px; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #0f172a;
+            color: #ffffff;
+            font-family: system-ui, -apple-system, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .admin-container {
+            background-color: #1e293b;
+            padding: 30px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        .admin-container h2 {
+            color: #38bdf8;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #94a3b8;
+            font-size: 14px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+            background-color: #0f172a;
+            color: #fff;
+            outline: none;
+        }
+        .form-group input:focus {
+            border-color: #38bdf8;
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background-color: #38bdf8;
+            color: #0f172a;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+        .btn-submit:hover {
+            background-color: #0284c7;
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
+
     <div class="admin-container">
         <h2>لوحة تحكم المالك</h2>
         <form id="addProductForm">
             <div class="form-group">
-                <label>اسم المنتج</label>
-                <input type="text" id="prodName" required placeholder="أدخل اسم المنتج">
+                <label for="productName">اسم المنتج</label>
+                <input type="text" id="productName" placeholder="أدخل اسم المنتج" required>
             </div>
             <div class="form-group">
-                <label>السعر (USDT)</label>
-                <input type="number" id="prodPrice" required placeholder="0.00">
+                <label for="productPrice">السعر (USDT)</label>
+                <input type="number" id="productPrice" step="0.01" placeholder="0.00" required>
             </div>
-            <button type="submit">إضافة المنتج</button>
+            <button type="submit" class="btn-submit">إضافة المنتج</button>
         </form>
     </div>
 
-    <!-- مكتبة Supabase وملف app.js -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="app.js"></script>
 </body>
 </html>
