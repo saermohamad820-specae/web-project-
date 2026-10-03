@@ -3,13 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DigiNest - لوحة التحكم</title>
+    <title>DigiNest - تسجيل دخول المالك</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             background-color: #0f172a;
             color: #ffffff;
@@ -20,7 +16,7 @@
             min-height: 100vh;
             padding: 20px;
         }
-        .admin-container {
+        .card {
             background-color: #1e293b;
             padding: 30px;
             border-radius: 12px;
@@ -28,14 +24,12 @@
             max-width: 450px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
         }
-        .admin-container h2 {
+        .card h2 {
             color: #38bdf8;
             margin-bottom: 20px;
             text-align: center;
         }
-        .form-group {
-            margin-bottom: 15px;
-        }
+        .form-group { margin-bottom: 15px; }
         .form-group label {
             display: block;
             margin-bottom: 8px;
@@ -51,9 +45,7 @@
             color: #fff;
             outline: none;
         }
-        .form-group input:focus {
-            border-color: #38bdf8;
-        }
+        .form-group input:focus { border-color: #38bdf8; }
         .btn-submit {
             width: 100%;
             padding: 12px;
@@ -65,17 +57,40 @@
             cursor: pointer;
             font-size: 16px;
             margin-top: 10px;
-            transition: background 0.2s;
         }
-        .btn-submit:hover {
-            background-color: #0284c7;
-            color: #ffffff;
+        .btn-submit:hover { background-color: #0284c7; color: #fff; }
+        .error-msg {
+            color: #ef4444;
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-align: center;
+            display: none;
         }
+        /* إخفاء لوحة التحكم في البداية */
+        #adminPanel { display: none; }
     </style>
 </head>
 <body>
 
-    <div class="admin-container">
+    <!-- 1. نموذج تسجيل الدخول -->
+    <div class="card" id="loginCard">
+        <h2>تسجيل دخول المالك</h2>
+        <div class="error-msg" id="loginError">اسم المستخدم أو كلمة السر غير صحيحة!</div>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">اسم المستخدم</label>
+                <input type="text" id="username" placeholder="أدخل اسم المستخدم" required>
+            </div>
+            <div class="form-group">
+                <label for="password">كلمة السر</label>
+                <input type="password" id="password" placeholder="أدخل كلمة السر" required>
+            </div>
+            <button type="submit" class="btn-submit">تسجيل الدخول</button>
+        </form>
+    </div>
+
+    <!-- 2. لوحة التحكم (تظهر فقط بعد تسجيل الدخول) -->
+    <div class="card" id="adminPanel">
         <h2>لوحة تحكم المالك</h2>
         <form id="addProductForm">
             <div class="form-group">
@@ -90,5 +105,37 @@
         </form>
     </div>
 
+    <script>
+        // تحديد بيانات الدخول الخاصة بالمالك (يمكنك تغييرها)
+        const OWNER_USER = "admin";
+        const OWNER_PASS = "123456";
+
+        // التعامل مع تسجيل الدخول
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+            const errorDiv = document.getElementById('loginError');
+
+            if (user === OWNER_USER && pass === OWNER_PASS) {
+                // دخول ناجح: إخفاء نموذج الدخول وإظهار لوحة التحكم
+                document.getElementById('loginCard').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+            } else {
+                // دخول خاطئ
+                errorDiv.style.display = 'block';
+            }
+        });
+
+        // التعامل مع إضافة المنتجات
+        document.getElementById('addProductForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('productName').value;
+            const price = document.getElementById('productPrice').value;
+
+            alert(`تمت إضافة المنتج بنجاح!\nالاسم: ${name}\nالسعر: $${price}`);
+            this.reset();
+        });
+    </script>
 </body>
 </html>
