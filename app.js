@@ -147,4 +147,57 @@ async function fetchProducts() {
 }
 
 document.addEventListener("DOMContentLoaded", fetchProducts);
+// 1. دالة رفع الصور/الملفات إلى Supabase Storage
+async function uploadFileToSupabase(fileInputId) {
+  try {
+    const fileInput = document.getElementById(fileInputId);
+    if (!fileInput || !fileInput.files[0]) {
+      alert("يرجى اختيار ملف أو صورة أولاً.");
+      return null;
+    }
+
+    const file = fileInput.files[0];
+    const fileName = `${Date.now()}_${file.name}`;
+
+    const { data, error } = await supabase.storage
+      .from('products')
+      .upload(fileName, file);
+
+    if (error) {
+      console.error("خطأ أثناء الرفع إلى Supabase:", error);
+      alert("فشل رفع الملف.");
+      return null;
+    }
+
+    const { data: publicUrlData } = supabase.storage
+      .from('products')
+      .getPublicUrl(fileName);
+
+    return publicUrlData.publicUrl;
+  } catch (err) {
+    console.error("حدث خطأ غير متوقع:", err);
+    return null;
+  }
+}
+
+// 2. دالة إضافة المنتج عبر العقد الذكي والتخزين
+async function handleAddProduct() {
+  const priceInput = document.getElementById("product-price").value;
+  
+  const fileUrl = await uploadFileToSupabase("product-file-input");
+  if (!fileUrl) return;
+
+  await listNewProduct(priceInput, fileUrl);
+}
+
+async function handleAddProduct() {
+  const priceInput = document.getElementById("product-price").value;
+  
+  // 1. رفع الملف وسحب الرابط المباشر
+  const fileUrl = await uploadFileToSupabase("product-file-input");
+  if (!fileUrl) return;
+
+  // 2. تسجيل المنتج في العقد الذكي باستخدام الرابط
+  await listNewProduct(priceInput, fileUrl);
+}
 
