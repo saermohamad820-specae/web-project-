@@ -1303,19 +1303,17 @@
 
    
 
-// نافذة رفع المنتجات الرقمية الاحترافية
-function openUploadModal() {
-  // إزالة أي نافذة سابقة إن وجدت
+// استبدال دالة الرفع القديمة وتفعيل الرفع المباشر
+window.openUploadModal = function() {
   const existingModal = document.getElementById("custom-upload-modal");
   if (existingModal) existingModal.remove();
 
-  // إنشاء واجهة الإدخال
   const modal = document.createElement("div");
   modal.id = "custom-upload-modal";
   modal.style.cssText = `
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.8); display: flex; align-items: center;
-    justify-content: center; z-index: 10000; direction: rtl;
+    background: rgba(0,0,0,0.85); display: flex; align-items: center;
+    justify-content: center; z-index: 99999; direction: rtl;
   `;
 
   modal.innerHTML = `
@@ -1336,10 +1334,8 @@ function openUploadModal() {
 
   document.body.appendChild(modal);
 
-  // زر الإلغاء
   document.getElementById("cancel-upload-btn").onclick = () => modal.remove();
 
-  // زر التأكيد والرفع
   document.getElementById("submit-upload-btn").onclick = async () => {
     const priceInput = document.getElementById("product-price").value;
     const fileInput = document.getElementById("product-file-input");
@@ -1353,12 +1349,23 @@ function openUploadModal() {
       return;
     }
 
-    modal.remove();
-
     if (typeof handleAddProduct === "function") {
       await handleAddProduct();
     } else {
-      alert("جاري رفع الملف إلى السيرفر والتسجيل في العقد...");
+      alert("جاري بدء معالجة رفع الملف...");
     }
   };
-}
+};
+
+// إجبار زر الرفع في الواجهة على استدعاء النافذة الجديدة
+document.addEventListener("click", (e) => {
+  if (e.target && e.target.innerText && e.target.innerText.includes("رفع منتج")) {
+    e.preventDefault();
+    e.stopPropagation();
+    window.openUploadModal();
+  }
+}, true);
+</script>
+</body>
+</html>
+
