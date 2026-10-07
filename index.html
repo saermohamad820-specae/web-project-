@@ -1332,6 +1332,7 @@ window.openUploadModal = function() {
     </div>
   `;
 
+  
   document.body.appendChild(modal);
 
   document.getElementById("cancel-upload-btn").onclick = () => modal.remove();
@@ -1348,27 +1349,35 @@ window.openUploadModal = function() {
       alert("يرجى اختيار ملف أو صورة قبل المتابعة!");
       return;
     }
-    if (typeof window.handleAddProduct === "function") {
-      await window.handleAddProduct();
-    } else if (typeof handleAddProduct === "function") {
+
+    modal.remove();
+
+    // التحقق المباشر واستدعاء دالة الرفع
+    if (typeof handleAddProduct === "function") {
       await handleAddProduct();
+    } else if (window.handleAddProduct && typeof window.handleAddProduct === "function") {
+      await window.handleAddProduct();
     } else {
-      alert("يرجى التأكد من الاتصال بالمحفظة أولاً قبل رفع المنتج!");
+      alert("يرجى الاتصال بالمحفظة الإلكترونية أولاً لتأكيد المعاملة ورفع المنتج على البلوكشين!");
     }
   };
 };
 
-// إجبار زر الرفع في الواجهة على استدعاء النافذة الجديدة
-document.addEventListener("click", (e) => {
-  if (e.target && e.target.innerText && e.target.innerText.includes("رفع منتج")) {
-    e.preventDefault();
-    e.stopPropagation();
-    window.openUploadModal();
-  }
-}, true);
+// ربط أزرار الرفع بالنافذة الجديدة
+document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("click", (e) => {
+    if (e.target && e.target.innerText && e.target.innerText.includes("رفع منتج")) {
+      e.preventDefault();
+      e.stopPropagation();
+      window.openUploadModal();
+    }
+  }, true);
+});
 </script>
 </body>
 </html>
+
+
 
     
       
