@@ -1301,14 +1301,18 @@
       }, 3000);
     }
 
-    let isArabic = true;
-    function toggleLanguage() {
-      isArabic = !isArabic;
-      document.documentElement.dir = isArabic ? 'rtl' : 'ltr';
-      document.documentElement.lang = isArabic ? 'ar' : 'en';
-      document.getElementById('lang-btn-text').innerText = isArabic ? 'English' : 'العربية';
-      showToast(isArabic ? 'تم تحويل الواجهة إلى العربية' : 'Switched to English');
-    }// دالة فتح نافذة رفع منتج جديد
+   
+
+  
+  let isArabic = true;
+function toggleLanguage() {
+  isArabic = !isArabic;
+  document.documentElement.dir = isArabic ? 'rtl' : 'ltr';
+  document.documentElement.lang = isArabic ? 'ar' : 'en';
+  showToast(isArabic ? 'تم تحويل الواجهة إلى العربية' : 'Switched to English');
+}
+
+// دالة فتح نافذة رفع منتج جديد
 function openUploadModal() {
   const price = prompt("أدخل سعر المنتج الرقمي (مثال: 0.05):");
   if (!price) return;
@@ -1316,10 +1320,13 @@ function openUploadModal() {
   const fileInput = document.createElement("input");
   fileInput.type = "file";
   fileInput.id = "product-file-input";
+  fileInput.style.display = "none";
 
   fileInput.onchange = async () => {
     document.body.appendChild(fileInput);
-    document.getElementById("product-price")?.remove();
+    
+    const oldPrice = document.getElementById("product-price");
+    if (oldPrice) oldPrice.remove();
     
     const priceHidden = document.createElement("input");
     priceHidden.type = "hidden";
@@ -1334,16 +1341,15 @@ function openUploadModal() {
     }
   };
 
+  document.body.appendChild(fileInput);
   fileInput.click();
-}  }
-};
+}
 
 // تفعيل زر الرفع تلقائياً عند الضغط عليه
 document.addEventListener("DOMContentLoaded", () => {
-  const uploadBtns = document.querySelectorAll("button");
-  uploadBtns.forEach(btn => {
-    if (btn.innerText.includes("رفع منتج")) {
-      btn.onclick = openUploadModal;
+  document.addEventListener("click", (e) => {
+    if (e.target && e.target.innerText && e.target.innerText.includes("رفع منتج")) {
+      openUploadModal();
     }
   });
 });
@@ -1351,7 +1357,3 @@ document.addEventListener("DOMContentLoaded", () => {
 </body>
 </html>
 
-
-  </script>
-</body>
-</html>
