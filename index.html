@@ -1584,9 +1584,26 @@ document.addEventListener("DOMContentLoaded", () => {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     color: #ffffff;
     animation: modalPop 0.3s ease-out;
+}
+</style>
+
+<script>
+  document.querySelectorAll('.buy-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const modal = document.querySelector('.custom-modal-content') || document.querySelector('.modal');
+      if (modal) {
+        modal.style.display = 'block';
+      }
+    });
+  });
+</script>
 
 </body>
 </html>
+
+
+
+
 
 
 
