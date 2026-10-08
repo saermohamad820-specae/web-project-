@@ -1624,7 +1624,29 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     }
-  });
+  });  // دالة إظهار التنبيهات
+  function showToast(message) {
+    const toast = document.getElementById('toast-notification');
+    if (toast) {
+      toast.innerText = message;
+      toast.style.display = 'block';
+      setTimeout(() => { toast.style.display = 'none'; }, 3000);
+    }
+  }
+
+  // كود نسخ عنوان المحفظة
+  const copyBtn = document.querySelector('.address-copy-box button');
+  const walletAddr = document.getElementById('checkout-wallet-address');
+  if (copyBtn && walletAddr) {
+    copyBtn.addEventListener('click', function() {
+      navigator.clipboard.writeText(walletAddr.innerText.trim()).then(() => {
+        showToast('تم نسخ عنوان المحفظة بنجاح!');
+      }).catch(() => {
+        showToast('تعذر النسخ، يرجى المحاولة يدويًا');
+      });
+    });
+  }
+
 </script>
 
 </body>
