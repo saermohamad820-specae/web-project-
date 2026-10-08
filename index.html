@@ -1741,10 +1741,92 @@ document.addEventListener("DOMContentLoaded", () => {
       const prodModal = document.getElementById('add-product-modal');
       if (prodModal) prodModal.style.display = 'none';
       addProdForm.reset();
-    });
-  }
+    
+  
 
+
+         
+  
+  
+
+// قيمة الاشتراك الشهري بالدولار
+const SUBSCRIPTION_FEE_USD = "$19.99";
+
+// فحص حالة اشتراك البائع وهل يحق له إضافة منتجات وإجراء عمليات بيع
+function checkVendorSubscription() {
+    let regDate = localStorage.getItem('registrationDate');
+
+    // إذا لم يكن تاريخ التسجيل مسجلاً، يتم تسجيل تاريخ اليوم تلقائياً
+    if (!regDate) {
+        regDate = new Date().toISOString();
+        localStorage.setItem('registrationDate', regDate);
+    }
+
+    const startDate = new Date(regDate);
+    const currentDate = new Date();
+
+    // حساب عدد الأيام المنقضية منذ تسجيل الدخول
+    const diffInMs = Math.abs(currentDate - startDate);
+    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+
+    // فحص هل قُبل الدفع/الاشتراك من قبل المستخدم (true/false)
+    const isPaid = localStorage.getItem('isSubscribed') === 'true';
+
+    // إذا مضت 5 أيام ولم يقم بالدفع
+    if (diffInDays >= 5 && !isPaid) {
+        return {
+            canAddProduct: false,
+            transferSalesToOwner: true,
+            daysLeft: 0,
+            message: "انتهت فترة التجربة المجانية (5 أيام). يرجى دفع قيمة الاشتراك الشهري $19.99 للاستمرار، والأرباح الحالية ستحول للمالك حتى إتمام الدفع."
+        };
+    }
+
+    // إذا كان ضمن الفترة المجانية (أقل من 5 أيام) أو قام بالدفع
+    return {
+        canAddProduct: true,
+        transferSalesToOwner: false,
+        daysLeft: Math.max(0, 5 - diffInDays),
+        message: isPaid ? "اشتراكك نشط." : `أنت في الفترة المجانية. متبقي لديك ${5 - diffInDays} أيام.`
+    };
+}
+
+// معالج إضافة منتج أو إتمام عملية بيع
+document.addEventListener('DOMContentLoaded', () => {
+    const subStatus = checkVendorSubscription();
+
+    // عند محاولة تنفيذ أي عملية بيع أو رفع منتج
+    const addProdForm = document.getElementById('addProdForm'); // تأكد من اسم الـ id الخاص بنموذجك
+    
+    if (addProdForm) {
+        addProdForm.addEventListener('submit', function (e) {
+            if (!subStatus.canAddProduct) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                alert(
+                    "⚠️ تنبيه!\n\n" +
+                    subStatus.message + "\n\n" +
+                    "لتفعيل الحساب وإرسال المبيعات لحسابك الشخصي، يرجى دفع مبلغ " + SUBSCRIPTION_FEE_USD + " شهرياً."
+                );
+
+                return false;
+            }
+
+            // إذا تحققت الشروط وكان ينبغي توجيه الأرباح للمالك:
+            if (subStatus.transferSalesToOwner) {
+                // الكود الخاص بتحويل ملكية المبيعات للمالك
+                console.log("تم تحويل ملكية هذه العملية لحساب المالك بسبب عدم الدفع.");
+            }
+        }, true);
+    }
+});
+
+    
+    
+  
 </script>
+   
 
 </body>
 </html>
