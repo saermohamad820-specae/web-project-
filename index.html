@@ -1360,28 +1360,45 @@ window.openUploadModal = function() {
 // دالة الرفع المباشر والتخزين في Supabase
 async function uploadProductToSupabaseDirect(price, file) {
   try {
-    alert("جاري رفع الملف والتخزين في السيرفر، يرجى الانتظار...");
+      showCustomAlert("جاري رفع الملف والتخزين في السيرفر، يرجى الانتظار...", "جاري التحميل ⏳");
 
-    // إذا كانت مكتبة Supabase معرفة يتم الرفع إلى Storage
+    // معرفة يتم الرفع إلى Supabase إذا كانت مكتبة Supabase موجودة
     if (window.supabase) {
       const fileName = `${Date.now()}_${file.name}`;
-      const { data, error } = await window.supabase.storage
+      const { data, error } = await window.supabase
+        .storage
         .from('products')
         .upload(fileName, file);
 
       if (error) throw error;
 
-      alert("تم رفع المنتج وتخزينه في المنصة بنجاح! 🎉");
+      showCustomAlert("تم رفع المنتج وتخزينه في المنصة بنجاح!", "تم بنجاح 🎉");
     } else {
-      // محاكاة النجاح في حال عدم اكتمال مفاتيح Supabase في الصفحة
-      alert("تم معالجة الملف ورفع المنتج بنجاح! 🎉");
+      // محاكاة النجاح في حال عدم اكتمال مفاتيح Supabase
+      showCustomAlert("تم معالجة الملف ورفع المنتج بنجاح!", "تم بنجاح 🎉");
     }
-    
-    // إعادة تحميل الصفحة لتحديث العرض
-    window.location.reload();
+
+    // إعادة تحميل الصفحة لتحديث العرض بعد إغلاق النافذة
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
+
   } catch (err) {
     console.error(err);
-    alert("حدث خطأ أثناء الرفع: " + (err.message || "يرجى المحاولة مرة أخرى"));
+    showCustomAlert("حدث خطأ أثناء الرفع: " + err.message, "خطأ ⚠️");
+  }
+   
+
+    
+  
+
+    
+    
+    
+    
+  
+    
+  
   }
 }
 
@@ -1481,6 +1498,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("DOMContentLoaded", displayProducts);
 </script>
+<!-- 1. هيكل نافذة التنبيه المخصصة (HTML) -->
+<div id="customAlertModal" class="custom-modal-overlay" style="display: none;">
+  <div class="custom-modal-content">
+    <div class="modal-icon">🎉</div>
+    <h3 id="customAlertTitle">تم بنجاح!</h3>
+    <p id="customAlertMessage">تم معالجة الملف ورفع المنتج بنجاح.</p>
+    <button class="modal-btn" onclick="closeCustomAlert()">حسناً</button>
+  </div>
+</div>
+
+<!-- 2. تنسيق النافذة المخصصة (CSS) -->
+<style>
+  .custom-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+
+  .custom-modal-content {
+    background: #181824;
+    border: 1px solid #2d2d44;
+    border-radius: 16px;
+    padding: 24px;
+    width: 90%;
+    max-width: 360px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    animation: modalPop 0.3s ease-out;
 
 </body>
 </html>
