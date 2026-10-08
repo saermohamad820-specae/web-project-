@@ -1593,7 +1593,11 @@ document.addEventListener("DOMContentLoaded", () => {
     <span class="close-modal-btn" style="position: absolute; top: 12px; left: 15px; cursor: pointer; font-size: 24px; color: #888;">&times;</span>
     
     <h2 style="text-align: center; margin-bottom: 15px; font-size: 20px; color: #00d2d3;">🛒 بازار المنتجات الرقمية</h2>
-    
+        <!-- زر إضافة منتج جديد داخل البازار -->
+    <div style="text-align: center; margin-bottom: 15px;">
+      <button id="add-product-btn" style="background: #10ac84; color: #fff; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;">+ إضافة منتج جديد</button>
+    </div>
+
     <!-- قائمة منتجات البازار -->
     <div class="bazaar-items-list" style="display: flex; flex-direction: column; gap: 12px; max-height: 350px; overflow-y: auto;">
       
@@ -1618,6 +1622,35 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
   </div>
 </div>
+<!-- نافذة إضافة منتج جديد -->
+<div id="add-product-modal" class="custom-modal-overlay" style="display: none;">
+  <div class="custom-modal-content" style="position: relative; max-width: 450px; width: 90%; background: #1a1e29; border-radius: 12px; padding: 20px; color: #fff;">
+    <span class="close-product-modal" style="position: absolute; top: 12px; left: 15px; cursor: pointer; font-size: 24px; color: #888;">&times;</span>
+    <h3 style="text-align: center; margin-bottom: 15px; color: #00d2d3;">إضافة منتج جديد للبازار</h3>
+    <form id="add-product-form" style="display: flex; flex-direction: column; gap: 10px;">
+      <input type="text" id="prod-title" placeholder="اسم المنتج" required style="padding: 10px; border-radius: 6px; border: 1px solid #333; background: #252a38; color: #fff;">
+      <input type="number" step="0.001" id="prod-price" placeholder="السعر بـ ETH" required style="padding: 10px; border-radius: 6px; border: 1px solid #333; background: #252a38; color: #fff;">
+      <button type="submit" style="background: #10ac84; color: #fff; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 5px;">نشر المنتج</button>
+    </form>
+  </div>
+</div>
+  // كود فتح وإغلاق نافذة إضافة المنتج
+  const addProdBtn = document.getElementById('add-product-btn');
+  const addProdModal = document.getElementById('add-product-modal');
+  const closeProdBtn = document.querySelector('.close-product-modal');
+
+  if (addProdBtn && addProdModal) {
+    addProdBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      addProdModal.style.display = 'flex';
+    });
+  }
+
+  if (closeProdBtn && addProdModal) {
+    closeProdBtn.addEventListener('click', function() {
+      addProdModal.style.display = 'none';
+    });
+  }
 
 
 <script>
@@ -1664,6 +1697,50 @@ document.addEventListener("DOMContentLoaded", () => {
       }).catch(() => {
         showToast('تعذر النسخ، يرجى المحاولة يدويًا');
       });
+    });
+  }
+  // كود معالجة تسجيل الدخول وفتح صلاحيات البائع
+  const loginForm = document.getElementById('login-form');
+  if (loginForm) {
+    loginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      localStorage.setItem('isLoggedIn', 'true');
+      if (typeof showToast === 'function') {
+        showToast('تم تسجيل الدخول بنجاح! يمكنك الآن رفع منتجاتك.');
+      }
+      const loginModal = document.querySelector('.login-modal-overlay');
+      if (loginModal) loginModal.style.display = 'none';
+    });
+  }
+  // كود معالجة إضافة منتج جديد من قبل البائع
+  const addProdForm = document.getElementById('add-product-form');
+  if (addProdForm) {
+    addProdForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const title = document.getElementById('prod-title').value;
+      const price = document.getElementById('prod-price').value;
+      
+      const bazaarList = document.querySelector('.bazaar-items-list');
+      if (bazaarList) {
+        const newCard = document.createElement('div');
+        newCard.className = 'bazaar-card';
+        newCard.style.cssText = 'background: #252a38; padding: 12px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;';
+        newCard.innerHTML = `
+          <div>
+            <h4 style="margin: 0 0 5px 0; font-size: 15px;">${title}</h4>
+            <span style="font-size: 13px; color: #10ac84;">${price} ETH</span>
+          </div>
+          <button class="buy-bazaar-item-btn" data-price="${price}" style="background: #10ac84; color: #fff; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-weight: bold;">شراء</button>
+        `;
+        bazaarList.appendChild(newCard);
+      }
+      
+      if (typeof showToast === 'function') {
+        showToast('تم نشر منتجك في البازار بنجاح!');
+      }
+      const prodModal = document.getElementById('add-product-modal');
+      if (prodModal) prodModal.style.display = 'none';
+      addProdForm.reset();
     });
   }
 
