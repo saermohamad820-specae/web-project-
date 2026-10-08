@@ -1587,18 +1587,36 @@ document.addEventListener("DOMContentLoaded", () => {
 }
 </style>
 
+<!-- زر فتح البازار -->
 <button id="bazaar-btn">بازار</button>
 
+<!-- النافذة المنبثقة للبازار مع زر الإغلاق X -->
+<div class="custom-modal-overlay">
+  <div class="custom-modal-content" style="position: relative;">
+    <span class="close-modal-btn" style="position: absolute; top: 10px; left: 15px; cursor: pointer; font-size: 22px; color: #aaa;">&times;</span>
+    <h2>محتوى البازار</h2>
+    <p>مرحباً بك في البازار!</p>
+  </div>
+</div>
+
+<!-- السكربت -->
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const bazaarBtn = document.getElementById('bazaar-btn');
     const modalOverlay = document.querySelector('.custom-modal-overlay');
+    const closeBtn = document.querySelector('.close-modal-btn');
 
     if (bazaarBtn && modalOverlay) {
       bazaarBtn.addEventListener('click', function(e) {
         e.preventDefault();
         modalOverlay.style.display = 'flex';
       });
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+          modalOverlay.style.display = 'none';
+        });
+      }
 
       modalOverlay.addEventListener('click', function(e) {
         if (e.target === modalOverlay) {
@@ -1611,6 +1629,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+
 
 
 
