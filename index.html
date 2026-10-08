@@ -1587,21 +1587,30 @@ document.addEventListener("DOMContentLoaded", () => {
 }
 </style>
 
+<button id="bazaar-btn">بازار</button>
+
 <script>
-  document.querySelectorAll('.buy-btn').forEach(button => {
-    button.addEventListener('click', () => {
-      const modal = document.querySelector('.custom-modal-content') || document.querySelector('.modal');
-      if (modal) {
-        modal.style.display = 'block';
-      }
-    });
+  document.addEventListener('DOMContentLoaded', function() {
+    const bazaarBtn = document.getElementById('bazaar-btn');
+    const modalOverlay = document.querySelector('.custom-modal-overlay');
+
+    if (bazaarBtn && modalOverlay) {
+      bazaarBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        modalOverlay.style.display = 'flex';
+      });
+
+      modalOverlay.addEventListener('click', function(e) {
+        if (e.target === modalOverlay) {
+          modalOverlay.style.display = 'none';
+        }
+      });
+    }
   });
 </script>
 
 </body>
 </html>
-
-
 
 
 
