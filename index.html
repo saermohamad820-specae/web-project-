@@ -1586,20 +1586,40 @@ document.addEventListener("DOMContentLoaded", () => {
     animation: modalPop 0.3s ease-out;
 }
 </style>
-
-<!-- زر فتح البازار -->
-<button id="bazaar-btn">بازار</button>
-
-<!-- النافذة المنبثقة للبازار مع زر الإغلاق X -->
+<!-- النافذة المنبثقة للبازار متضمنة المنتجات -->
 <div class="custom-modal-overlay">
-  <div class="custom-modal-content" style="position: relative;">
-    <span class="close-modal-btn" style="position: absolute; top: 10px; left: 15px; cursor: pointer; font-size: 22px; color: #aaa;">&times;</span>
-    <h2>محتوى البازار</h2>
-    <p>مرحباً بك في البازار!</p>
+  <div class="custom-modal-content" style="position: relative; max-width: 500px; width: 90%; background: #1a1e29; border-radius: 12px; padding: 20px; color: #fff;">
+    <!-- زر الإغلاق X -->
+    <span class="close-modal-btn" style="position: absolute; top: 12px; left: 15px; cursor: pointer; font-size: 24px; color: #888;">&times;</span>
+    
+    <h2 style="text-align: center; margin-bottom: 15px; font-size: 20px; color: #00d2d3;">🛒 بازار المنتجات الرقمية</h2>
+    
+    <!-- قائمة منتجات البازار -->
+    <div class="bazaar-items-list" style="display: flex; flex-direction: column; gap: 12px; max-height: 350px; overflow-y: auto;">
+      
+      <!-- منتج 1 -->
+      <div class="bazaar-card" style="background: #252a38; padding: 12px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <h4 style="margin: 0 0 5px 0; font-size: 15px;">اشتراك VIP مميز</h4>
+          <span style="font-size: 13px; color: #10ac84;">0.01 ETH</span>
+        </div>
+        <button class="buy-bazaar-item-btn" data-price="0.01" style="background: #10ac84; color: #fff; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-weight: bold;">شراء</button>
+      </div>
+
+      <!-- منتج 2 -->
+      <div class="bazaar-card" style="background: #252a38; padding: 12px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <h4 style="margin: 0 0 5px 0; font-size: 15px;">حزمة أصول NFT رقمية</h4>
+          <span style="font-size: 13px; color: #10ac84;">0.025 ETH</span>
+        </div>
+        <button class="buy-bazaar-item-btn" data-price="0.025" style="background: #10ac84; color: #fff; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-weight: bold;">شراء</button>
+      </div>
+
+    </div>
   </div>
 </div>
 
-<!-- السكربت -->
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const bazaarBtn = document.getElementById('bazaar-btn');
