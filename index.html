@@ -1394,13 +1394,97 @@ document.addEventListener("DOMContentLoaded", () => {
       window.openUploadModal();
     }
   }, true);
+  });
 });
 </script>
+
+<!-- قسم عرض المنتجات المرفوعة -->
+<section class="products-section">
+  <h2>المنتجات المتاحة</h2>
+  <div id="productsGrid" class="products-grid">
+    <!-- ستظهر المنتجات هنا ديناميكياً -->
+  </div>
+</section>
+
+<!-- تنسيق قسم المنتجات -->
+<style>
+  .products-section {
+    padding: 30px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .products-section h2 {
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+  }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
+  .product-card {
+    background: #1e1e2f;
+    border: 1px solid #2d2d44;
+    border-radius: 12px;
+    padding: 16px;
+    color: #fff;
+    transition: transform 0.2s ease;
+  }
+  .product-card:hover {
+    transform: translateY(-5px);
+  }
+  .product-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  .product-card h3 {
+    margin: 12px 0 8px;
+    font-size: 1.1rem;
+  }
+  .product-card p {
+    color: #aaa;
+    font-size: 0.9rem;
+  }
+  .product-card .price {
+    color: #4ef075;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 10px;
+  }
+</style>
+
+<!-- كود العرض وقراءة المنتجات -->
+<script>
+  function displayProducts() {
+    const productsGrid = document.getElementById('productsGrid');
+    if (!productsGrid) return;
+
+    const products = JSON.parse(localStorage.getItem('diginest_products') || '[]');
+
+    if (products.length === 0) {
+      productsGrid.innerHTML = '<p style="color: #888;">لا توجد منتجات معروضة حالياً.</p>';
+      return;
+    }
+
+    productsGrid.innerHTML = products.map(product => `
+      <div class="product-card">
+        <img src="${product.imageUrl || 'https://via.placeholder.com/300x180'}" alt="${product.title}">
+        <h3>${product.title || 'منتج بدون عنوان'}</h3>
+        <p>${product.description || ''}</p>
+        <div class="price">${product.price || '0'} ETH</div>
+      </div>
+    `).join('');
+  }
+
+  document.addEventListener("DOMContentLoaded", displayProducts);
+</script>
+
 </body>
 </html>
 
-    
-</html>
 
 
 
