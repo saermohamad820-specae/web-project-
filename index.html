@@ -1824,7 +1824,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     
     
-  
+          }
+    }, true);
+}
+});
+
+
+document.addEventListener('click', function(event) {
+    if (event.target.matches('.close, .close-btn, [class*="close"], [class*="cancel"]') || event.target.innerHTML.includes('&times;')) {
+        const modal = event.target.closest('.modal, .modal-overlay, div[style*="flex"], div[style*="block"]');
+        if (modal) { modal.style.display = 'none'; }
+    }
+    if (event.target.classList && event.target.classList.contains('modal-overlay')) {
+        event.target.style.display = 'none';
+    }
+});
+
+</script>
+
 </script>
    
 
