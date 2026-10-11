@@ -1590,7 +1590,9 @@ document.addEventListener("DOMContentLoaded", () => {
 <div class="custom-modal-overlay">
   <div class="custom-modal-content" style="position: relative; max-width: 500px; width: 90%; background: #1a1e29; border-radius: 12px; padding: 20px; color: #fff;">
     <!-- زر الإغلاق X -->
-    <span class="close-modal-btn" style="position: absolute; top: 12px; left: 15px; cursor: pointer; font-size: 24px; color: #888;">&times;</span>
+  <span class="close-modal-btn" onclick="this.closest('.custom-modal-overlay').style.display='none'">&times;</span>
+    
+
     
     <h2 style="text-align: center; margin-bottom: 15px; font-size: 20px; color: #00d2d3;">🛒 بازار المنتجات الرقمية</h2>
         <!-- زر إضافة منتج جديد داخل البازار -->
