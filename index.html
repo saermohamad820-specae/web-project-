@@ -1841,9 +1841,43 @@ document.addEventListener('click', function(event) {
         event.target.style.display = 'none';
     }
 });
+        if (event.target.classList && event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+    }
+});
+
+function switchTab(tabId) {
+    const tabs = document.querySelectorAll('[id^="tab-"], .products-grid');
+    tabs.forEach(tab => {
+        if (tab) tab.style.display = 'none';
+    });
+    const targetTab = document.getElementById(tabId);
+    if (targetTab) {
+        targetTab.style.display = 'block';
+    }
+  
+  
+      
+    }
+}
 </script>
+
+
+<!-- شريط التنقل السفلي -->
+<div style="position: fixed; bottom: 0; left: 0; width: 100%; background: #1a1a1a; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #333; z-index: 1000;">
+    <button onclick="switchTab('products-grid')" style="background: none; border: none; color: #fff; cursor: pointer; font-size: 14px;">🛒 السوق</button>
+    <button onclick="switchTab('tab-studio')" style="background: none; border: none; color: #fff; cursor: pointer; font-size: 14px;">🎨 الاستوديو</button>
+    <button onclick="switchTab('tab-library')" style="background: none; border: none; color: #fff; cursor: pointer; font-size: 14px;">📦 مشترياتي</button>
+</div>
+
 </body>
 </html>
+
+
+
+
+      
+    
 
 
 
