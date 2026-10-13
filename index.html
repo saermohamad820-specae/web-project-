@@ -804,6 +804,315 @@ document.addEventListener('DOMContentLoaded', () => {
   displayProducts();
   renderLibrary();
 });
+</script>  
+  <!-- DigiNest Web3 Admin Panel -->
+<style>
+#dn-admin-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 99999;
+  padding: 13px 18px;
+  background: #6c4cff;
+  color: white;
+  border: 0;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 5px 20px #0003;
+}
+
+#dn-admin-panel {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  background: #f4f5fb;
+  color: #202033;
+  overflow-y: auto;
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  direction: rtl;
+}
+
+#dn-admin-panel * {
+  box-sizing: border-box;
+}
+
+.dn-box {
+  max-width: 650px;
+  margin: 20px auto;
+  padding: 22px;
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 5px 25px #0001;
+}
+
+.dn-box input,
+.dn-box textarea {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 9px;
+  font-size: 16px;
+}
+
+.dn-button {
+  border: 0;
+  padding: 11px 15px;
+  border-radius: 9px;
+  margin: 5px 3px;
+  cursor: pointer;
+  background: #6c4cff;
+  color: white;
+}
+
+.dn-delete {
+  background: #dc3545;
+}
+
+.dn-product {
+  border: 1px solid #eee;
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 10px;
+  overflow-wrap: anywhere;
+}
+</style>
+
+<button id="dn-admin-btn" type="button">
+  ⚙️ إدارة المتجر
+</button>
+
+<div id="dn-admin-panel">
+  <div class="dn-box">
+    <h2>لوحة إدارة DigiNest Web3</h2>
+    <p>إدارة المنتجات المحفوظة على هذا الجهاز.</p>
+
+    <button class="dn-button" id="dn-close" type="button">
+      إغلاق اللوحة
+    </button>
+
+    <hr>
+
+    <h3>إضافة منتج جديد</h3>
+
+    <form id="dn-product-form">
+      <input id="dn-name" placeholder="اسم المنتج" required>
+
+      <textarea
+        id="dn-description"
+        placeholder="وصف المنتج"
+        required
+      ></textarea>
+
+      <input
+        id="dn-price"
+        type="number"
+        min="0"
+        step="0.01"
+        placeholder="السعر"
+        required
+      >
+
+      <input
+        id="dn-image"
+        type="url"
+        placeholder="رابط صورة المنتج (اختياري)"
+      >
+
+      <input
+        id="dn-file"
+        type="url"
+        placeholder="رابط ملف التنزيل (اختياري)"
+      >
+
+      <button class="dn-button" type="submit">
+        إضافة المنتج
+      </button>
+    </form>
+
+    <hr>
+
+    <h3>المنتجات المضافة</h3>
+    <div id="dn-products"></div>
+
+    <p style="color:#b42318;font-size:13px">
+      تنبيه: هذه اللوحة ليست نظام إدارة محمياً. لا تضع فيها
+      كلمات مرور أو مفاتيح دفع أو معلومات سرية.
+    </p>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  const STORAGE_KEY = "diginest_admin_products_v1";
+
+  const panel = document.getElementById("dn-admin-panel");
+  const form = document.getElementById("dn-product-form");
+  const list = document.getElementById("dn-products");
+
+  function loadProducts() {
+    try {
+      const data = JSON.parse(
+        localStorage.getItem(STORAGE_KEY) || "[]"
+      );
+
+      return Array.isArray(data) ? data : [];
+    } catch (error) {
+      return [];
+    }
+  }
+
+  function saveProducts(products) {
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(products)
+    );
+  }
+
+  function addText(parent, tag, text, className) {
+    const element = document.createElement(tag);
+    element.textContent = text;
+
+    if (className) {
+      element.className = className;
+    }
+
+    parent.appendChild(element);
+    return element;
+  }
+
+  function renderProducts() {
+    list.replaceChildren();
+
+    const products = loadProducts();
+
+    if (products.length === 0) {
+      addText(list, "p", "لا توجد منتجات مضافة بعد.");
+      return;
+    }
+
+    products.forEach(function (product) {
+      const card = document.createElement("div");
+      card.className = "dn-product";
+
+      addText(card, "h4", product.name);
+      addText(card, "p", product.description);
+      addText(card, "p", "السعر: " + product.price);
+
+      if (product.image) {
+        const image = document.createElement("img");
+        image.src = product.image;
+        image.alt = product.name;
+        image.loading = "lazy";
+        image.style.maxWidth = "120px";
+        image.style.borderRadius = "8px";
+
+        image.onerror = function () {
+          image.remove();
+        };
+
+        card.appendChild(image);
+      }
+
+      if (product.file) {
+        const link = document.createElement("a");
+        link.href = product.file;
+        link.textContent = "رابط ملف المنتج";
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        card.appendChild(link);
+      }
+
+      const deleteButton = document.createElement("button");
+      deleteButton.type = "button";
+      deleteButton.className = "dn-button dn-delete";
+      deleteButton.textContent = "حذف المنتج";
+
+      deleteButton.addEventListener("click", function () {
+        if (!confirm("هل تريد حذف هذا المنتج من هذه اللوحة؟")) {
+          return;
+        }
+
+        const updated = loadProducts().filter(function (item) {
+          return item.id !== product.id;
+        });
+
+        saveProducts(updated);
+        renderProducts();
+      });
+
+      card.appendChild(deleteButton);
+      list.appendChild(card);
+    });
+  }
+
+  document.getElementById("dn-admin-btn").addEventListener(
+    "click",
+    function () {
+      panel.style.display = "block";
+      renderProducts();
+    }
+  );
+
+  document.getElementById("dn-close").addEventListener(
+    "click",
+    function () {
+      panel.style.display = "none";
+    }
+  );
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const name = document.getElementById("dn-name").value.trim();
+    const description = document.getElementById(
+      "dn-description"
+    ).value.trim();
+
+    const price = Number(
+      document.getElementById("dn-price").value
+    );
+
+    const image = document.getElementById("dn-image").value.trim();
+    const file = document.getElementById("dn-file").value.trim();
+
+    if (!name || !description || !Number.isFinite(price) || price < 0) {
+      alert("يرجى إدخال بيانات المنتج بصورة صحيحة.");
+      return;
+    }
+
+    const products = loadProducts();
+
+    products.push({
+      id: Date.now().toString(36) +
+          Math.random().toString(36).slice(2),
+      name: name,
+      description: description,
+      price: price,
+      image: image,
+      file: file
+    });
+
+    try {
+      saveProducts(products);
+    } catch (error) {
+      alert("تعذر الحفظ. قد تكون مساحة التخزين ممتلئة.");
+      return;
+    }
+
+    form.reset();
+    renderProducts();
+
+    alert("تم حفظ المنتج على هذا الجهاز.");
+  });
+})();
 </script>
 </body>
 </html>
