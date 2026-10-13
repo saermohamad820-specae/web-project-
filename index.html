@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>DigiNest | المتجر الرقمي اللامركزي للمنتجات الرقمية والمدفوعات المشفرة</title>
+  <title>DigiNest | المتجر الرقمي اللامركزي</title>
   
-  <meta name="description" content="DigiNest - سوق لامركزي لبيع وشراء المنتجات الرقمية والبرمجيات وقوالب الذكاء الاصطناعي بدفع فوري مع نظام اشتراك للبائعين.">
+  <meta name="description" content="DigiNest - سوق لامركزي لبيع وشراء المنتجات الرقمية والبرمجيات مع نظام اشتراك شهري للبائعين.">
   <meta name="theme-color" content="#0B0F17">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,28 +18,17 @@
       --bg-dark: #07090E;
       --bg-surface: #0E131F;
       --bg-card: #141B2D;
-      --bg-card-hover: #1A243B;
       --border-subtle: #242E47;
-      --border-focus: #10B981;
-      
       --emerald-500: #10B981;
       --emerald-400: #34D399;
       --emerald-glow: rgba(16, 185, 129, 0.25);
-      
       --amber-400: #FBBF24;
-      --cyan-400: #22D3EE;
-      --purple-400: #A78BFA;
-      
       --text-primary: #F9FAFB;
       --text-secondary: #94A3B8;
       --text-muted: #64748B;
-      
       --font-ar: 'Tajawal', sans-serif;
-      --font-en: 'Inter', sans-serif;
-      --radius-sm: 8px;
-      --radius-md: 14px;
-      --radius-lg: 20px;
-      --radius-xl: 28px;
+      --radius-md: 12px;
+      --radius-xl: 20px;
     }
 
     * {
@@ -57,34 +46,16 @@
       display: flex;
       flex-direction: column;
       overflow-x: hidden;
-      padding-bottom: 70px;
+      padding-bottom: 90px;
     }
-
-    @media (min-width: 768px) {
-      body { padding-bottom: 0; }
-    }
-
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg-dark); }
-    ::-webkit-scrollbar-thumb { background: #242E47; border-radius: 10px; }
 
     .top-announcement {
       background: linear-gradient(90deg, #059669, #10B981, #0284C7);
       color: #064E3B;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 800;
-      padding: 6px 15px;
+      padding: 8px 12px;
       text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-    .top-announcement span {
-      background: rgba(255, 255, 255, 0.25);
-      padding: 2px 8px;
-      border-radius: 20px;
-      color: #064E3B;
     }
 
     header {
@@ -94,7 +65,7 @@
       position: sticky;
       top: 0;
       z-index: 40;
-      padding: 12px 18px;
+      padding: 10px 14px;
     }
 
     .header-inner {
@@ -103,69 +74,99 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
+      gap: 8px;
     }
 
     .brand-logo {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 6px;
       text-decoration: none;
       color: inherit;
     }
 
     .brand-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
       background: linear-gradient(135deg, #10B981, #047857);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
+      font-size: 16px;
       color: #FFFFFF;
-      box-shadow: 0 0 16px var(--emerald-glow);
+      box-shadow: 0 0 12px var(--emerald-glow);
     }
 
     .brand-title h1 {
-      font-size: 19px;
+      font-size: 15px;
       font-weight: 900;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
     }
 
     .brand-title span.tag {
-      font-size: 10px;
+      font-size: 8px;
       font-weight: 800;
       background: rgba(16, 185, 129, 0.15);
       color: var(--emerald-400);
       border: 1px solid rgba(16, 185, 129, 0.3);
-      padding: 1px 6px;
+      padding: 1px 4px;
       border-radius: 4px;
     }
 
     .brand-title p {
-      font-size: 11px;
+      font-size: 9px;
       color: var(--text-muted);
     }
 
-    .header-search {
-      flex: 1;
-      max-width: 440px;
-      position: relative;
-      display: none;
+    .btn {
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      text-decoration: none;
+      transition: 0.2s;
     }
-    @media (min-width: 768px) { .header-search { display: block; } }
 
+    .btn-emerald {
+      background: linear-gradient(135deg, #10B981, #059669);
+      color: #032E21;
+      box-shadow: 0 4px 12px var(--emerald-glow);
+    }
+
+    .btn-secondary {
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+    }
+
+    main {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 14px 12px;
+      width: 100%;
+      flex: 1;
+    }
+
+    .search-box {
+      margin-bottom: 16px;
+      position: relative;
+    }
     .search-input {
       width: 100%;
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md);
-      padding: 10px 42px 10px 14px;
+      padding: 10px 38px 10px 14px;
       color: var(--text-primary);
-      font-size: 13px;
+      font-size: 12px;
       outline: none;
     }
     .search-input:focus {
@@ -179,335 +180,94 @@
       transform: translateY(-50%);
       color: var(--text-muted);
       pointer-events: none;
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn {
-      padding: 9px 16px;
-      border-radius: var(--radius-md);
       font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      border: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      transition: 0.2s;
-    }
-
-    .btn-emerald {
-      background: linear-gradient(135deg, #10B981, #059669);
-      color: #032E21;
-      box-shadow: 0 4px 14px var(--emerald-glow);
-    }
-    .btn-emerald:hover { background: linear-gradient(135deg, #34D399, #10B981); }
-
-    .btn-secondary {
-      background: var(--bg-surface);
-      color: var(--text-primary);
-      border: 1px solid var(--border-subtle);
-    }
-
-    .nav-tabs-bar {
-      background: var(--bg-surface);
-      border-bottom: 1px solid var(--border-subtle);
-      display: none;
-      padding: 0 20px;
-    }
-    @media (min-width: 768px) {
-      .nav-tabs-bar { display: flex; justify-content: center; gap: 8px; }
-    }
-
-    .nav-tab-item {
-      padding: 12px 20px;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text-secondary);
-      background: transparent;
-      border: none;
-      border-bottom: 2px solid transparent;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .nav-tab-item.active {
-      color: var(--emerald-400);
-      border-bottom-color: var(--emerald-500);
-      background: rgba(16, 185, 129, 0.05);
-    }
-
-    main {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 24px 16px;
-      width: 100%;
-      flex: 1;
     }
 
     .hero-banner {
       background: radial-gradient(circle at 100% 0%, rgba(16, 185, 129, 0.15), transparent 50%), var(--bg-surface);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-xl);
-      padding: 32px 20px;
+      padding: 20px 14px;
       text-align: center;
-      margin-bottom: 28px;
-    }
-    .hero-banner h2 { font-size: 26px; font-weight: 900; margin-bottom: 10px; }
-    .hero-banner p { color: var(--text-secondary); font-size: 14px; max-width: 640px; margin: 0 auto 20px; line-height: 1.6; }
-
-    .hero-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(16, 185, 129, 0.12);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      color: var(--emerald-400);
-      padding: 5px 14px;
-      border-radius: 30px;
-      font-size: 12px;
-      font-weight: 800;
       margin-bottom: 16px;
     }
+    .hero-banner h2 { font-size: 20px; font-weight: 900; margin-bottom: 8px; line-height: 1.4; }
+       function loadProducts() {
+      const grid = document.getElementById('productsGrid');
+      if (!grid) return;
 
-    .subscription-panel {
-      background: linear-gradient(135deg, #141B2D, #0E131F);
-      border: 1px solid var(--emerald-500);
-      border-radius: var(--radius-lg);
-      padding: 24px;
-      margin-bottom: 28px;
-      text-align: center;
-    }
-    .subscription-panel h3 { color: var(--emerald-400); margin-bottom: 8px; font-size: 19px; font-weight: 900; }
-    .subscription-panel p { color: var(--text-secondary); font-size: 13px; margin-bottom: 16px; line-height: 1.5; }
+      const customProducts = JSON.parse(localStorage.getItem('diginest_products') || '[]');
+      const allProducts = [...INITIAL_PRODUCTS, ...customProducts];
 
-    .categories-scroll {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 12px;
-      margin-bottom: 24px;
-    }
-    .category-chip {
-      white-space: nowrap;
-      padding: 9px 18px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: 30px;
-      color: var(--text-secondary);
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    .category-chip.active {
-      background: rgba(16, 185, 129, 0.15);
-      border-color: var(--emerald-500);
-      color: var(--emerald-400);
-    }
+      const filtered = allProducts.filter(p => {
+        const matchesCat = currentCategory === 'all' || p.category === currentCategory;
+        const matchesSearch = p.title.toLowerCase().includes(searchTerm.toLowerCase());
+        return matchesCat && matchesSearch;
+      });
 
-    .products-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 18px;
-    }
-    @media (min-width: 600px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (min-width: 992px) { .products-grid { grid-template-columns: repeat(3, 1fr); } }
-    @media (min-width: 1200px) { .products-grid { grid-template-columns: repeat(4, 1fr); } }
+      if (filtered.length === 0) {
+        grid.innerHTML = '<p style="color: var(--text-muted); grid-column: 1/-1; text-align: center; padding: 20px; font-size: 11px;">لا توجد منتجات مطابقة.</p>';
+        return;
+      }
 
-    .product-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      padding: 16px;
-      transition: 0.25s;
-    }
-    .product-card:hover { transform: translateY(-4px); border-color: #384566; }
-    .product-card h3 { font-size: 16px; margin: 10px 0; color: #FFF; font-weight: 800; }
-    .product-card p { font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; line-height: 1.5; flex: 1; }
-    .product-card .price { font-size: 18px; font-weight: 900; color: var(--emerald-400); }
-
-    .custom-modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(4, 7, 13, 0.85);
-      backdrop-filter: blur(10px);
-      z-index: 1000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-    }
-    .custom-modal-content {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-xl);
-      max-width: 460px;
-      width: 100%;
-      padding: 24px;
-      position: relative;
-    }
-
-    .toast-msg {
-      position: fixed;
-      bottom: 80px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #10B981;
-      color: #032E21;
-      padding: 10px 20px;
-      border-radius: 30px;
-      font-size: 13px;
-      font-weight: 800;
-      z-index: 2000;
-      display: none;
-    }
-
-    .mobile-bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(14, 19, 31, 0.96);
-      backdrop-filter: blur(16px);
-      border-top: 1px solid var(--border-subtle);
-      display: flex;
-      justify-content: space-around;
-      padding: 8px 10px;
-      z-index: 50;
-    }
-    @media (min-width: 768px) { .mobile-bottom-nav { display: none; } }
-    .bottom-nav-item {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      font-size: 11px;
-      font-weight: 700;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      cursor: pointer;
-    }
-    .bottom-nav-item.active { color: var(--emerald-400); }
-
-    footer {
-      background: var(--bg-surface);
-      border-top: 1px solid var(--border-subtle);
-      padding: 35px 20px 20px;
-      color: var(--text-muted);
-      font-size: 12px;
-      margin-top: 40px;
-    }
-    .footer-container {
-      max-width: 1240px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 24px;
-      margin-bottom: 24px;
-    }
-    @media (min-width: 768px) { .footer-container { grid-template-columns: 2fr 1fr 1fr; } }
-  </style>
-</head>
-<body>
-
-  <!-- شريط الإعلان العلوي -->
-  <div class="top-announcement">
-    <span>تسجيل مجاني 5 أيام</span> سوق المنتجات الرقمية اللامركزي مع نظام اشتراك شهري ($20) لمالك المنصة 🚀
-  </div>
-
-  <!-- الهيدر -->
-  <header>
-    <div class="header-inner">
-      <a href="#" class="brand-logo">
-        <div class="brand-icon"><i class="fa-solid fa-layer-group"></i></div>
-        <div class="brand-title">
-          <h1>DigiNest <span class="tag">Web3</span></h1>
-          <p>سوق المنتجات الرقمية اللامركزي</p>
+      grid.innerHTML = filtered.map(p => `
+        <div class="product-card">
+          <h3>${p.title}</h3>
+          <p>${p.description || 'بدون وصف'}</p>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 8px; border-top: 1px solid rgba(36,46,71,0.5);">
+            <span class="price">${p.price}</span>
+            <button class="btn btn-emerald" style="padding: 4px 10px; font-size: 10px;" onclick="buyProduct('${p.id}', '${p.title}')">شراء</button>
+          </div>
         </div>
-      </a>
-      
-      <a href="#" class="btn btn-secondary" onclick="openLoginModal(event)">حساب البائع</a>
-      
-      <div class="header-search">
-        <input type="text" class="search-input" id="desktop-search" placeholder="ابحث عن قوالب، روبوتات، سكربتات..." oninput="handleSearch(this.value)">
-        <i class="fa-solid fa-magnifying-glass search-icon"></i>
-      </div>
+      `).join('');
+    }
 
-      <div class="header-actions">
-        <button class="btn btn-emerald" onclick="handleWalletConnect()">
-          <i class="fa-solid fa-wallet"></i>
-          <span id="wallet-text">ربط المحفظة</span>
-        </button>
-      </div>
-    </div>
-  </header>
+    function buyProduct(id, title) {
+      let purchased = JSON.parse(localStorage.getItem('user_library') || '[]');
+      if (!purchased.some(item => item.id === id)) {
+        purchased.push({ id, title, date: new Date().toLocaleDateString('ar') });
+        localStorage.setItem('user_library', JSON.stringify(purchased));
+      }
+      showToast(`تم شراء "${title}" بنجاح!`);
+      loadUserLibrary();
+    }
 
-  <!-- شريط التبويبات الرئيسي -->
-  <nav class="nav-tabs-bar">
-    <button class="nav-tab-item active" onclick="switchMainTab('tab-explore', this)">
-      <i class="fa-solid fa-compass"></i> تصفح السوق
-    </button>
-    <button class="nav-tab-item" onclick="switchMainTab('tab-studio', this)">
-      <i class="fa-solid fa-store"></i> استوديو البائع
-    </button>
-    <button class="nav-tab-item" onclick="switchMainTab('tab-library', this)">
-      <i class="fa-solid fa-box-open"></i> اشتراكي ومشترياتي
-    </button>
-  </nav>
+    function loadUserLibrary() {
+      const libraryContainer = document.getElementById('user-purchased-items');
+      if (!libraryContainer) return;
 
-  <!-- المحتوى الرئيسي -->
-  <main>
-    <!-- قسم استكشاف السوق -->
-    <div id="tab-explore">
-      <section class="hero-banner">
-        <div class="hero-pill"><i class="fa-solid fa-shield-halved"></i> مدفوعات لامركزية فورية وآمنة</div>
-        <h2>سوق المنتجات الرقمية الأسرع والأكثر أماناً</h2>
-        <p>قم بشراء وبيع القوالب البرمجية، تصاميم Figma، وخوارزميات التداول بمدفوعات فورية وتراخيص دائمة.</p>
-        <button class="btn btn-emerald" onclick="openUploadModal()">
-          <i class="fa-solid fa-cloud-arrow-up"></i> رفع منتج رقمي جديد
-        </button>
-      </section>
+      const purchased = JSON.parse(localStorage.getItem('user_library') || '[]');
+      if (purchased.length === 0) {
+        libraryContainer.innerHTML = 'لم تقم بشراء أي منتج حتى الآن.';
+        return;
+      }
 
-      <!-- التصنيفات -->
-      <div class="categories-scroll">
-        <button class="category-chip active" onclick="filterCategory('all', this)"><i class="fa-solid fa-border-all"></i> الكل</button>
-        <button class="category-chip" onclick="filterCategory('ai', this)"><i class="fa-solid fa-robot"></i> الذكاء الاصطناعي</button>
-        <button class="category-chip" onclick="filterCategory('ui', this)"><i class="fa-solid fa-palette"></i> تصاميم وواجهات</button>
-        <button class="category-chip" onclick="filterCategory('code', this)"><i class="fa-solid fa-code"></i> برمجيات وسكربتات</button>
-      </div>
+      libraryContainer.innerHTML = purchased.map(item => `
+        <div style="background: var(--bg-card); padding: 8px; border-radius: 6px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border-subtle);">
+          <div>
+            <strong style="color: #FFF; font-size: 11px;">${item.title}</strong>
+            <div style="font-size: 9px; color: var(--text-muted);">تاريخ الشراء: ${item.date}</div>
+          </div>
+          <button class="btn btn-emerald" style="padding: 3px 8px; font-size: 9px;" onclick="showToast('جاري التحميل...')">تحميل</button>
+        </div>
+      `).join('');
+    }
 
-      <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
-        <h3 style="color: #fff; font-size: 19px; font-weight: 900;"><i class="fa-solid fa-fire text-amber-400"></i> المنتجات المميزة المتاحة</h3>
-      </div>
-
-      <div class="products-grid" id="productsGrid"></div>
-    </div>
-
-    <!-- قسم الاستوديو -->
-    <div id="tab-studio" style="display: none;">
-      <section class="hero-banner">
-        <div class="hero-pill"><i class="fa-solid fa-coins"></i> أرباح صافية فورية</div>
-        <h2>استوديو صناع المنتجات الرقمية</h2>
-        <p>ارفع ملفاتك الرقمية، حدد السعر، وتابع مبيعاتك وأرباح متجرك بكل سهولة.</p>
-        <button class="btn btn-emerald" onclick="openUploadModal()">
-          <i class="fa-solid fa-plus"></i> رفع منتج رقمي جديد
-        </button>
-      </section>
-    </div>
-
-    <!-- قسم الاشتراكات والمشتريات -->
-    <div id="tab-library" style="display: none;">
-      <!-- لوحة الاشتراك الشهري -->
-      <section class="subscription-panel">
-        <h3><i class="fa-solid fa-crown"></i> لوحة اشتراك البائع الشهري</h3>
-        <p id="subscription-status-text">جاري فحص حالة
+    function handleWalletConnect() {
+      if (window.ethereum) {
+        window.ethereum.request({ method: 'eth_requestAccounts' })
+          .then(accs => {
+            const short = accs[0].substring(0, 6) + '...' + accs[0].substring(accs[0].length - 4);
+            document.getElementById('wallet-main-text').innerText = short;
+            showToast('تم ربط المحفظة: ' + short);
+          })
+          .catch(() => showToast('تم إلغاء الاتصال'));
+      } else {
+        document.getElementById('wallet-main-text').innerText = '0x71C5...498a';
+        showToast('تم ربط المحفظة الوهمية بنجاح!');
+      }
+    }
+  </script>
+</body>
+</html>
+ 
