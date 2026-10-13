@@ -5,11 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>DigiNest | المتجر الرقمي اللامركزي للمنتجات الرقمية والمدفوعات المشفرة</title>
   
-  <!-- SEO & OpenGraph -->
   <meta name="description" content="DigiNest - سوق لامركزي لبيع وشراء المنتجات الرقمية والبرمجيات وقوالب الذكاء الاصطناعي بدفع فوري بالعملات المشفرة مع تسليم فوري وتراخيص مؤكدة.">
   <meta name="theme-color" content="#0B0F17">
 
-  <!-- Google Fonts & Font Awesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -23,25 +21,15 @@
       --bg-card-hover: #1A243B;
       --border-subtle: #242E47;
       --border-focus: #10B981;
-      
       --emerald-500: #10B981;
       --emerald-400: #34D399;
       --emerald-glow: rgba(16, 185, 129, 0.25);
-      
       --amber-400: #FBBF24;
-      --cyan-400: #22D3EE;
-      --purple-400: #A78BFA;
-      
       --text-primary: #F9FAFB;
       --text-secondary: #94A3B8;
       --text-muted: #64748B;
-      
       --font-ar: 'Tajawal', sans-serif;
       --font-en: 'Inter', sans-serif;
-      --radius-sm: 8px;
-      --radius-md: 14px;
-      --radius-lg: 20px;
-      --radius-xl: 28px;
     }
 
     * {
@@ -63,18 +51,9 @@
     }
 
     @media (min-width: 768px) {
-      body {
-        padding-bottom: 0;
-      }
+      body { padding-bottom: 0; }
     }
 
-    /* Scrollbars */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg-dark); }
-    ::-webkit-scrollbar-thumb { background: #242E47; border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: #374151; }
-
-    /* Top Announcement Bar */
     .top-announcement {
       background: linear-gradient(90deg, #059669, #10B981, #0284C7);
       color: #064E3B;
@@ -94,7 +73,6 @@
       color: #064E3B;
     }
 
-    /* Header */
     header {
       background: rgba(14, 19, 31, 0.92);
       backdrop-filter: blur(14px);
@@ -138,8 +116,6 @@
     .brand-title h1 {
       font-size: 19px;
       font-weight: 900;
-      letter-spacing: -0.3px;
-      line-height: 1.1;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -160,32 +136,27 @@
       color: var(--text-muted);
     }
 
-    /* Search Bar in Header (Desktop) */
     .header-search {
       flex: 1;
       max-width: 440px;
       position: relative;
       display: none;
     }
-    @media (min-width: 768px) {
-      .header-search { display: block; }
-    }
+    @media (min-width: 768px) { .header-search { display: block; } }
 
     .search-input {
       width: 100%;
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
+      border-radius: 12px;
       padding: 10px 42px 10px 14px;
       color: var(--text-primary);
       font-size: 13px;
       outline: none;
-      transition: all 0.2s ease;
     }
     .search-input:focus {
       border-color: var(--emerald-500);
       box-shadow: 0 0 0 3px var(--emerald-glow);
-      background: var(--bg-card);
     }
     .search-icon {
       position: absolute;
@@ -196,7 +167,6 @@
       pointer-events: none;
     }
 
-    /* Header Action Buttons */
     .header-actions {
       display: flex;
       align-items: center;
@@ -205,7 +175,7 @@
 
     .btn {
       padding: 9px 16px;
-      border-radius: var(--radius-md);
+      border-radius: 12px;
       font-size: 13px;
       font-weight: 700;
       cursor: pointer;
@@ -213,8 +183,8 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       text-decoration: none;
+      transition: 0.2s;
     }
 
     .btn-emerald {
@@ -222,22 +192,15 @@
       color: #032E21;
       box-shadow: 0 4px 14px var(--emerald-glow);
     }
-    .btn-emerald:hover {
-      background: linear-gradient(135deg, #34D399, #10B981);
-      transform: translateY(-1px);
-    }
+    .btn-emerald:hover { background: linear-gradient(135deg, #34D399, #10B981); }
 
     .btn-secondary {
       background: var(--bg-surface);
       color: var(--text-primary);
       border: 1px solid var(--border-subtle);
     }
-    .btn-secondary:hover {
-      background: var(--bg-card);
-      border-color: #374151;
-    }
+    .btn-secondary:hover { background: var(--bg-card); }
 
-    /* Sub-nav Tabs (Desktop) */
     .nav-tabs-bar {
       background: var(--bg-surface);
       border-bottom: 1px solid var(--border-subtle);
@@ -245,11 +208,7 @@
       padding: 0 20px;
     }
     @media (min-width: 768px) {
-      .nav-tabs-bar {
-        display: flex;
-        justify-content: center;
-        gap: 8px;
-      }
+      .nav-tabs-bar { display: flex; justify-content: center; gap: 8px; }
     }
 
     .nav-tab-item {
@@ -264,16 +223,13 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      transition: all 0.2s ease;
     }
-    .nav-tab-item:hover { color: #FFFFFF; }
     .nav-tab-item.active {
       color: var(--emerald-400);
       border-bottom-color: var(--emerald-500);
       background: rgba(16, 185, 129, 0.05);
     }
 
-    /* Main Container */
     main {
       max-width: 1240px;
       margin: 0 auto;
@@ -282,89 +238,23 @@
       flex: 1;
     }
 
-    .mobile-search-box {
-      margin-bottom: 18px;
-      position: relative;
-    }
-    @media (min-width: 768px) {
-      .mobile-search-box { display: none; }
-    }
-
-    /* Hero Section */
     .hero-banner {
-      background: radial-gradient(circle at 100% 0%, rgba(16, 185, 129, 0.15), transparent 50%),
-                  radial-gradient(circle at 0% 100%, rgba(34, 211, 238, 0.08), transparent 55%),
-                  var(--bg-surface);
+      background: radial-gradient(circle at 100% 0%, rgba(16, 185, 129, 0.15), transparent 50%), var(--bg-surface);
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-xl);
+      border-radius: 20px;
       padding: 32px 20px;
       text-align: center;
       margin-bottom: 28px;
-      position: relative;
-      overflow: hidden;
     }
+    .hero-banner h2 { font-size: 26px; font-weight: 900; margin-bottom: 10px; }
+    .hero-banner p { color: var(--text-secondary); font-size: 14px; max-width: 640px; margin: 0 auto 20px; line-height: 1.6; }
 
-    .hero-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(16, 185, 129, 0.12);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      color: var(--emerald-400);
-      padding: 5px 14px;
-      border-radius: 30px;
-      font-size: 12px;
-      font-weight: 800;
-      margin-bottom: 16px;
-    }
-
-    .hero-banner h2 {
-      font-size: 26px;
-      font-weight: 900;
-      line-height: 1.35;
-      margin-bottom: 10px;
-    }
-    @media (min-width: 640px) {
-      .hero-banner h2 { font-size: 34px; }
-    }
-
-    .hero-banner p {
-      color: var(--text-secondary);
-      font-size: 14px;
-      max-width: 640px;
-      margin: 0 auto 20px;
-      line-height: 1.65;
-    }
-
-    .hero-stats {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .stat-badge {
-      background: rgba(20, 27, 45, 0.8);
-      border: 1px solid var(--border-subtle);
-      padding: 8px 16px;
-      border-radius: 30px;
-      font-size: 12px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: #E2E8F0;
-    }
-    .stat-badge i { color: var(--emerald-400); }
-
-    /* Categories Horizontal Scroll */
     .categories-scroll {
       display: flex;
       gap: 8px;
       overflow-x: auto;
       padding-bottom: 12px;
       margin-bottom: 24px;
-      -webkit-overflow-scrolling: touch;
     }
     .category-chip {
       white-space: nowrap;
@@ -376,41 +266,13 @@
       font-size: 13px;
       font-weight: 700;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.2s ease;
     }
     .category-chip.active {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.05));
+      background: rgba(16, 185, 129, 0.15);
       border-color: var(--emerald-500);
       color: var(--emerald-400);
     }
 
-    /* Section Headers */
-    .section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 18px;
-    }
-    .section-header h3 {
-      font-size: 19px;
-      font-weight: 900;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .section-header span.count {
-      font-size: 12px;
-      color: var(--text-muted);
-      background: var(--bg-surface);
-      padding: 4px 10px;
-      border-radius: 20px;
-      border: 1px solid var(--border-subtle);
-    }
-
-    /* Products Grid */
     .products-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -418,131 +280,26 @@
     }
     @media (min-width: 600px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (min-width: 992px) { .products-grid { grid-template-columns: repeat(3, 1fr); } }
-    @media (min-width: 1200px) { .products-grid { grid-template-columns: repeat(4, 1fr); } }
 
     .product-card {
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
+      border-radius: 16px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: all 0.25s ease;
-      position: relative;
-    }
-    .product-card:hover {
-      transform: translateY(-4px);
-      border-color: #384566;
-    }
-
-    .card-banner {
-      height: 150px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 52px;
-    }
-    .card-banner.ai { background: linear-gradient(135deg, #1E1B4B, #312E81); }
-    .card-banner.ui { background: linear-gradient(135deg, #064E3B, #065F46); }
-    .card-banner.code { background: linear-gradient(135deg, #3730A3, #1E293B); }
-    .card-banner.finance { background: linear-gradient(135deg, #78350F, #92400E); }
-    .card-banner.web3 { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
-
-    .category-tag {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: rgba(14, 19, 31, 0.85);
-      backdrop-filter: blur(6px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #FFFFFF;
-      font-size: 11px;
-      font-weight: 800;
-      padding: 3px 8px;
-      border-radius: 6px;
-    }
-
-    .rating-tag {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      background: rgba(14, 19, 31, 0.85);
-      backdrop-filter: blur(6px);
-      color: var(--amber-400);
-      font-size: 11px;
-      font-weight: 800;
-      padding: 3px 8px;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .card-content {
       padding: 16px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
     }
+    .product-card h3 { font-size: 16px; margin: 10px 0; color: #FFF; }
+    .product-card p { font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; }
+    .product-card .price { font-size: 18px; font-weight: 900; color: var(--emerald-400); }
 
-    .card-title {
-      font-size: 16px;
-      font-weight: 800;
-      margin-bottom: 6px;
-      color: #FFFFFF;
-    }
-
-    .card-desc {
-      font-size: 12px;
-      color: var(--text-secondary);
-      line-height: 1.55;
-      margin-bottom: 14px;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      flex: 1;
-    }
-
-    .card-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-bottom: 14px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid rgba(36, 46, 71, 0.7);
-    }
-    .card-meta span { display: flex; align-items: center; gap: 4px; }
-
-    .card-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    .fiat-amount {
-      font-size: 18px;
-      font-weight: 900;
-      color: var(--emerald-400);
-      font-family: var(--font-en);
-    }
-    .crypto-amount {
-      font-size: 11px;
-      color: var(--text-muted);
-      font-weight: 700;
-    }
-
-    /* Modal Overlays */
     .custom-modal-overlay {
       position: fixed;
       inset: 0;
       background: rgba(4, 7, 13, 0.85);
       backdrop-filter: blur(10px);
-      z-index: 1000;
+      z-index: 100;
       display: none;
       align-items: center;
       justify-content: center;
@@ -551,15 +308,13 @@
     .custom-modal-content {
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-xl);
+      border-radius: 20px;
       max-width: 460px;
       width: 100%;
       padding: 24px;
       position: relative;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
     }
 
-    /* Toast Notification */
     .toast-msg {
       position: fixed;
       bottom: 80px;
@@ -571,12 +326,10 @@
       border-radius: 30px;
       font-size: 13px;
       font-weight: 800;
-      z-index: 2000;
+      z-index: 200;
       display: none;
-      box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
     }
 
-    /* Mobile Bottom Navigation Bar */
     .mobile-bottom-nav {
       position: fixed;
       bottom: 0;
@@ -587,30 +340,68 @@
       border-top: 1px solid var(--border-subtle);
       display: flex;
       justify-content: space-around;
-      padding: 8px 10px;
+      padding: 10px 0;
       z-index: 50;
     }
-    @media (min-width: 768px) {
-      .mobile-bottom-nav { display: none; }
-    }
-
+    @media (min-width: 768px) { .mobile-bottom-nav { display: none; } }
     .bottom-nav-item {
-      background: transparent;
+      background: none;
       border: none;
       color: var(--text-muted);
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 4px;
       cursor: pointer;
-      padding: 4px 10px;
-      border-radius: 8px;
     }
-    .bottom-nav-item i { font-size: 18px; }
     .bottom-nav-item.active { color: var(--emerald-400); }
+  </style>
+</head>
+<body>
 
-    /* Footer */
-    footer {
-      background: var(--bg-surface);
+  <div class="top-announcement">
+    <span>عمولة 3% فقط</span> بوابة الدفع الذكية بالعملات المشفرة مع تسليم فوري وتلقائي للملفات الرقمية 🚀
+  </div>
+
+  <header>
+    <div class="header-inner">
+      <a href="#" class="brand-logo">
+        <div class="brand-icon"><i class="fa-solid fa-layer-group"></i></div>
+        <div class="brand-title">
+          <h1>DigiNest <span class="tag">Web3</span></h1>
+          <p>سوق المنتجات الرقمية اللامركزي</p>
+        </div>
+      </a>
+      <a href="#" class="btn btn-secondary" onclick="openLoginModal(event)">تسجيل الدخول</a>
+      
+      <div class="header-search">
+        <input type="text" class="search-input" id="desktop-search" placeholder="ابحث عن المنتجات الرقمية..." oninput="handleSearch(this.value)">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+      </div>
+
+      <div class="header-actions">
+        <button class="btn btn-emerald" id="connect-wallet-btn" onclick="handleWalletConnect()">
+          <i class="fa-solid fa-wallet"></i>
+          <span id="wallet-text">ربط المحفظة</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav-tabs-bar">
+    <button class="nav-tab-item active" onclick="switchMainTab('tab-explore', this)">
+      <i class="fa-solid fa-compass"></i> تصفح السوق
+    </button>
+    <button class="nav-tab-item" onclick="switchMainTab('tab-studio', this)">
+      <i class="fa-solid fa-store"></i> استوديو البائع
+    </button>
+    <button class="nav-tab-item" onclick="switchMainTab('tab-library', this)">
+      <i class="fa-solid fa-box-open"></i> مشترياتي الرقمية
+    </button>
+  </nav>
+
+  <main>
+    <div id="tab-explore">
+      <section class="hero-banner
