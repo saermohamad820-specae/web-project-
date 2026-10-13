@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>DigiNest | المتجر الرقمي اللامركزي للمنتجات الرقمية والمدفوعات المشفرة</title>
   
-  <meta name="description" content="DigiNest - سوق لامركزي لبيع وشراء المنتجات الرقمية والبرمجيات وقوالب الذكاء الاصطناعي بدفع فوري بالعملات المشفرة مع تسليم فوري وتراخيص مؤكدة.">
+  <meta name="description" content="DigiNest - سوق لامركزي لبيع وشراء المنتجات الرقمية والبرمجيات وقوالب الذكاء الاصطناعي بدفع فوري مع نظام اشتراك للبائعين.">
   <meta name="theme-color" content="#0B0F17">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,15 +21,25 @@
       --bg-card-hover: #1A243B;
       --border-subtle: #242E47;
       --border-focus: #10B981;
+      
       --emerald-500: #10B981;
       --emerald-400: #34D399;
       --emerald-glow: rgba(16, 185, 129, 0.25);
+      
       --amber-400: #FBBF24;
+      --cyan-400: #22D3EE;
+      --purple-400: #A78BFA;
+      
       --text-primary: #F9FAFB;
       --text-secondary: #94A3B8;
       --text-muted: #64748B;
+      
       --font-ar: 'Tajawal', sans-serif;
       --font-en: 'Inter', sans-serif;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
     }
 
     * {
@@ -53,6 +63,10 @@
     @media (min-width: 768px) {
       body { padding-bottom: 0; }
     }
+
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-dark); }
+    ::-webkit-scrollbar-thumb { background: #242E47; border-radius: 10px; }
 
     .top-announcement {
       background: linear-gradient(90deg, #059669, #10B981, #0284C7);
@@ -148,7 +162,7 @@
       width: 100%;
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
-      border-radius: 12px;
+      border-radius: var(--radius-md);
       padding: 10px 42px 10px 14px;
       color: var(--text-primary);
       font-size: 13px;
@@ -175,7 +189,7 @@
 
     .btn {
       padding: 9px 16px;
-      border-radius: 12px;
+      border-radius: var(--radius-md);
       font-size: 13px;
       font-weight: 700;
       cursor: pointer;
@@ -199,7 +213,6 @@
       color: var(--text-primary);
       border: 1px solid var(--border-subtle);
     }
-    .btn-secondary:hover { background: var(--bg-card); }
 
     .nav-tabs-bar {
       background: var(--bg-surface);
@@ -241,13 +254,38 @@
     .hero-banner {
       background: radial-gradient(circle at 100% 0%, rgba(16, 185, 129, 0.15), transparent 50%), var(--bg-surface);
       border: 1px solid var(--border-subtle);
-      border-radius: 20px;
+      border-radius: var(--radius-xl);
       padding: 32px 20px;
       text-align: center;
       margin-bottom: 28px;
     }
     .hero-banner h2 { font-size: 26px; font-weight: 900; margin-bottom: 10px; }
     .hero-banner p { color: var(--text-secondary); font-size: 14px; max-width: 640px; margin: 0 auto 20px; line-height: 1.6; }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--emerald-400);
+      padding: 5px 14px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .subscription-panel {
+      background: linear-gradient(135deg, #141B2D, #0E131F);
+      border: 1px solid var(--emerald-500);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 28px;
+      text-align: center;
+    }
+    .subscription-panel h3 { color: var(--emerald-400); margin-bottom: 8px; font-size: 19px; font-weight: 900; }
+    .subscription-panel p { color: var(--text-secondary); font-size: 13px; margin-bottom: 16px; line-height: 1.5; }
 
     .categories-scroll {
       display: flex;
@@ -280,18 +318,21 @@
     }
     @media (min-width: 600px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (min-width: 992px) { .products-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 1200px) { .products-grid { grid-template-columns: repeat(4, 1fr); } }
 
     .product-card {
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
-      border-radius: 16px;
+      border-radius: var(--radius-lg);
       overflow: hidden;
       display: flex;
       flex-direction: column;
       padding: 16px;
+      transition: 0.25s;
     }
-    .product-card h3 { font-size: 16px; margin: 10px 0; color: #FFF; }
-    .product-card p { font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; }
+    .product-card:hover { transform: translateY(-4px); border-color: #384566; }
+    .product-card h3 { font-size: 16px; margin: 10px 0; color: #FFF; font-weight: 800; }
+    .product-card p { font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; line-height: 1.5; flex: 1; }
     .product-card .price { font-size: 18px; font-weight: 900; color: var(--emerald-400); }
 
     .custom-modal-overlay {
@@ -299,7 +340,7 @@
       inset: 0;
       background: rgba(4, 7, 13, 0.85);
       backdrop-filter: blur(10px);
-      z-index: 100;
+      z-index: 1000;
       display: none;
       align-items: center;
       justify-content: center;
@@ -308,7 +349,7 @@
     .custom-modal-content {
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
-      border-radius: 20px;
+      border-radius: var(--radius-xl);
       max-width: 460px;
       width: 100%;
       padding: 24px;
@@ -326,7 +367,7 @@
       border-radius: 30px;
       font-size: 13px;
       font-weight: 800;
-      z-index: 200;
+      z-index: 2000;
       display: none;
     }
 
@@ -340,7 +381,7 @@
       border-top: 1px solid var(--border-subtle);
       display: flex;
       justify-content: space-around;
-      padding: 10px 0;
+      padding: 8px 10px;
       z-index: 50;
     }
     @media (min-width: 768px) { .mobile-bottom-nav { display: none; } }
@@ -348,7 +389,7 @@
       background: none;
       border: none;
       color: var(--text-muted);
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       display: flex;
       flex-direction: column;
@@ -357,14 +398,34 @@
       cursor: pointer;
     }
     .bottom-nav-item.active { color: var(--emerald-400); }
+
+    footer {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-subtle);
+      padding: 35px 20px 20px;
+      color: var(--text-muted);
+      font-size: 12px;
+      margin-top: 40px;
+    }
+    .footer-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    @media (min-width: 768px) { .footer-container { grid-template-columns: 2fr 1fr 1fr; } }
   </style>
 </head>
 <body>
 
+  <!-- شريط الإعلان العلوي -->
   <div class="top-announcement">
-    <span>عمولة 3% فقط</span> بوابة الدفع الذكية بالعملات المشفرة مع تسليم فوري وتلقائي للملفات الرقمية 🚀
+    <span>تسجيل مجاني 5 أيام</span> سوق المنتجات الرقمية اللامركزي مع نظام اشتراك شهري ($20) لمالك المنصة 🚀
   </div>
 
+  <!-- الهيدر -->
   <header>
     <div class="header-inner">
       <a href="#" class="brand-logo">
@@ -374,15 +435,16 @@
           <p>سوق المنتجات الرقمية اللامركزي</p>
         </div>
       </a>
-      <a href="#" class="btn btn-secondary" onclick="openLoginModal(event)">تسجيل الدخول</a>
+      
+      <a href="#" class="btn btn-secondary" onclick="openLoginModal(event)">حساب البائع</a>
       
       <div class="header-search">
-        <input type="text" class="search-input" id="desktop-search" placeholder="ابحث عن المنتجات الرقمية..." oninput="handleSearch(this.value)">
+        <input type="text" class="search-input" id="desktop-search" placeholder="ابحث عن قوالب، روبوتات، سكربتات..." oninput="handleSearch(this.value)">
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
       </div>
 
       <div class="header-actions">
-        <button class="btn btn-emerald" id="connect-wallet-btn" onclick="handleWalletConnect()">
+        <button class="btn btn-emerald" onclick="handleWalletConnect()">
           <i class="fa-solid fa-wallet"></i>
           <span id="wallet-text">ربط المحفظة</span>
         </button>
@@ -390,6 +452,7 @@
     </div>
   </header>
 
+  <!-- شريط التبويبات الرئيسي -->
   <nav class="nav-tabs-bar">
     <button class="nav-tab-item active" onclick="switchMainTab('tab-explore', this)">
       <i class="fa-solid fa-compass"></i> تصفح السوق
@@ -398,10 +461,53 @@
       <i class="fa-solid fa-store"></i> استوديو البائع
     </button>
     <button class="nav-tab-item" onclick="switchMainTab('tab-library', this)">
-      <i class="fa-solid fa-box-open"></i> مشترياتي الرقمية
+      <i class="fa-solid fa-box-open"></i> اشتراكي ومشترياتي
     </button>
   </nav>
 
+  <!-- المحتوى الرئيسي -->
   <main>
+    <!-- قسم استكشاف السوق -->
     <div id="tab-explore">
-      <section class="hero-banner
+      <section class="hero-banner">
+        <div class="hero-pill"><i class="fa-solid fa-shield-halved"></i> مدفوعات لامركزية فورية وآمنة</div>
+        <h2>سوق المنتجات الرقمية الأسرع والأكثر أماناً</h2>
+        <p>قم بشراء وبيع القوالب البرمجية، تصاميم Figma، وخوارزميات التداول بمدفوعات فورية وتراخيص دائمة.</p>
+        <button class="btn btn-emerald" onclick="openUploadModal()">
+          <i class="fa-solid fa-cloud-arrow-up"></i> رفع منتج رقمي جديد
+        </button>
+      </section>
+
+      <!-- التصنيفات -->
+      <div class="categories-scroll">
+        <button class="category-chip active" onclick="filterCategory('all', this)"><i class="fa-solid fa-border-all"></i> الكل</button>
+        <button class="category-chip" onclick="filterCategory('ai', this)"><i class="fa-solid fa-robot"></i> الذكاء الاصطناعي</button>
+        <button class="category-chip" onclick="filterCategory('ui', this)"><i class="fa-solid fa-palette"></i> تصاميم وواجهات</button>
+        <button class="category-chip" onclick="filterCategory('code', this)"><i class="fa-solid fa-code"></i> برمجيات وسكربتات</button>
+      </div>
+
+      <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
+        <h3 style="color: #fff; font-size: 19px; font-weight: 900;"><i class="fa-solid fa-fire text-amber-400"></i> المنتجات المميزة المتاحة</h3>
+      </div>
+
+      <div class="products-grid" id="productsGrid"></div>
+    </div>
+
+    <!-- قسم الاستوديو -->
+    <div id="tab-studio" style="display: none;">
+      <section class="hero-banner">
+        <div class="hero-pill"><i class="fa-solid fa-coins"></i> أرباح صافية فورية</div>
+        <h2>استوديو صناع المنتجات الرقمية</h2>
+        <p>ارفع ملفاتك الرقمية، حدد السعر، وتابع مبيعاتك وأرباح متجرك بكل سهولة.</p>
+        <button class="btn btn-emerald" onclick="openUploadModal()">
+          <i class="fa-solid fa-plus"></i> رفع منتج رقمي جديد
+        </button>
+      </section>
+    </div>
+
+    <!-- قسم الاشتراكات والمشتريات -->
+    <div id="tab-library" style="display: none;">
+      <!-- لوحة الاشتراك الشهري -->
+      <section class="subscription-panel">
+        <h3><i class="fa-solid fa-crown"></i> لوحة اشتراك البائع الشهري</h3>
+        <p id="subscription-status-text">جاري فحص حالة
