@@ -5,11 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>DigiNest | المتجر الرقمي اللامركزي للمنتجات الرقمية والمدفوعات المشفرة</title>
   
-  <!-- SEO & OpenGraph -->
   <meta name="description" content="DigiNest - سوق لامركزي لبيع وشراء المنتجات الرقمية والبرمجيات وقوالب الذكاء الاصطناعي بدفع فوري بالعملات المشفرة مع تسليم فوري وتراخيص مؤكدة.">
   <meta name="theme-color" content="#0B0F17">
 
-  <!-- Google Fonts & Font Awesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -23,25 +21,15 @@
       --bg-card-hover: #1A243B;
       --border-subtle: #242E47;
       --border-focus: #10B981;
-      
       --emerald-500: #10B981;
       --emerald-400: #34D399;
       --emerald-glow: rgba(16, 185, 129, 0.25);
-      
       --amber-400: #FBBF24;
-      --cyan-400: #22D3EE;
-      --purple-400: #A78BFA;
-      
       --text-primary: #F9FAFB;
       --text-secondary: #94A3B8;
       --text-muted: #64748B;
-      
       --font-ar: 'Tajawal', sans-serif;
       --font-en: 'Inter', sans-serif;
-      --radius-sm: 8px;
-      --radius-md: 14px;
-      --radius-lg: 20px;
-      --radius-xl: 28px;
     }
 
     * {
@@ -63,38 +51,9 @@
     }
 
     @media (min-width: 768px) {
-      body {
-        padding-bottom: 0;
-      }
+      body { padding-bottom: 0; }
     }
 
-    /* Scrollbars */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg-dark); }
-    ::-webkit-scrollbar-thumb { background: #242E47; border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: #374151; }
-
-    /* Top Announcement Bar */
-    .top-announcement {
-      background: linear-gradient(90deg, #059669, #10B981, #0284C7);
-      color: #064E3B;
-      font-size: 12px;
-      font-weight: 800;
-      padding: 6px 15px;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-    .top-announcement span {
-      background: rgba(255, 255, 255, 0.25);
-      padding: 2px 8px;
-      border-radius: 20px;
-      color: #064E3B;
-    }
-
-    /* Header */
     header {
       background: rgba(14, 19, 31, 0.92);
       backdrop-filter: blur(14px);
@@ -138,8 +97,6 @@
     .brand-title h1 {
       font-size: 19px;
       font-weight: 900;
-      letter-spacing: -0.3px;
-      line-height: 1.1;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -160,7 +117,6 @@
       color: var(--text-muted);
     }
 
-    /* Search Bar in Header (Desktop) */
     .header-search {
       flex: 1;
       max-width: 440px;
@@ -175,20 +131,15 @@
       width: 100%;
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
+      border-radius: 12px;
       padding: 10px 42px 10px 14px;
       color: var(--text-primary);
       font-size: 13px;
       outline: none;
-      transition: all 0.2s ease;
-    }
-    [dir="ltr"] .search-input {
-      padding: 10px 14px 10px 42px;
     }
     .search-input:focus {
       border-color: var(--emerald-500);
       box-shadow: 0 0 0 3px var(--emerald-glow);
-      background: var(--bg-card);
     }
     .search-icon {
       position: absolute;
@@ -198,12 +149,7 @@
       color: var(--text-muted);
       pointer-events: none;
     }
-    [dir="ltr"] .search-icon {
-      right: auto;
-      left: 14px;
-    }
 
-    /* Header Action Buttons */
     .header-actions {
       display: flex;
       align-items: center;
@@ -212,7 +158,7 @@
 
     .btn {
       padding: 9px 16px;
-      border-radius: var(--radius-md);
+      border-radius: 12px;
       font-size: 13px;
       font-weight: 700;
       cursor: pointer;
@@ -220,8 +166,8 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       text-decoration: none;
+      transition: 0.2s;
     }
 
     .btn-emerald {
@@ -229,22 +175,15 @@
       color: #032E21;
       box-shadow: 0 4px 14px var(--emerald-glow);
     }
-    .btn-emerald:hover {
-      background: linear-gradient(135deg, #34D399, #10B981);
-      transform: translateY(-1px);
-    }
+    .btn-emerald:hover { background: linear-gradient(135deg, #34D399, #10B981); }
 
     .btn-secondary {
       background: var(--bg-surface);
       color: var(--text-primary);
       border: 1px solid var(--border-subtle);
     }
-    .btn-secondary:hover {
-      background: var(--bg-card);
-      border-color: #374151;
-    }
+    .btn-secondary:hover { background: var(--bg-card); }
 
-    /* Sub-nav Tabs (Desktop) */
     .nav-tabs-bar {
       background: var(--bg-surface);
       border-bottom: 1px solid var(--border-subtle);
@@ -252,11 +191,7 @@
       padding: 0 20px;
     }
     @media (min-width: 768px) {
-      .nav-tabs-bar {
-        display: flex;
-        justify-content: center;
-        gap: 8px;
-      }
+      .nav-tabs-bar { display: flex; justify-content: center; gap: 8px; }
     }
 
     .nav-tab-item {
@@ -271,10 +206,6 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      transition: all 0.2s ease;
-    }
-    .nav-tab-item:hover {
-      color: #FFFFFF;
     }
     .nav-tab-item.active {
       color: var(--emerald-400);
@@ -282,7 +213,6 @@
       background: rgba(16, 185, 129, 0.05);
     }
 
-    /* Main Container */
     main {
       max-width: 1240px;
       margin: 0 auto;
@@ -291,294 +221,39 @@
       flex: 1;
     }
 
-    /* Mobile Search */
-    .mobile-search-box {
-      margin-bottom: 18px;
-      position: relative;
-    }
-    @media (min-width: 768px) {
-      .mobile-search-box { display: none; }
-    }
-
-    /* Hero Section */
     .hero-banner {
-      background: radial-gradient(circle at 100% 0%, rgba(16, 185, 129, 0.15), transparent 50%),
-                  radial-gradient(circle at 0% 100%, rgba(34, 211, 238, 0.08), transparent 55%),
-                  var(--bg-surface);
+      background: radial-gradient(circle at 100% 0%, rgba(16, 185, 129, 0.15), transparent 50%), var(--bg-surface);
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-xl);
+      border-radius: 20px;
       padding: 32px 20px;
       text-align: center;
       margin-bottom: 28px;
-      position: relative;
-      overflow: hidden;
     }
+    .hero-banner h2 { font-size: 26px; font-weight: 900; margin-bottom: 10px; }
+    .hero-banner p { color: var(--text-secondary); font-size: 14px; max-width: 640px; margin: 0 auto 20px; line-height: 1.6; }
 
-    .hero-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(16, 185, 129, 0.12);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      color: var(--emerald-400);
-      padding: 5px 14px;
-      border-radius: 30px;
-      font-size: 12px;
-      font-weight: 800;
-      margin-bottom: 16px;
-    }
-
-    .hero-banner h2 {
-      font-size: 26px;
-      font-weight: 900;
-      line-height: 1.35;
-      margin-bottom: 10px;
-    }
-    @media (min-width: 640px) {
-      .hero-banner h2 { font-size: 34px; }
-    }
-
-    .hero-banner p {
-      color: var(--text-secondary);
-      font-size: 14px;
-      max-width: 640px;
-      margin: 0 auto 20px;
-      line-height: 1.65;
-    }
-
-    .hero-stats {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .stat-badge {
-      background: rgba(20, 27, 45, 0.8);
-      border: 1px solid var(--border-subtle);
-      padding: 8px 16px;
-      border-radius: 30px;
-      font-size: 12px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: #E2E8F0;
-    }
-    .stat-badge i { color: var(--emerald-400); }
-
-    /* Categories Horizontal Scroll */
-    .categories-scroll {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 12px;
-      margin-bottom: 24px;
-      -webkit-overflow-scrolling: touch;
-    }
-    .category-chip {
-      white-space: nowrap;
-      padding: 9px 18px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: 30px;
-      color: var(--text-secondary);
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.2s ease;
-    }
-    .category-chip:hover {
-      border-color: #384566;
-      color: #FFFFFF;
-    }
-    .category-chip.active {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.05));
-      border-color: var(--emerald-500);
-      color: var(--emerald-400);
-      box-shadow: 0 0 12px var(--emerald-glow);
-    }
-
-    /* Section Headers */
-    .section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 18px;
-    }
-    .section-header h3 {
-      font-size: 19px;
-      font-weight: 900;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .section-header span.count {
-      font-size: 12px;
-      color: var(--text-muted);
-      background: var(--bg-surface);
-      padding: 4px 10px;
-      border-radius: 20px;
-      border: 1px solid var(--border-subtle);
-    }
-
-    /* Products Grid */
     .products-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 18px;
     }
-    @media (min-width: 600px) {
-      .products-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (min-width: 992px) {
-      .products-grid { grid-template-columns: repeat(3, 1fr); }
-    }
-    @media (min-width: 1200px) {
-      .products-grid { grid-template-columns: repeat(4, 1fr); }
-    }
+    @media (min-width: 600px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 992px) { .products-grid { grid-template-columns: repeat(3, 1fr); } }
 
-    /* Product Card */
     .product-card {
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
+      border-radius: 16px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-    }
-    .product-card:hover {
-      transform: translateY(-4px);
-      border-color: #384566;
-      box-shadow: 0 16px 30px -10px rgba(0, 0, 0, 0.5);
-    }
-
-    .card-banner {
-      height: 150px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 52px;
-      overflow: hidden;
-    }
-    .card-banner.ai { background: linear-gradient(135deg, #1E1B4B, #312E81); }
-    .card-banner.ui { background: linear-gradient(135deg, #064E3B, #065F46); }
-    .card-banner.code { background: linear-gradient(135deg, #3730A3, #1E293B); }
-    .card-banner.finance { background: linear-gradient(135deg, #78350F, #92400E); }
-    .card-banner.web3 { background: linear-gradient(135deg, #4C1D95, #5B21B6); }
-
-    .category-tag {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: rgba(14, 19, 31, 0.85);
-      backdrop-filter: blur(6px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #FFFFFF;
-      font-size: 11px;
-      font-weight: 800;
-      padding: 3px 8px;
-      border-radius: 6px;
-    }
-    [dir="ltr"] .category-tag {
-      right: auto;
-      left: 10px;
-    }
-
-    .rating-tag {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      background: rgba(14, 19, 31, 0.85);
-      backdrop-filter: blur(6px);
-      color: var(--amber-400);
-      font-size: 11px;
-      font-weight: 800;
-      padding: 3px 8px;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    [dir="ltr"] .rating-tag {
-      left: auto;
-      right: 10px;
-    }
-
-    .card-content {
       padding: 16px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
     }
+    .product-card h3 { font-size: 16px; margin: 10px 0; color: #FFF; }
+    .product-card p { font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; }
+    .product-card .price { font-size: 18px; font-weight: 900; color: var(--emerald-400); }
 
-    .card-title {
-      font-size: 16px;
-      font-weight: 800;
-      margin-bottom: 6px;
-      color: #FFFFFF;
-      line-height: 1.35;
-    }
-
-    .card-desc {
-      font-size: 12px;
-      color: var(--text-secondary);
-      line-height: 1.55;
-      margin-bottom: 14px;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      flex: 1;
-    }
-
-    .card-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-bottom: 14px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid rgba(36, 46, 71, 0.7);
-    }
-    .card-meta span {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .card-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    .price-block {
-      display: flex;
-      flex-direction: column;
-    }
-    .fiat-amount {
-      font-size: 18px;
-      font-weight: 900;
-      color: var(--emerald-400);
-      font-family: var(--font-en);
-    }
-    .crypto-amount {
-      font-size: 11px;
-      color: var(--text-muted);
-      font-weight: 700;
-    }
-
-    /* Crypto Checkout Modal */
-    .modal-overlay {
+    .custom-modal-overlay {
       position: fixed;
       inset: 0;
       background: rgba(4, 7, 13, 0.85);
@@ -589,132 +264,16 @@
       justify-content: center;
       padding: 16px;
     }
-    .modal-dialog {
+    .custom-modal-content {
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-xl);
+      border-radius: 20px;
       max-width: 460px;
       width: 100%;
       padding: 24px;
       position: relative;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
-      animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    @keyframes modalPop {
-      0% { opacity: 0; transform: scale(0.92); }
-      100% { opacity: 1; transform: scale(1); }
     }
 
-    .modal-close-btn {
-      position: absolute;
-      top: 18px;
-      left: 18px;
-      background: rgba(36, 46, 71, 0.5);
-      border: 1px solid var(--border-subtle);
-      color: var(--text-secondary);
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-    }
-    [dir="ltr"] .modal-close-btn {
-      left: auto;
-      right: 18px;
-    }
-    .modal-close-btn:hover { color: #FFF; background: #242E47; }
-
-    .modal-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--emerald-400);
-      background: rgba(16, 185, 129, 0.1);
-      padding: 4px 10px;
-      border-radius: 20px;
-      margin-bottom: 12px;
-    }
-
-    .modal-header h3 {
-      font-size: 18px;
-      font-weight: 900;
-      margin-bottom: 4px;
-    }
-    .modal-price-display {
-      font-size: 24px;
-      font-weight: 900;
-      color: var(--emerald-400);
-      margin-bottom: 16px;
-      font-family: var(--font-en);
-    }
-
-    /* Crypto Network Options */
-    .crypto-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
-      margin-bottom: 16px;
-    }
-    .crypto-option {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-sm);
-      padding: 8px 4px;
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--text-secondary);
-      cursor: pointer;
-      text-align: center;
-      transition: all 0.2s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-    }
-    .crypto-option i { font-size: 14px; }
-    .crypto-option.active {
-      background: rgba(16, 185, 129, 0.15);
-      border-color: var(--emerald-500);
-      color: var(--emerald-400);
-    }
-
-    .qr-frame {
-      background: #FFFFFF;
-      padding: 10px;
-      border-radius: var(--radius-md);
-      width: 160px;
-      height: 160px;
-      margin: 0 auto 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .qr-frame img { width: 100%; height: 100%; }
-
-    .address-copy-box {
-      background: var(--bg-dark);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 10px 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-    .address-copy-box code {
-      font-family: monospace;
-      font-size: 11px;
-      color: #E2E8F0;
-      word-break: break-all;
-    }
-
-    /* Toast Notification */
     .toast-msg {
       position: fixed;
       bottom: 80px;
@@ -728,10 +287,8 @@
       font-weight: 800;
       z-index: 200;
       display: none;
-      box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
     }
 
-    /* Mobile Bottom Navigation Bar */
     .mobile-bottom-nav {
       position: fixed;
       bottom: 0;
@@ -742,102 +299,26 @@
       border-top: 1px solid var(--border-subtle);
       display: flex;
       justify-content: space-around;
-      padding: 8px 10px;
+      padding: 10px 0;
       z-index: 50;
     }
-    @media (min-width: 768px) {
-      .mobile-bottom-nav { display: none; }
-    }
-
+    @media (min-width: 768px) { .mobile-bottom-nav { display: none; } }
     .bottom-nav-item {
-      background: transparent;
+      background: none;
       border: none;
       color: var(--text-muted);
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 4px;
       cursor: pointer;
-      padding: 4px 10px;
-      border-radius: 8px;
-      transition: all 0.2s;
     }
-    .bottom-nav-item i { font-size: 18px; }
-    .bottom-nav-item.active {
-      color: var(--emerald-400);
-    }
-
-    /* Footer */
-    footer {
-      background: var(--bg-surface);
-      border-top: 1px solid var(--border-subtle);
-      padding: 35px 20px 20px;
-      color: var(--text-muted);
-      font-size: 12px;
-      margin-top: 40px;
-    }
-    .footer-container {
-      max-width: 1240px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 24px;
-      margin-bottom: 24px;
-    }
-    @media (min-width: 768px) {
-      .footer-container { grid-template-columns: 2fr 1fr 1fr; }
-    }
-    .footer-info h4 {
-      color: #FFF;
-      font-size: 16px;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-    .footer-info p {
-      line-height: 1.6;
-      max-width: 400px;
-      color: var(--text-secondary);
-    }
-    .footer-links-col h5 {
-      color: #FFF;
-      font-size: 13px;
-      font-weight: 800;
-      margin-bottom: 12px;
-    }
-    .footer-links-col ul { list-style: none; }
-    .footer-links-col li { margin-bottom: 8px; }
-    .footer-links-col a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .footer-links-col a:hover { color: var(--emerald-400); }
-
-    .footer-bottom {
-      border-top: 1px solid var(--border-subtle);
-      padding-top: 18px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    }
-    @media (min-width: 640px) {
-      .footer-bottom {
-        flex-direction: row;
-        justify-content: space-between;
-      }
-    }
+    .bottom-nav-item.active { color: var(--emerald-400); }
   </style>
 </head>
 <body>
-
-  <!-- شريط الإعلان العلوي -->
-  <div class="top-announcement">
-    <span>عمولة 3% فقط</span> بوابة الدفع الذكية بالعملات المشفرة مع تسليم فوري وتلقائي للملفات الرقمية 🚀
-  </div>
 
   <!-- الهيدر العلوي -->
   <header>
@@ -849,21 +330,14 @@
           <p>سوق المنتجات الرقمية اللامركزي</p>
         </div>
       </a>
-<a href="login.html" class="nav-btn">تسجيل الدخول</a>
-
+      <a href="#" class="btn btn-secondary" onclick="openLoginModal(event)">تسجيل الدخول</a>
       
-      <!-- شريط البحث لسطح المكتب -->
       <div class="header-search">
-        <input type="text" class="search-input" id="desktop-search" placeholder="ابحث عن روبوتات تداول، قوالب Figma، سكربتات..." oninput="handleSearch(this.value)">
+        <input type="text" class="search-input" id="desktop-search" placeholder="ابحث عن المنتجات الرقمية..." oninput="handleSearch(this.value)">
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
       </div>
 
-      <!-- أزرار الإجراءات -->
       <div class="header-actions">
-        <button class="btn btn-secondary" onclick="toggleLanguage()">
-          <i class="fa-solid fa-globe"></i>
-          <span id="lang-btn-text">English</span>
-        </button>
         <button class="btn btn-emerald" id="connect-wallet-btn" onclick="handleWalletConnect()">
           <i class="fa-solid fa-wallet"></i>
           <span id="wallet-text">ربط المحفظة</span>
@@ -872,1022 +346,47 @@
     </div>
   </header>
 
-  <!-- شريط التبويبات الرئيسي (Desktop) -->
+  <!-- شريط التبويبات الرئيسي -->
   <nav class="nav-tabs-bar">
-    <button class="nav-tab-item active" onclick="switchMainTab('explore', this)">
+    <button class="nav-tab-item active" onclick="switchMainTab('tab-explore', this)">
       <i class="fa-solid fa-compass"></i> تصفح السوق
     </button>
-    <button class="nav-tab-item" onclick="switchMainTab('studio', this)">
+    <button class="nav-tab-item" onclick="switchMainTab('tab-studio', this)">
       <i class="fa-solid fa-store"></i> استوديو البائع
     </button>
-    <button class="nav-tab-item" onclick="switchMainTab('library', this)">
+    <button class="nav-tab-item" onclick="switchMainTab('tab-library', this)">
       <i class="fa-solid fa-box-open"></i> مشترياتي الرقمية
     </button>
   </nav>
 
   <!-- المحتوى الرئيسي -->
   <main>
-    <!-- شريط البحث للموبايل -->
-    <div class="mobile-search-box">
-      <input type="text" class="search-input" id="mobile-search" placeholder="ابحث عن المنتجات الرقمية..." oninput="handleSearch(this.value)">
-      <i class="fa-solid fa-magnifying-glass search-icon"></i>
-    </div>
-
-    <!-- قسم الاستكشاف والتسوق -->
+    <!-- قسم السوق والاستكشاف -->
     <div id="tab-explore">
-      <!-- البانر الترويجي -->
       <section class="hero-banner">
-        <div class="hero-pill">
-          <i class="fa-solid fa-shield-halved"></i> مدفوعات لامركزية 100% بدون حظر أو تأخير
-        </div>
         <h2>سوق المنتجات الرقمية الأسرع والأكثر أماناً</h2>
-        <p>قم بشراء وبيع القوالب البرمجية، تصاميم Figma، خوارزميات التداول، والنماذج المالية مع تقسيم فوري للأرباح (97% للبائع و 3% عمولة).</p>
-        
-        <div class="hero-stats">
-          <div class="stat-badge"><i class="fa-brands fa-ethereum"></i> إيثر، بوليجون، و USDT</div>
-          <div class="stat-badge"><i class="fa-solid fa-bolt"></i> تسليم فوري وتلقائي</div>
-          <div class="stat-badge"><i class="fa-solid fa-unlock-keyhole"></i> تراخيص مشفرة دائمة</div>
-        </div>
-      </section>
-
-      <!-- شريط التصنيفات السريع -->
-      <div class="categories-scroll" id="categories-container">
-        <button class="category-chip active" onclick="filterCategory('all', this)">
-          <i class="fa-solid fa-border-all"></i> الكل
-        </button>
-        <button class="category-chip" onclick="filterCategory('ai', this)">
-          <i class="fa-solid fa-robot"></i> الذكاء الاصطناعي
-        </button>
-        <button class="category-chip" onclick="filterCategory('ui', this)">
-          <i class="fa-solid fa-palette"></i> تصاميم وواجهات
-        </button>
-        <button class="category-chip" onclick="filterCategory('code', this)">
-          <i class="fa-solid fa-code"></i> برمجيات وسكربتات
-        </button>
-        <button class="category-chip" onclick="filterCategory('finance', this)">
-          <i class="fa-solid fa-chart-line"></i> مالية وأعمال
-        </button>
-        <button class="category-chip" onclick="filterCategory('web3', this)">
-          <i class="fa-solid fa-cube"></i> عقود ذكية Web3
-        </button>
-      </div>
-
-      <!-- عنوان القسم والعداد -->
-      <div class="section-header">
-        <h3><i class="fa-solid fa-fire text-amber-400"></i> المنتجات المميزة المتاحة للتحميل</h3>
-        <span class="count" id="products-count-badge">4 منتجات جاهزة</span>
-      </div>
-
-      <!-- شبكة بطاقات المنتجات -->
-      <div class="products-grid" id="products-container">
-        <!-- يتم ملء المنتجات برمجياً عبر الجافاسكربت -->
-      </div>
-    </div>
-
-    <!-- قسم استوديو البائع -->
-    <div id="tab-studio" style="display: none;">
-      <section class="hero-banner">
-        <div class="hero-pill"><i class="fa-solid fa-coins"></i> 97% أرباح صافية</div>
-        <h2>استوديو صناع المنتجات الرقمية</h2>
-        <p>ارفع ملفاتك الرقمية وحدد سعرها بالدولار أو الكريبتو، وسيتولى العقد الذكي تحويل المبيعات لمحفظتك فوراً.</p>
-        <button class="btn btn-emerald" onclick="showToast('ميزة إضافة المنتجات جاهزة ومربوطة بالسيرفر!')">
+        <p>قم بشراء وبيع القوالب البرمجية، التصاميم، والنماذج المالية بمدفوعات فورية وبدون وسطاء.</p>
+        <button class="btn btn-emerald" onclick="openUploadModal()">
           <i class="fa-solid fa-cloud-arrow-up"></i> رفع منتج رقمي جديد
         </button>
       </section>
+
+      <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <h3 style="color: #fff; font-size: 18px;"><i class="fa-solid fa-fire text-amber-400"></i> المنتجات المتاحة</h3>
+      </div>
+
+      <div class="products-grid" id="productsGrid">
+        <!-- المنتجات الديناميكية -->
+      </div>
     </div>
 
-    <!-- قسم المشتريات والمكتبة -->
-    <div id="tab-library" style="display: none;">
+    <!-- قسم الاستوديو -->
+    <div id="tab-studio" style="display: none;">
       <section class="hero-banner">
-        <div class="hero-pill"><i class="fa-solid fa-key"></i> التراخيص الفورية</div>
-        <h2>مكتبة مشترياتك الرقمية</h2>
-        <p>جميع الملفات والأدوات الرقمية التي اشتريتها تظل محفوظة هنا مع روابط تحميل مباشرة ومفاتيح الترخيص المشفرة.</p>
-        <div id="library-items" style="margin-top: 15px; font-size: 13px; color: var(--text-muted);">
-          <i class="fa-solid fa-circle-info"></i> لم تقم بأي عملية شراء حتى الآن. تصفح المتجر واختر منتجك الأول!
-        </div>
+        <h2>استوديو صناع المنتجات الرقمية</h2>
+        <p>إدارة منتجاتك المعروضة ومتابعة الأرباح وحالة الاشتراك الخاص بك.</p>
+        <button class="btn btn-emerald" onclick="openUploadModal()">إضافة منتج جديد</button>
       </section>
     </div>
-  </main>
 
-  <!-- نافذة الدفع المشفرة المنبثقة (Crypto Checkout Modal) -->
-  <div class="modal-overlay" id="checkout-modal">
-    <div class="modal-dialog">
-      <button class="modal-close-btn" onclick="closeCheckoutModal()">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-
-      <div class="modal-badge"><i class="fa-solid fa-shield-check"></i> دفع مشفر آمن وفوري</div>
-      <div class="modal-header">
-        <h3 id="checkout-product-title">اسم المنتج الرقمي</h3>
-        <div class="modal-price-display" id="checkout-price-display">$0.00</div>
-      </div>
-
-      <!-- خيارات العملات المشفرة -->
-      <div class="crypto-grid">
-        <button class="crypto-option active" onclick="selectCryptoOption('USDT', this)">
-          <i class="fa-solid fa-dollar-sign" style="color: #10B981;"></i>
-          <span>USDT</span>
-        </button>
-        <button class="crypto-option" onclick="selectCryptoOption('ETH', this)">
-          <i class="fa-brands fa-ethereum" style="color: #818CF8;"></i>
-          <span>ETH</span>
-        </button>
-        <button class="crypto-option" onclick="selectCryptoOption('BNB', this)">
-          <i class="fa-solid fa-coins" style="color: #FBBF24;"></i>
-          <span>BNB</span>
-        </button>
-        <button class="crypto-option" onclick="selectCryptoOption('MATIC', this)">
-          <i class="fa-solid fa-bolt" style="color: #A78BFA;"></i>
-          <span>MATIC</span>
-        </button>
-      </div>
-
-      <!-- كود الـ QR الديناميكي -->
-      <div class="qr-frame">
-        <img id="checkout-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=0x71C5A8c43B06C185A48Fcf4E654b9B23E257498a" alt="Crypto QR Code">
-      </div>
-
-      <!-- عنوان المحفظة للنسخ -->
-      <div class="address-copy-box">
-        <code id="checkout-wallet-address">0x71C5A8c43B06C185A48Fcf4E654b9B23E257498a</code>
-        <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 11px;" onclick="copyWalletAddress()">
-          <i class="fa-solid fa-copy"></i> نسخ
-        </button>
-      </div>
-
-      <!-- زر تأكيد العملية -->
-      <button class="btn btn-emerald" style="width: 100%; justify-content: center; padding: 13px;" onclick="completeCryptoCheckout()">
-        <i class="fa-solid fa-circle-check"></i> تأكيد المعاملة وتحميل الملف
-      </button>
-    </div>
-  </div>
-
-  <!-- رسالة التنبيه العائمة (Toast) -->
-  <div class="toast-msg" id="toast-notification">تمت العملية بنجاح!</div>
-
-  <!-- القائمة السفلية للموبايل (Mobile Bottom Navigation) -->
-  <nav class="mobile-bottom-nav">
-    <button class="bottom-nav-item active" onclick="switchMainTab('explore', this)">
-      <i class="fa-solid fa-compass"></i>
-      <span>السوق</span>
-    </button>
-    <button class="bottom-nav-item" onclick="switchMainTab('studio', this)">
-      <i class="fa-solid fa-store"></i>
-      <span>الاستوديو</span>
-    </button>
-    <button class="bottom-nav-item" onclick="switchMainTab('library', this)">
-      <i class="fa-solid fa-box-open"></i>
-      <span>مشترياتي</span>
-    </button>
-    <button class="bottom-nav-item" onclick="handleWalletConnect()">
-      <i class="fa-solid fa-wallet"></i>
-      <span>محفظتي</span>
-    </button>
-  </nav>
-
-  <!-- الفوتر السفلي -->
-  <footer>
-    <div class="footer-container">
-      <div class="footer-info">
-        <h4>DigiNest Web3 Marketplace</h4>
-        <p>المنصة الرائدة لبيع وشراء الملفات الرقمية والأكواد والتصاميم بمدفوعات العملات المشفرة الفورية وبدون وسطاء تقليديين.</p>
-      </div>
-      <div class="footer-links-col">
-        <h5>روابط سريعة</h5>
-        <ul>
-          <li><a href="#" onclick="switchMainTab('explore', this)">سوق المنتجات</a></li>
-          <li><a href="#" onclick="switchMainTab('studio', this)">بيع منتجاتك</a></li>
-          <li><a href="#" onclick="switchMainTab('library', this)">مكتبة التنزيلات</a></li>
-        </ul>
-      </div>
-      <div class="footer-links-col">
-        <h5>الأمان والشفافية</h5>
-        <ul>
-          <li><a href="#">العقود الذكية Solidity</a></li>
-          <li><a href="#">عمولة المنصة 3%</a></li>
-          <li><a href="#">سياسة التراخيص الرقمية</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <p>© 2026 DigiNest Inc. جميع الحقوق محفوظة - منصة رقمية لا مركزية.</p>
-      <div style="display: flex; gap: 14px; font-size: 16px;">
-        <a href="#" style="color: var(--text-muted);"><i class="fa-brands fa-github"></i></a>
-        <a href="#" style="color: var(--text-muted);"><i class="fa-brands fa-x-twitter"></i></a>
-        <a href="#" style="color: var(--text-muted);"><i class="fa-brands fa-telegram"></i></a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- الأكواد البرمجية التفاعلية المدمجة (JavaScript) -->
-  <script>
-    const PRODUCTS_DATA = [
-      {
-        id: 'prod-1',
-        title: 'روبوت التداول الآلي الذكي v2.4 (Crypto Bot)',
-        desc: 'خوارزمية متطورة بلغة بايثون للتداول الآلي على منصات Binance وBybit مع استراتيجيات تحوط وإدارة المخاطر.',
-        category: 'ai',
-        categoryName: 'ذكاء اصطناعي',
-        bannerClass: 'ai',
-        icon: '🤖',
-        priceUsd: 39.99,
-        cryptoRate: '39.99 USDT',
-        rating: 4.9,
-        downloads: 384,
-        author: 'CryptoDev Pro'
-      },
-      {
-        id: 'prod-2',
-        title: 'حزمة تصميم تطبيقات الهاتف المتطورة (Figma UI Kit)',
-        desc: 'أكثر من 140 شاشة تفاعلية مخصصة لتطبيقات المحافظ الرقمية ومنصات التداول الحديثة بنظام ألوان عصري.',
-        category: 'ui',
-        categoryName: 'واجهات وتصميم',
-        bannerClass: 'ui',
-        icon: '📱',
-        priceUsd: 19.99,
-        cryptoRate: '19.99 USDT',
-        rating: 4.8,
-        downloads: 612,
-        author: 'PixelMaster Studio'
-      },
-      {
-        id: 'prod-3',
-        title: 'النموذج المالي الشامل للشركات الناشئة (SaaS Model)',
-        desc: 'ملف Excel احترافي لحساب تكلفة اكتساب العملاء (CAC)، الإيراد المتكرر (MRR)، وتوقعات نمو الاستثمارات.',
-        category: 'finance',
-        categoryName: 'مالية وأعمال',
-        bannerClass: 'finance',
-        icon: '📊',
-        priceUsd: 14.50,
-        cryptoRate: '14.50 USDT',
-        rating: 4.7,
-        downloads: 295,
-        author: 'FinVenture Advisory'
-      },
-      {
-        id: 'prod-4',
-        title: 'العقد الذكي لتقسيم العمولات (Solidity Splitter)',
-        desc: 'عقد ذكي متوافق مع معايير ERC-20 وشبكات EVM لتقسيم المدفوعات والعمولات تلقائياً بنسبة 3% و 97%.',
-        category: 'web3',
-        categoryName: 'عقود ذكية',
-        bannerClass: 'web3',
-        icon: '🔐',
-        priceUsd: 29.00,
-        cryptoRate: '0.0093 ETH',
-        rating: 5.0,
-        downloads: 189,
-        author: 'DigiNest Labs'
-      }
-    ];
-
-    let currentSelectedCategory = 'all';
-    let currentSearchTerm = '';
-    let currentActiveProduct = null;
-    let selectedCryptoSymbol = 'USDT';
-    const STORE_PAYOUT_ADDRESS = '0x71C5A8c43B06C185A48Fcf4E654b9B23E257498a';
-
-    document.addEventListener('DOMContentLoaded', () => {
-      renderProducts();
-    });
-
-    function renderProducts() {
-      const container = document.getElementById('products-container');
-      const badge = document.getElementById('products-count-badge');
-      
-      const filtered = PRODUCTS_DATA.filter(item => {
-        const matchesCategory = currentSelectedCategory === 'all' || item.category === currentSelectedCategory;
-        const matchesSearch = item.title.toLowerCase().includes(currentSearchTerm.toLowerCase()) || 
-                              item.desc.toLowerCase().includes(currentSearchTerm.toLowerCase());
-        return matchesCategory && matchesSearch;
-      });
-
-      badge.innerText = `${filtered.length} منتجات متاحة`;
-
-      if (filtered.length === 0) {
-        container.innerHTML = `
-          <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--text-muted);">
-            <i class="fa-solid fa-magnifying-glass" style="font-size: 32px; margin-bottom: 10px; display: block;"></i>
-            لم نتمكن من العثور على أي منتج يطابق معايير البحث.
-          </div>
-        `;
-        return;
-      }
-
-      container.innerHTML = filtered.map(item => `
-        <div class="product-card">
-          <div class="card-banner ${item.bannerClass}">
-            <span>${item.icon}</span>
-            <span class="category-tag">${item.categoryName}</span>
-            <span class="rating-tag"><i class="fa-solid fa-star"></i> ${item.rating}</span>
-          </div>
-          <div class="card-content">
-            <h4 class="card-title">${item.title}</h4>
-            <p class="card-desc">${item.desc}</p>
-            <div class="card-meta">
-              <span><i class="fa-solid fa-download"></i> ${item.downloads} تنزيل</span>
-              <span><i class="fa-solid fa-circle-check" style="color: var(--emerald-400);"></i> ${item.author}</span>
-            </div>
-            <div class="card-footer">
-              <div class="price-block">
-                <span class="fiat-amount">$${item.priceUsd.toFixed(2)}</span>
-                <span class="crypto-amount">≈ ${item.cryptoRate}</span>
-              </div>
-              <button class="btn btn-emerald" onclick="openCheckoutModal('${item.id}')">
-                شراء الآن <i class="fa-solid fa-cart-shopping"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function filterCategory(cat, el) {
-      currentSelectedCategory = cat;
-      document.querySelectorAll('.category-chip').forEach(btn => btn.classList.remove('active'));
-      el.classList.add('active');
-      renderProducts();
-    }
-
-    function handleSearch(val) {
-      currentSearchTerm = val;
-      renderProducts();
-    }
-
-    function switchMainTab(tabKey, el) {
-      document.querySelectorAll('.nav-tab-item, .bottom-nav-item').forEach(btn => btn.classList.remove('active'));
-      if (el) el.classList.add('active');
-
-      document.getElementById('tab-explore').style.display = tabKey === 'explore' ? 'block' : 'none';
-      document.getElementById('tab-studio').style.display = tabKey === 'studio' ? 'block' : 'none';
-      document.getElementById('tab-library').style.display = tabKey === 'library' ? 'block' : 'none';
-    }
-
-    function openCheckoutModal(productId) {
-      const product = PRODUCTS_DATA.find(p => p.id === productId);
-      if (!product) return;
-      currentActiveProduct = product;
-
-      document.getElementById('checkout-product-title').innerText = product.title;
-      document.getElementById('checkout-price-display').innerText = `$${product.priceUsd.toFixed(2)}`;
-      updateModalQr();
-
-      document.getElementById('checkout-modal').style.display = 'flex';
-    }
-
-    function closeCheckoutModal() {
-      document.getElementById('checkout-modal').style.display = 'none';
-    }
-
-    function selectCryptoOption(symbol, el) {
-      selectedCryptoSymbol = symbol;
-      document.querySelectorAll('.crypto-option').forEach(btn => btn.classList.remove('active'));
-      el.classList.add('active');
-      updateModalQr();
-    }
-
-    function updateModalQr() {
-      const qrImg = document.getElementById('checkout-qr-img');
-      const uri = `${selectedCryptoSymbol.toLowerCase()}:${STORE_PAYOUT_ADDRESS}?amount=${currentActiveProduct ? currentActiveProduct.priceUsd : 10}`;
-      qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(uri)}`;
-    }
-
-    function copyWalletAddress() {
-      const address = document.getElementById('checkout-wallet-address').innerText;
-      navigator.clipboard.writeText(address).then(() => {
-        showToast('تم نسخ عنوان المحفظة بنجاح!');
-      });
-    }
-
-    function completeCryptoCheckout() {
-      showToast('🎉 تم تأكيد الدفع عبر البلوكتشين! جاري تنزيل الملف...');
-      setTimeout(() => {
-        closeCheckoutModal();
-        switchMainTab('library');
-        document.getElementById('library-items').innerHTML = `
-          <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 15px; margin-top: 15px; text-align: right;">
-            <h4 style="color: #FFF; font-size: 15px; margin-bottom: 5px;">${currentActiveProduct.title}</h4>
-            <p style="color: var(--emerald-400); font-size: 12px; margin-bottom: 10px;">الترخيص: DGN-${Date.now()}-LICENSED</p>
-            <button class="btn btn-emerald" style="padding: 6px 14px; font-size: 12px;" onclick="showToast('بدأ تحميل الملف الرقمي!')">
-              <i class="fa-solid fa-download"></i> تحميل الملف الرقمي
-            </button>
-          </div>
-        `;
-      }, 1000);
-    }
-
-    function handleWalletConnect() {
-      const walletBtn = document.getElementById('wallet-text');
-      if (window.ethereum) {
-        window.ethereum.request({ method: 'eth_requestAccounts' })
-          .then(accs => {
-            const short = accs[0].substring(0, 6) + '...' + accs[0].substring(accs[0].length - 4);
-            walletBtn.innerText = short;
-            showToast('تم ربط المحفظة بنجاح: ' + short);
-          })
-          .catch(() => showToast('تم إلغاء الاتصال بالمحفظة'));
-      } else {
-        walletBtn.innerText = '0x71C5...498a';
-        showToast('تم ربط المحفظة الافتراضية بنجاح!');
-      }
-    }
-
-    function showToast(msg) {
-      const toast = document.getElementById('toast-notification');
-      toast.innerText = msg;
-      toast.style.display = 'block';
-      setTimeout(() => {
-        toast.style.display = 'none';
-      }, 3000);
-    }
-
-   
-
-// استبدال دالة الرفع القديمة وتفعيل الرفع المباشر
-window.openUploadModal = function() {
-  const existingModal = document.getElementById("custom-upload-modal");
-  if (existingModal) existingModal.remove();
-
-  const modal = document.createElement("div");
-  modal.id = "custom-upload-modal";
-  modal.style.cssText = `
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85); display: flex; align-items: center;
-    justify-content: center; z-index: 99999; direction: rtl;
-  `;
-
-  modal.innerHTML = `
-    <div style="background: #1e293b; color: #fff; padding: 20px; border-radius: 12px; width: 90%; max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
-      <h3 style="margin-top:0; color:#10b981;">رفع منتج رقمي جديد</h3>
-      <label style="display:block; margin: 10px 0 5px;">سعر المنتج (ETH/USDT):</label>
-      <input type="number" id="product-price" placeholder="مثال: 0.05" step="0.01" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #334155; background: #0f172a; color: #fff; box-sizing: border-box;">
-      
-      <label style="display:block; margin: 15px 0 5px;">اختر صورة أو ملف المنتج:</label>
-      <input type="file" id="product-file-input" style="width: 100%; color: #94a3b8;">
-      
-      <div style="display: flex; gap: 10px; margin-top: 20px;">
-        <button id="submit-upload-btn" style="flex:1; background: #10b981; color: #fff; border: none; padding: 10px; border-radius: 6px; cursor: pointer; font-weight: bold;">تأكيد ورفع</button>
-        <button id="cancel-upload-btn" style="flex:1; background: #475569; color: #fff; border: none; padding: 10px; border-radius: 6px; cursor: pointer;">إلغاء</button>
-      </div>
-    </div>
-  `;
-
-    document.body.appendChild(modal);
-
-  document.getElementById("cancel-upload-btn").onclick = () => modal.remove();
-
-  document.getElementById("submit-upload-btn").onclick = async () => {
-    const priceInput = document.getElementById("product-price").value;
-    const fileInput = document.getElementById("product-file-input");
-
-    if (!priceInput || priceInput <= 0) {
-      alert("يرجى إدخال سعر صحيح للمنتج!");
-      return;
-    }
-    if (!fileInput.files || fileInput.files.length === 0) {
-      alert("يرجى اختيار ملف أو صورة قبل المتابعة!");
-      return;
-    }
-
-    const file = fileInput.files[0];
-    modal.remove();
-
-    // استدعاء دالة الرفع المباشرة
-    await uploadProductToSupabaseDirect(priceInput, file);
-  };
-};
-
-// دالة الرفع المباشر والتخزين في Supabase
-async function uploadProductToSupabaseDirect(price, file) {
-  try {
-      showCustomAlert("جاري رفع الملف والتخزين في السيرفر، يرجى الانتظار...", "جاري التحميل ⏳");
-
-    // معرفة يتم الرفع إلى Supabase إذا كانت مكتبة Supabase موجودة
-    if (window.supabase) {
-      const fileName = `${Date.now()}_${file.name}`;
-      const { data, error } = await window.supabase
-        .storage
-        .from('products')
-        .upload(fileName, file);
-
-      if (error) throw error;
-
-      showCustomAlert("تم رفع المنتج وتخزينه في المنصة بنجاح!", "تم بنجاح 🎉");
-    } else {
-      // محاكاة النجاح في حال عدم اكتمال مفاتيح Supabase
-      showCustomAlert("تم معالجة الملف ورفع المنتج بنجاح!", "تم بنجاح 🎉");
-    }
-
-    // إعادة تحميل الصفحة لتحديث العرض بعد إغلاق النافذة
-    setTimeout(() => {
-      window.location.reload();
-    }, 2000);
-
-  } catch (err) {
-    console.error(err);
-    showCustomAlert("حدث خطأ أثناء الرفع: " + err.message, "خطأ ⚠️")   
-
-
-
-
-
-
-    
-    
-    
-
-
-    
-    
-  
-    
-  
-  }
-}
-
-// ربط أزرار الرفع بالنافذة مباشرة
-document.addEventListener("DOMContentLoaded", () => {
-  document.addEventListener("click", (e) => {
-    if (e.target && e.target.innerText && e.target.innerText.includes("رفع منتج")) {
-      e.preventDefault();
-      e.stopPropagation();
-      window.openUploadModal();
-    }
-  }, true);
-  });
-});
-</script>
-
-<!-- قسم عرض المنتجات المرفوعة -->
-<section class="products-section">
-  <h2>المنتجات المتاحة</h2>
-  <div id="productsGrid" class="products-grid">
-    <!-- ستظهر المنتجات هنا ديناميكياً -->
-  </div>
-</section>
-
-<!-- تنسيق قسم المنتجات -->
-<style>
-  .products-section {
-    padding: 30px 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .products-section h2 {
-    color: #fff;
-    margin-bottom: 20px;
-    font-size: 1.5rem;
-  }
-  .products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 20px;
-  }
-  .product-card {
-    background: #1e1e2f;
-    border: 1px solid #2d2d44;
-    border-radius: 12px;
-    padding: 16px;
-    color: #fff;
-    transition: transform 0.2s ease;
-  }
-  .product-card:hover {
-    transform: translateY(-5px);
-  }
-  .product-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 8px;
-  }
-  .product-card h3 {
-    margin: 12px 0 8px;
-    font-size: 1.1rem;
-  }
-  .product-card p {
-    color: #aaa;
-    font-size: 0.9rem;
-  }
-  .product-card .price {
-    color: #4ef075;
-    font-weight: bold;
-    font-size: 1.2rem;
-    margin-top: 10px;
-  }
-.card-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 15px;
-}
-
-.buy-btn {
-  background: #3a86ff;
-  color: #fff;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.buy-btn:hover {
-  background: #2563eb;
-}
-
-.close-modal-btn {
-  position: absolute;
-  top: 12px;
-  left: 16px;
-  background: transparent;
-  border: none;
-  color: #888;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-.close-modal-btn:hover {
-  color: #fff;
-}
-
-.buy-price-box {
-  background: #232334;
-  padding: 12px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  font-size: 1.05rem;
-}
-
-.buy-modal-content {
-  position: relative;
-}
-
-</style>
-
-<!-- كود العرض وقراءة المنتجات -->
-<script>
-  function displayProducts() {
-    const productsGrid = document.getElementById('productsGrid');
-    if (!productsGrid) return;
-
-    const products = JSON.parse(localStorage.getItem('diginest_products') || '[]');
-
-    if (products.length === 0) {
-      productsGrid.innerHTML = '<p style="color: #888;">لا توجد منتجات معروضة حالياً.</p>';
-      return;
-    }
-
-    productsGrid.innerHTML = products.map(product => `
-      <div class="product-card">
-        <img src="${product.imageUrl || 'https://via.placeholder.com/300x180'}" alt="${product.title}">
-        <h3>${product.title || 'منتج بدون عنوان'}</h3>
-        <p>${product.description || ''}</p>
-        <div class="price">${product.price || '0'} ETH</div>
-      </div>
-    `).join('');
-  }
-
-  document.addEventListener("DOMContentLoaded", displayProducts);
-</script>
-<!-- 1. هيكل نافذة التنبيه المخصصة (HTML) -->
-<div id="customAlertModal" class="custom-modal-overlay" style="display: none;">
-  <div class="custom-modal-content">
-    <div class="modal-icon">🎉</div>
-    <h3 id="customAlertTitle">تم بنجاح!</h3>
-    <p id="customAlertMessage">تم معالجة الملف ورفع المنتج بنجاح.</p>
-    <button class="modal-btn" onclick="closeCustomAlert()">حسناً</button>
-  </div>
-</div>
-
-<!-- 2. تنسيق النافذة المخصصة (CSS) -->
-<style>
-  .custom-modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(4px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-  }
-
-  .custom-modal-content {
-    background: #181824;
-    border: 1px solid #2d2d44;
-    border-radius: 16px;
-    padding: 24px;
-    width: 90%;
-    max-width: 360px;
-    text-align: center;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-    color: #ffffff;
-    animation: modalPop 0.3s ease-out;
-}
-</style>
-<!-- النافذة المنبثقة للبازار متضمنة المنتجات -->
-<div class="custom-modal-overlay">
-  <div class="custom-modal-content" style="position: relative; max-width: 500px; width: 90%; background: #1a1e29; border-radius: 12px; padding: 20px; color: #fff;">
-    <!-- زر الإغلاق X -->
-  <span class="close-modal-btn" onclick="this.closest('.custom-modal-overlay').style.display='none'">&times;</span>
-    
-
-    
-    <h2 style="text-align: center; margin-bottom: 15px; font-size: 20px; color: #00d2d3;">🛒 بازار المنتجات الرقمية</h2>
-        <!-- زر إضافة منتج جديد داخل البازار -->
-    <div style="text-align: center; margin-bottom: 15px;">
-      <button id="add-product-btn" style="background: #10ac84; color: #fff; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;">+ إضافة منتج جديد</button>
-    </div>
-
-    <!-- قائمة منتجات البازار -->
-    <div class="bazaar-items-list" style="display: flex; flex-direction: column; gap: 12px; max-height: 350px; overflow-y: auto;">
-      
-      <!-- منتج 1 -->
-      <div class="bazaar-card" style="background: #252a38; padding: 12px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
-        <div>
-          <h4 style="margin: 0 0 5px 0; font-size: 15px;">اشتراك VIP مميز</h4>
-          <span style="font-size: 13px; color: #10ac84;">0.01 ETH</span>
-        </div>
-        <button class="buy-bazaar-item-btn" data-price="0.01" style="background: #10ac84; color: #fff; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-weight: bold;">شراء</button>
-      </div>
-
-      <!-- منتج 2 -->
-      <div class="bazaar-card" style="background: #252a38; padding: 12px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
-        <div>
-          <h4 style="margin: 0 0 5px 0; font-size: 15px;">حزمة أصول NFT رقمية</h4>
-          <span style="font-size: 13px; color: #10ac84;">0.025 ETH</span>
-        </div>
-        <button class="buy-bazaar-item-btn" data-price="0.025" style="background: #10ac84; color: #fff; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-weight: bold;">شراء</button>
-      </div>
-
-    </div>
-  </div>
-</div>
-<!-- نافذة إضافة منتج جديد -->
-<div id="add-product-modal" class="custom-modal-overlay" style="display: none;">
-  <div class="custom-modal-content" style="position: relative; max-width: 450px; width: 90%; background: #1a1e29; border-radius: 12px; padding: 20px; color: #fff;">
-    <span class="close-product-modal" style="position: absolute; top: 12px; left: 15px; cursor: pointer; font-size: 24px; color: #888;">&times;</span>
-    <h3 style="text-align: center; margin-bottom: 15px; color: #00d2d3;">إضافة منتج جديد للبازار</h3>
-    <form id="add-product-form" style="display: flex; flex-direction: column; gap: 10px;">
-      <input type="text" id="prod-title" placeholder="اسم المنتج" required style="padding: 10px; border-radius: 6px; border: 1px solid #333; background: #252a38; color: #fff;">
-      <input type="number" step="0.001" id="prod-price" placeholder="السعر بـ ETH" required style="padding: 10px; border-radius: 6px; border: 1px solid #333; background: #252a38; color: #fff;">
-      <button type="submit" style="background: #10ac84; color: #fff; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 5px;">نشر المنتج</button>
-    </form>
-  </div>
-</div>
-  // كود فتح وإغلاق نافذة إضافة المنتج
-  const addProdBtn = document.getElementById('add-product-btn');
-  const addProdModal = document.getElementById('add-product-modal');
-  const closeProdBtn = document.querySelector('.close-product-modal');
-
-  if (addProdBtn && addProdModal) {
-    addProdBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      addProdModal.style.display = 'flex';
-    });
-  }
-
-  if (closeProdBtn && addProdModal) {
-    closeProdBtn.addEventListener('click', function() {
-      addProdModal.style.display = 'none';
-    });
-  }
-
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const bazaarBtn = document.getElementById('bazaar-btn');
-    const modalOverlay = document.querySelector('.custom-modal-overlay');
-    const closeBtn = document.querySelector('.close-modal-btn');
-
-    if (bazaarBtn && modalOverlay) {
-      bazaarBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        modalOverlay.style.display = 'flex';
-      });
-
-      if (closeBtn) {
-        closeBtn.addEventListener('click', function() {
-          modalOverlay.style.display = 'none';
-        });
-      }
-
-      modalOverlay.addEventListener('click', function(e) {
-        if (e.target === modalOverlay) {
-          modalOverlay.style.display = 'none';
-        }
-      });
-    }
-  });  // دالة إظهار التنبيهات
-  function showToast(message) {
-    const toast = document.getElementById('toast-notification');
-    if (toast) {
-      toast.innerText = message;
-      toast.style.display = 'block';
-      setTimeout(() => { toast.style.display = 'none'; }, 3000);
-    }
-  }
-
-  // كود نسخ عنوان المحفظة
-  const copyBtn = document.querySelector('.address-copy-box button');
-  const walletAddr = document.getElementById('checkout-wallet-address');
-  if (copyBtn && walletAddr) {
-    copyBtn.addEventListener('click', function() {
-      navigator.clipboard.writeText(walletAddr.innerText.trim()).then(() => {
-        showToast('تم نسخ عنوان المحفظة بنجاح!');
-      }).catch(() => {
-        showToast('تعذر النسخ، يرجى المحاولة يدويًا');
-      });
-    });
-  }
-  // كود معالجة تسجيل الدخول وفتح صلاحيات البائع
-  const loginForm = document.getElementById('login-form');
-  if (loginForm) {
-    loginForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      localStorage.setItem('isLoggedIn', 'true');
-      if (typeof showToast === 'function') {
-        showToast('تم تسجيل الدخول بنجاح! يمكنك الآن رفع منتجاتك.');
-      }
-      const loginModal = document.querySelector('.login-modal-overlay');
-      if (loginModal) loginModal.style.display = 'none';
-    });
-  }
-  // كود معالجة إضافة منتج جديد من قبل البائع
-  const addProdForm = document.getElementById('add-product-form');
-  if (addProdForm) {
-    addProdForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const title = document.getElementById('prod-title').value;
-      const price = document.getElementById('prod-price').value;
-      
-      const bazaarList = document.querySelector('.bazaar-items-list');
-      if (bazaarList) {
-        const newCard = document.createElement('div');
-        newCard.className = 'bazaar-card';
-        newCard.style.cssText = 'background: #252a38; padding: 12px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;';
-        newCard.innerHTML = `
-          <div>
-            <h4 style="margin: 0 0 5px 0; font-size: 15px;">${title}</h4>
-            <span style="font-size: 13px; color: #10ac84;">${price} ETH</span>
-          </div>
-          <button class="buy-bazaar-item-btn" data-price="${price}" style="background: #10ac84; color: #fff; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-weight: bold;">شراء</button>
-        `;
-        bazaarList.appendChild(newCard);
-      }
-      
-      if (typeof showToast === 'function') {
-        showToast('تم نشر منتجك في البازار بنجاح!');
-      }
-      const prodModal = document.getElementById('add-product-modal');
-      if (prodModal) prodModal.style.display = 'none';
-      addProdForm.reset();
-    
-  
-
-
-         
-  
-  
-
-// قيمة الاشتراك الشهري بالدولار
-const SUBSCRIPTION_FEE_USD = "$19.99";
-
-// فحص حالة اشتراك البائع وهل يحق له إضافة منتجات وإجراء عمليات بيع
-function checkVendorSubscription() {
-    let regDate = localStorage.getItem('registrationDate');
-
-    // إذا لم يكن تاريخ التسجيل مسجلاً، يتم تسجيل تاريخ اليوم تلقائياً
-    if (!regDate) {
-        regDate = new Date().toISOString();
-        localStorage.setItem('registrationDate', regDate);
-    }
-
-    const startDate = new Date(regDate);
-    const currentDate = new Date();
-
-    // حساب عدد الأيام المنقضية منذ تسجيل الدخول
-    const diffInMs = Math.abs(currentDate - startDate);
-    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
-
-    // فحص هل قُبل الدفع/الاشتراك من قبل المستخدم (true/false)
-    const isPaid = localStorage.getItem('isSubscribed') === 'true';
-
-    // إذا مضت 5 أيام ولم يقم بالدفع
-    if (diffInDays >= 5 && !isPaid) {
-        return {
-            canAddProduct: false,
-            transferSalesToOwner: true,
-            daysLeft: 0,
-            message: "انتهت فترة التجربة المجانية (5 أيام). يرجى دفع قيمة الاشتراك الشهري $19.99 للاستمرار، والأرباح الحالية ستحول للمالك حتى إتمام الدفع."
-        };
-    }
-
-    // إذا كان ضمن الفترة المجانية (أقل من 5 أيام) أو قام بالدفع
-    return {
-        canAddProduct: true,
-        transferSalesToOwner: false,
-        daysLeft: Math.max(0, 5 - diffInDays),
-        message: isPaid ? "اشتراكك نشط." : `أنت في الفترة المجانية. متبقي لديك ${5 - diffInDays} أيام.`
-    };
-}
-
-// معالج إضافة منتج أو إتمام عملية بيع
-document.addEventListener('DOMContentLoaded', () => {
-    const subStatus = checkVendorSubscription();
-
-    // عند محاولة تنفيذ أي عملية بيع أو رفع منتج
-    const addProdForm = document.getElementById('addProdForm'); // تأكد من اسم الـ id الخاص بنموذجك
-    
-    if (addProdForm) {
-        addProdForm.addEventListener('submit', function (e) {
-            if (!subStatus.canAddProduct) {
-                e.preventDefault();
-                e.stopPropagation();
-
-                alert(
-                    "⚠️ تنبيه!\n\n" +
-                    subStatus.message + "\n\n" +
-                    "لتفعيل الحساب وإرسال المبيعات لحسابك الشخصي، يرجى دفع مبلغ " + SUBSCRIPTION_FEE_USD + " شهرياً."
-                );
-
-                return false;
-            }
-
-            // إذا تحققت الشروط وكان ينبغي توجيه الأرباح للمالك:
-            if (subStatus.transferSalesToOwner) {
-                // الكود الخاص بتحويل ملكية المبيعات للمالك
-                console.log("تم تحويل ملكية هذه العملية لحساب المالك بسبب عدم الدفع.");
-            }
-        }, true);
-    }
-});
-
-    
-    
-          }
-    }, true);
-
-document.addEventListener('click', function(event) {
-    if (event.target.matches('.close, .close-btn, [class*="close"], [class*="cancel"]') || event.target.innerHTML.includes('&times;')) {
-        const modal = event.target.closest('.modal, .modal-overlay, div[style*="flex"], div[style*="block"], .custom-modal-overlay');
-        if (modal) { modal.style.display = 'none'; }
-    }
-    if (event.target.classList && event.target.classList.contains('modal-overlay')) {
-        event.target.style.display = 'none';
-    }
-});
-        if (event.target.classList && event.target.classList.contains('modal')) {
-        event.target.style.display = 'none';
-    }
-});
-
-function switchTab(tabId) {
-    const tabs = document.querySelectorAll('[id^="tab-"], .products-grid');
-    tabs.forEach(tab => {
-        if (tab) tab.style.display = 'none';
-    });
-    const targetTab = document.getElementById(tabId);
-    if (targetTab) {
-        targetTab.style.display = 'block';
-    }
-  
-  
-      
-    }
-}
-</script>
-
-
-<!-- شريط التنقل السفلي -->
-<div style="position: fixed; bottom: 0; left: 0; width: 100%; background: #1a1a1a; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #333; z-index: 1000;">
-    <button onclick="switchTab('products-grid')" style="background: none; border: none; color: #fff; cursor: pointer; font-size: 14px;">🛒 السوق</button>
-    <button onclick="switchTab('tab-studio')" style="background: none; border: none; color: #fff; cursor: pointer; font-size: 14px;">🎨 الاستوديو</button>
-    <button onclick="switchTab('tab-library')" style="background: none; border: none; color: #fff; cursor: pointer; font-size: 14px;">📦 مشترياتي</button>
-</div>
-
-</body>
-</html>
-
-
-
-
-      
-    
-
-
-
-
-
-
-
-    
-      
-
-      
-
-
+    <!--
