@@ -1113,6 +1113,41 @@ document.addEventListener('DOMContentLoaded', () => {
     alert("تم حفظ المنتج على هذا الجهاز.");
   });
 })();
+</script> 
+  <!-- DigiNest: Supabase connection -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+(async function () {
+  const SUPABASE_URL = "https://xxfykrtdhsyqtmizvgav.supabase.co";
+
+  const SUPABASE_KEY = "ضع_المفتاح_العام_هنا";
+
+  const client = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+  // إتاحة الاتصال لبقية أكواد الموقع
+  window.digiNestSupabase = client;
+
+  // جلب المنتجات من قاعدة البيانات
+  const { data: products, error } = await client
+    .from("products")
+    .select("id,title,description,price,image_url,created_at")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("DigiNest: تعذر جلب المنتجات:", error.message);
+    return;
+  }
+
+  console.log("DigiNest: تم الاتصال بنجاح.");
+  console.log("المنتجات الموجودة في قاعدة البيانات:", products);
+
+  // حفظ المنتجات كي تتمكن أكواد الموقع من استخدامها
+  window.digiNestProducts = products || [];
+})();
 </script>
 </body>
 </html>
