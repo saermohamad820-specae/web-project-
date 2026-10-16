@@ -1188,6 +1188,37 @@ console.log("DigiNest: Supabase client initialized successfully");
     console.error("حدث خطأ أثناء الاتصال:", error);
   }
 })();
+</script> 
+  <script>
+async function digiNestRegister(email, password, storeName) {
+  try {
+    const { data, error } = await supabaseClient.auth.signUp({
+      email: email,
+      password: password,
+      options: {
+        data: {
+          store_name: storeName
+        }
+      }
+    });
+
+    if (error) {
+      throw error;
+    }
+
+    if (data.user && data.session) {
+      alert("تم إنشاء الحساب بنجاح! بدأت تجربتك المجانية لمدة 5 أيام.");
+    } else if (data.user) {
+      alert("تم إرسال طلب التسجيل. تحقق من بريدك الإلكتروني لتأكيد الحساب.");
+    }
+
+    return data;
+  } catch (error) {
+    console.error("خطأ في التسجيل:", error.message);
+    alert("تعذر التسجيل: " + error.message);
+    return null;
+  }
+}
 </script>
 </body>
 </html>
