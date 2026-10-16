@@ -1159,6 +1159,35 @@ const supabaseClient = window.supabase.createClient(
 );
 
 console.log("DigiNest: Supabase client initialized successfully");
+</script> 
+  <script>
+(async function loadDigiNestProducts() {
+  try {
+    if (!window.supabase || typeof supabaseClient === "undefined") {
+      console.error("تعذر العثور على اتصال Supabase.");
+      return;
+    }
+
+    const { data, error } = await supabaseClient
+      .from("products")
+      .select("id, title, description, price, image_url, created_at, file_url")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("خطأ في تحميل المنتجات:", error.message);
+      return;
+    }
+
+    if (Array.isArray(data) && data.length > 0) {
+      window.digiNestProducts = data;
+      console.log("تم تحميل المنتجات من Supabase:", data.length);
+    } else {
+      console.log("لا توجد منتجات في قاعدة البيانات حتى الآن.");
+    }
+  } catch (error) {
+    console.error("حدث خطأ أثناء الاتصال:", error);
+  }
+})();
 </script>
 </body>
 </html>
