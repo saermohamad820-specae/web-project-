@@ -1066,51 +1066,89 @@ document.addEventListener('DOMContentLoaded', () => {
     function () {
       panel.style.display = "none";
     }
-  );
+  (
 
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
+    form.addEventListener("submit", async function (event) {
+  event.preventDefault();
 
-    const name = document.getElementById("dn-name").value.trim();
-    const description = document.getElementById(
-      "dn-description"
-    ).value.trim();
+  const name = document.getElementById("dn-name").value.trim();
+  const description = document.getElementById("dn-description").value.trim();
+  const price = Number(document.getElementById("dn-price").value);
+  const image = document.getElementById("dn-image").value.trim();
+  const fileInput = document.getElementById("dn-file");
+  const selectedFile = fileInput.files ? fileInput.files[0] : null;
 
-    const price = Number(
-      document.getElementById("dn-price").value
-    );
+  if (!name || !description || !Number.isFinite(price) || price < 0) {
+    alert("يرجى إدخال بيانات المنتج بصورة صحيحة.");
+    return;
+  }
 
-    const image = document.getElementById("dn-image").value.trim();
-    const file = document.getElementById("dn-file").value.trim();
+  if (!window.digiNestSupabase) {
+    alert("تعذر الاتصال بقاعدة البيانات. أعد تحميل الصفحة.");
+    return;
+  }
 
-    if (!name || !description || !Number.isFinite(price) || price < 0) {
-      alert("يرجى إدخال بيانات المنتج بصورة صحيحة.");
+  if (!selectedFile) {
+    alert("يرجى اختيار ملف المنتج أولًا.");
+    return;
+  }
+
+  try {
+    const client = window.digiNestSupabase;
+    const { data: authData, error: authError } = await client.auth.getUser();
+
+    if (authError || !authData.user) {
+      alert("يرجى تسجيل الدخول قبل إضافة المنتج.");
       return;
     }
 
-    const products = loadProducts();
+    const userId = authData.user.id;
+    const safeName = selectedFile.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+    const filePath = `${userId}/${Date.now()}_${safeName}`;
 
-    products.push({
-      id: Date.now().toString(36) +
-          Math.random().toString(36).slice(2),
-      name: name,
-      description: description,
-      price: price,
-      image: image,
-      file: file
-    });
+    const { error: uploadError } = await client.storage
+      .from("product-files")
+      .upload(filePath, selectedFile);
 
-    try {
-      saveProducts(products);
-    } catch (error) {
-      alert("تعذر الحفظ. قد تكون مساحة التخزين ممتلئة.");
-      return;
+    if (uploadError) {
+      throw uploadError;
     }
 
+    const { data: fileData } = client.storage
+      .from("product-files")
+      .getPublicUrl(filePath);
+
+    const { data: product, error: insertError } = await client
+      .from("products")
+      .insert({
+        title: name,
+        description: description,
+        price: price,
+        image_url: image || null,
+        file_url: filePath
+      })
+      .select()
+      .single();
+
+    if (insertError) {
+      throw insertError;
+    }
+
+    alert("تم حفظ المنتج في قاعدة البيانات بنجاح!");
     form.reset();
     renderProducts();
 
-    alert("تم حفظ المنتج على هذا الجهاز.");
+  } catch (error) {
+    console.error("خطأ في حفظ المنتج:", error);
+    alert("تعذر حفظ المنتج: " + (error.message || "خطأ غير معروف"));
+  }
+});
+  
+    
+
+    
+
+
   });
 })();
 </script> 
