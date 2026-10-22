@@ -1,6 +1,6 @@
 // 1. إعداد الاتصال بـ Supabase
 const SUPABASE_URL = "https://xxfykrtdhsyqtmizvgav.supabase.co";
-const SUPABASE_KEY = "Sb_publishable_I1ru_zUVcgszKRcGc4u6wQ_L1BZ9hPh";
+const SUPABASE_KEY = "sb_publishable_I1ru_zUVcgszKrCGc4u6wQ_L1BZ9hPh";
 
 const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
