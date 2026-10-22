@@ -1114,9 +1114,9 @@ document.addEventListener('DOMContentLoaded', () => {
       throw uploadError;
     }
 
-    const { data: fileData } = client.storage
-      .from("product-files")
-      .getPublicUrl(filePath);
+    
+      
+      
 
     const { data: product, error: insertError } = await client
       .from("products")
