@@ -734,61 +734,89 @@ function renderLibrary(){
       : 'No verified purchases. Purchases should only be added after server-side payment verification.');
 }
 
-document.getElementById('add-product-form').addEventListener('submit', function(event){
+document.getElementById('add-product-form').addEventListener('submit', async function(event) {
   event.preventDefault();
+
+  const client = window.digiNestSupabase;
+
+  if (!client) {
+    showToast('تعذر الاتصال بقاعدة البيانات. أعد تحميل الصفحة.');
+    return;
+  }
 
   const title = document.getElementById('prod-title').value.trim();
   const description = document.getElementById('prod-description').value.trim();
   const price = Number(document.getElementById('prod-price').value);
   const file = document.getElementById('prod-file').files[0];
 
-  if(!title){
+  if (!title) {
     showToast(t('productTitle'));
     return;
   }
 
-  if(!Number.isFinite(price) || price <= 0){
+  if (!Number.isFinite(price) || price <= 0) {
     showToast(t('invalidPrice'));
     return;
   }
 
-  if(!file){
+  if (!file) {
     showToast(t('noFile'));
     return;
   }
 
-  if(file.size > 5 * 1024 * 1024){
+  if (file.size > 5 * 1024 * 1024) {
     showToast(t('fileTooLarge'));
     return;
   }
 
-  const products = readLocalProducts();
+  try {
+    const { data: authData, error: authError } = await client.auth.getUser();
 
-  products.unshift({
-    id:'local-' + Date.now(),
-    title,
-    description,
-    price,
-    fileName:file.name,
-    createdAt:new Date().toISOString()
-  });
+    if (authError || !authData.user) {
+      showToast('يرجى تسجيل الدخول قبل إضافة المنتج.');
+      return;
+    }
 
-  try{
-    localStorage.setItem('diginest_products', JSON.stringify(products));
-  }catch(e){
-    showToast(
-      currentLang === 'ar'
-        ? 'تعذر الحفظ. مساحة التخزين المحلية ممتلئة.'
-        : 'Could not save; local storage may be full.'
-    );
-    return;
+    const userId = authData.user.id;
+    const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+    const filePath = `${userId}/${Date.now()}_${safeName}`;
+
+    const { error: uploadError } = await client.storage
+      .from('product-files')
+      .upload(filePath, file);
+
+    if (uploadError) {
+      console.error('خطأ رفع الملف:', uploadError);
+      showToast('فشل رفع الملف: ' + uploadError.message);
+      return;
+    }
+
+    const { error: insertError } = await client
+      .from('products')
+      .insert({
+        title: title,
+        description: description,
+        price: price,
+        image_url: null,
+        file_url: filePath
+      });
+
+    if (insertError) {
+      console.error('خطأ حفظ المنتج:', insertError);
+      showToast('فشل حفظ بيانات المنتج: ' + insertError.message);
+      return;
+    }
+
+    this.reset();
+    showToast('تم حفظ المنتج ورفعه إلى التخزين السحابي بنجاح.');
+    switchMainTab('explore');
+
+  } catch (error) {
+    console.error('خطأ غير متوقع:', error);
+    showToast('حدث خطأ: ' + error.message);
   }
-
-  this.reset();
-  displayProducts();
-  showToast(t('savedLocal'));
-  switchMainTab('explore');
 });
+    
 
 document.getElementById('checkout-modal').addEventListener('click', function(event){
   if(event.target === this) closeCheckoutModal();
