@@ -95,9 +95,6 @@ async function fetchProducts() {
       card.prepend(image);
     }
 
-    // الملفات داخل الحاوية الخاصة لا تُعرض كرابط عام.
-    // سنضيف رابط تنزيل موقّت عند الحاجة.
-
     container.appendChild(card);
   });
 }
@@ -125,7 +122,6 @@ async function uploadFileToSupabase(file, userId) {
     throw new Error("تعذر رفع الملف: " + error.message);
   }
 
-  // نعيد مسار الملف داخل الحاوية الخاصة.
   return data.path;
 }
 
@@ -145,13 +141,18 @@ async function saveProductToSupabase({
   }
 
   const product = {
-    title,
-    description,
+    title: title,
+    description: description || null,
     price: Number(price),
     image_url: imageUrl || null,
     file_url: filePath || null,
     user_id: userId
   };
+
+  console.log("بيانات المنتج المراد حفظه:", {
+    title: product.title,
+    user_id: product.user_id
+  });
 
   const { data, error } = await supabaseClient
     .from("products")
@@ -160,7 +161,10 @@ async function saveProductToSupabase({
     .single();
 
   if (error) {
-    throw new Error("تعذر حفظ المنتج في قاعدة البيانات: " + error.message);
+    console.error("خطأ Supabase عند الحفظ:", error);
+    throw new Error(
+      "تعذر حفظ المنتج في قاعدة البيانات: " + error.message
+    );
   }
 
   return data;
@@ -181,7 +185,6 @@ function connectProductForm() {
     return;
   }
 
-  // منع ربط النموذج أكثر من مرة.
   if (form.dataset.diginestConnected === "true") return;
   form.dataset.diginestConnected = "true";
 
@@ -247,25 +250,37 @@ function connectProductForm() {
         }
       }
 
-      // التحقق من المستخدم الحالي.
+      // التحقق من جلسة تسجيل الدخول
       const { data: userData, error: authError } =
         await supabaseClient.auth.getUser();
 
-      if (authError || !userData?.user) {
-        throw new Error("يرجى تسجيل الدخول قبل إضافة المنتج.");
+      if (authError) {
+        throw new Error(
+          "تعذر التحقق من تسجيل الدخول: " + authError.message
+        );
+      }
+
+      if (!userData?.user) {
+        throw new Error(
+          "لا توجد جلسة دخول نشطة. سجّل الدخول ثم أعد المحاولة."
+        );
       }
 
       const userId = userData.user.id;
 
-      // رفع الملف إن اختار المستخدم ملفًا.
+      // فحص مؤقت لمعرفة معرّف المستخدم
+      console.log("DigiNest user ID:", userId);
+      alert("تم التحقق من المستخدم. معرّف الحساب:\n" + userId);
+
+      // رفع الملف إن اختار المستخدم ملفًا
       let filePath = null;
 
       if (file) {
         filePath = await uploadFileToSupabase(file, userId);
       }
 
-      // حفظ المنتج مع معرّف صاحبه.
-      await saveProductToSupabase({
+      // حفظ المنتج في Supabase
+      const savedProduct = await saveProductToSupabase({
         title,
         description,
         price,
@@ -274,6 +289,8 @@ function connectProductForm() {
         userId
       });
 
+      console.log("تم حفظ المنتج:", savedProduct);
+
       alert("تم حفظ المنتج في قاعدة بيانات Supabase بنجاح!");
 
       form.reset();
@@ -281,7 +298,10 @@ function connectProductForm() {
 
     } catch (error) {
       console.error("خطأ في حفظ المنتج:", error);
-      alert(error.message || "تعذر حفظ المنتج. يرجى المحاولة مرة أخرى.");
+      alert(
+        error.message ||
+        "تعذر حفظ المنتج. يرجى المحاولة مرة أخرى."
+      );
 
     } finally {
       if (submitButton) {
