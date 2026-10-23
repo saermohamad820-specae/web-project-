@@ -10,9 +10,9 @@ const supabaseClient = window.supabase.createClient(
 );
 
 // ========================================
-// 2. تسجيل الدخول
+// 2. تهيئة الصفحة وتسجيل الدخول
 // ========================================
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const loginForm = document.getElementById("loginForm");
 
   if (loginForm) {
@@ -22,6 +22,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const inputs = loginForm.querySelectorAll("input");
       const email = inputs[0]?.value.trim();
       const password = inputs[1]?.value;
+
+      if (!email || !password) {
+        alert("يرجى إدخال البريد الإلكتروني وكلمة المرور.");
+        return;
+      }
 
       const { error } = await supabaseClient.auth.signInWithPassword({
         email,
@@ -38,15 +43,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // عرض المنتجات المحفوظة في قاعدة البيانات
-  fetchProducts();
-
-  // ربط نموذج إضافة المنتج
+  await fetchProducts();
   connectProductForm();
 });
 
 // ========================================
-// 3. جلب المنتجات من Supabase
+// 3. جلب المنتجات من قاعدة البيانات
 // ========================================
 async function fetchProducts() {
   const container = document.getElementById("products-container");
@@ -54,12 +56,12 @@ async function fetchProducts() {
 
   const { data: products, error } = await supabaseClient
     .from("products")
-    .select("*")
+    .select("id,title,description,price,image_url,created_at,file_url")
     .order("created_at", { ascending: false });
 
   if (error) {
     console.error("خطأ في جلب المنتجات:", error.message);
-    container.textContent = "تعذر تحميل المنتجات. يرجى المحاولة لاحقاً.";
+    container.textContent = "تعذر تحميل المنتجات. يرجى المحاولة لاحقًا.";
     return;
   }
 
@@ -93,36 +95,37 @@ async function fetchProducts() {
       card.prepend(image);
     }
 
+    // الملفات داخل الحاوية الخاصة لا تُعرض كرابط عام.
+    // سنضيف رابط تنزيل موقّت عند الحاجة.
+
     container.appendChild(card);
   });
 }
 
 // ========================================
-// 4. رفع ملف إلى Storage
+// 4. رفع ملف المنتج إلى Storage
 // ========================================
-async function uploadFileToSupabase(file) {
+async function uploadFileToSupabase(file, userId) {
   if (!file) return null;
 
-  const { data: userData, error: authError } =
-    await supabaseClient.auth.getUser();
-
-  if (authError || !userData.user) {
-    throw new Error("يرجى تسجيل الدخول قبل رفع الملف.");
+  if (!userId) {
+    throw new Error("تعذر تحديد المستخدم المسجّل.");
   }
 
   const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
-  const filePath =
-    `${userData.user.id}/${Date.now()}_${safeName}`;
+  const filePath = `${userId}/${Date.now()}_${safeName}`;
 
   const { data, error } = await supabaseClient.storage
     .from("product-files")
-    .upload(filePath, file);
+    .upload(filePath, file, {
+      upsert: false
+    });
 
   if (error) {
     throw new Error("تعذر رفع الملف: " + error.message);
   }
 
-  // نعيد مسار الملف لأن الحاوية خاصة
+  // نعيد مسار الملف داخل الحاوية الخاصة.
   return data.path;
 }
 
@@ -134,12 +137,10 @@ async function saveProductToSupabase({
   description,
   price,
   imageUrl,
-  filePath
+  filePath,
+  userId
 }) {
-  const { data: userData, error: authError } =
-    await supabaseClient.auth.getUser();
-
-  if (authError || !userData.user) {
+  if (!userId) {
     throw new Error("يرجى تسجيل الدخول قبل إضافة المنتج.");
   }
 
@@ -148,7 +149,8 @@ async function saveProductToSupabase({
     description,
     price: Number(price),
     image_url: imageUrl || null,
-    file_url: filePath || null
+    file_url: filePath || null,
+    user_id: userId
   };
 
   const { data, error } = await supabaseClient
@@ -165,7 +167,7 @@ async function saveProductToSupabase({
 }
 
 // ========================================
-// 6. ربط نموذج المنتج
+// 6. ربط نموذج إضافة المنتج
 // ========================================
 function connectProductForm() {
   const form =
@@ -174,10 +176,14 @@ function connectProductForm() {
 
   if (!form) {
     console.warn(
-      "لم يُعثر على نموذج productForm أو addProductForm. قد نحتاج إلى مطابقة اسم النموذج في index.html."
+      "لم يُعثر على نموذج productForm أو addProductForm."
     );
     return;
   }
+
+  // منع ربط النموذج أكثر من مرة.
+  if (form.dataset.diginestConnected === "true") return;
+  form.dataset.diginestConnected = "true";
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -199,11 +205,11 @@ function connectProductForm() {
 
     const imageInput =
       form.querySelector('[name="image_url"]') ||
+      form.querySelector('[name="image"]') ||
       form.querySelector("#product-image") ||
       form.querySelector("#dn-image");
 
-    const fileInput =
-      form.querySelector('input[type="file"]');
+    const fileInput = form.querySelector('input[type="file"]');
 
     const title = titleInput?.value.trim();
     const description = descriptionInput?.value.trim() || "";
@@ -211,7 +217,13 @@ function connectProductForm() {
     const imageUrl = imageInput?.value.trim() || "";
     const file = fileInput?.files?.[0] || null;
 
-    if (!title || price === "" || price == null || !Number.isFinite(Number(price)) || Number(price) < 0) {
+    if (
+      !title ||
+      price === "" ||
+      price == null ||
+      !Number.isFinite(Number(price)) ||
+      Number(price) < 0
+    ) {
       alert("يرجى إدخال اسم المنتج وسعر صحيح.");
       return;
     }
@@ -219,31 +231,51 @@ function connectProductForm() {
     const submitButton = form.querySelector(
       'button[type="submit"], input[type="submit"]'
     );
+
     const originalText = submitButton
-      ? submitButton.textContent
+      ? (submitButton.textContent || submitButton.value)
       : "";
 
     try {
       if (submitButton) {
         submitButton.disabled = true;
-        submitButton.textContent = "جارٍ حفظ المنتج...";
+
+        if (submitButton.tagName === "INPUT") {
+          submitButton.value = "جارٍ حفظ المنتج...";
+        } else {
+          submitButton.textContent = "جارٍ حفظ المنتج...";
+        }
       }
 
+      // التحقق من المستخدم الحالي.
+      const { data: userData, error: authError } =
+        await supabaseClient.auth.getUser();
+
+      if (authError || !userData?.user) {
+        throw new Error("يرجى تسجيل الدخول قبل إضافة المنتج.");
+      }
+
+      const userId = userData.user.id;
+
+      // رفع الملف إن اختار المستخدم ملفًا.
       let filePath = null;
 
       if (file) {
-        filePath = await uploadFileToSupabase(file);
+        filePath = await uploadFileToSupabase(file, userId);
       }
 
+      // حفظ المنتج مع معرّف صاحبه.
       await saveProductToSupabase({
         title,
         description,
         price,
         imageUrl,
-        filePath
+        filePath,
+        userId
       });
 
       alert("تم حفظ المنتج في قاعدة بيانات Supabase بنجاح!");
+
       form.reset();
       await fetchProducts();
 
@@ -254,7 +286,12 @@ function connectProductForm() {
     } finally {
       if (submitButton) {
         submitButton.disabled = false;
-        submitButton.textContent = originalText || "حفظ المنتج";
+
+        if (submitButton.tagName === "INPUT") {
+          submitButton.value = originalText || "حفظ المنتج";
+        } else {
+          submitButton.textContent = originalText || "حفظ المنتج";
+        }
       }
     }
   });
