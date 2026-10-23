@@ -267,7 +267,8 @@ function connectProductForm() {
       }
 
       const userId = userData.user.id;
-
+console.log("DigiNest user ID:", userId);
+alert("معرّف حسابك:\n" + userId);
       // فحص مؤقت لمعرفة معرّف المستخدم
       console.log("DigiNest user ID:", userId);
       alert("تم التحقق من المستخدم. معرّف الحساب:\n" + userId);
