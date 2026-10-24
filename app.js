@@ -252,10 +252,19 @@ function connectProductForm() {
 
       // التحقق من جلسة تسجيل الدخول
       const { data: userData, error: authError } =
-        await supabaseClient.auth.getUser();
+  await supabaseClient.auth.getUser();
 
-      if (authError) {
-        throw new Error(
+if (authError || !userData?.user) {
+  alert("يرجى تسجيل الدخول مجددًا قبل إضافة المنتج.");
+  return;
+}
+
+const userId = userData.user.id;
+console.log("DigiNest user ID:", userId);
+    
+
+    
+        
           "تعذر التحقق من تسجيل الدخول: " + authError.message
         );
       }
