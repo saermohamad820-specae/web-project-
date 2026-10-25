@@ -264,7 +264,7 @@ function connectProductForm() {
       const userId = userData.user.id;
 
       console.log("DigiNest user ID:", userId);
-
+console.log("DigiNest session:", !!userData.user);
       // رفع الملف إذا اختار المستخدم ملفًا
       let filePath = null;
 
