@@ -10,7 +10,7 @@ const supabaseClient = window.supabase.createClient(
 );
 
 // ========================================
-// 2. تهيئة الصفحة وتسجيل الدخول
+// 2. تشغيل الصفحة
 // ========================================
 document.addEventListener("DOMContentLoaded", async () => {
   const loginForm = document.getElementById("loginForm");
@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 // ========================================
 async function fetchProducts() {
   const container = document.getElementById("products-container");
+
   if (!container) return;
 
   const { data: products, error } = await supabaseClient
@@ -100,7 +101,7 @@ async function fetchProducts() {
 }
 
 // ========================================
-// 4. رفع ملف المنتج إلى Storage
+// 4. رفع ملف المنتج إلى Supabase Storage
 // ========================================
 async function uploadFileToSupabase(file, userId) {
   if (!file) return null;
@@ -141,18 +142,13 @@ async function saveProductToSupabase({
   }
 
   const product = {
-    title: title,
+    title,
     description: description || null,
     price: Number(price),
     image_url: imageUrl || null,
     file_url: filePath || null,
     user_id: userId
   };
-
-  console.log("بيانات المنتج المراد حفظه:", {
-    title: product.title,
-    user_id: product.user_id
-  });
 
   const { data, error } = await supabaseClient
     .from("products")
@@ -163,7 +159,7 @@ async function saveProductToSupabase({
   if (error) {
     console.error("خطأ Supabase عند الحفظ:", error);
     throw new Error(
-      "تعذر حفظ المنتج في قاعدة البيانات: " + error.message
+      "تعذر حفظ المنتج: " + error.message
     );
   }
 
@@ -179,13 +175,12 @@ function connectProductForm() {
     document.getElementById("addProductForm");
 
   if (!form) {
-    console.warn(
-      "لم يُعثر على نموذج productForm أو addProductForm."
-    );
+    console.warn("لم يُعثر على نموذج إضافة المنتج.");
     return;
   }
 
   if (form.dataset.diginestConnected === "true") return;
+
   form.dataset.diginestConnected = "true";
 
   form.addEventListener("submit", async (event) => {
@@ -250,46 +245,34 @@ function connectProductForm() {
         }
       }
 
-      // التحقق من جلسة تسجيل الدخول
+      // التحقق من تسجيل الدخول
       const { data: userData, error: authError } =
-  await supabaseClient.auth.getUser();
+        await supabaseClient.auth.getUser();
 
-if (authError || !userData?.user) {
-  alert("يرجى تسجيل الدخول مجددًا قبل إضافة المنتج.");
-  return;
-}
-
-const userId = userData.user.id;
-console.log("DigiNest user ID:", userId);
-    
-
-    
-        
+      if (authError) {
+        throw new Error(
           "تعذر التحقق من تسجيل الدخول: " + authError.message
         );
       }
 
       if (!userData?.user) {
         throw new Error(
-          "لا توجد جلسة دخول نشطة. سجّل الدخول ثم أعد المحاولة."
+          "يرجى تسجيل الدخول قبل إضافة المنتج."
         );
       }
 
       const userId = userData.user.id;
-console.log("DigiNest user ID:", userId);
-alert("معرّف حسابك:\n" + userId);
-      // فحص مؤقت لمعرفة معرّف المستخدم
-      console.log("DigiNest user ID:", userId);
-      alert("تم التحقق من المستخدم. معرّف الحساب:\n" + userId);
 
-      // رفع الملف إن اختار المستخدم ملفًا
+      console.log("DigiNest user ID:", userId);
+
+      // رفع الملف إذا اختار المستخدم ملفًا
       let filePath = null;
 
       if (file) {
         filePath = await uploadFileToSupabase(file, userId);
       }
 
-      // حفظ المنتج في Supabase
+      // حفظ المنتج في قاعدة البيانات
       const savedProduct = await saveProductToSupabase({
         title,
         description,
@@ -299,15 +282,17 @@ alert("معرّف حسابك:\n" + userId);
         userId
       });
 
-      console.log("تم حفظ المنتج:", savedProduct);
+      console.log("تم حفظ المنتج بنجاح:", savedProduct);
 
-      alert("تم حفظ المنتج في قاعدة بيانات Supabase بنجاح!");
+      alert("تم حفظ المنتج في قاعدة البيانات بنجاح!");
 
       form.reset();
+
       await fetchProducts();
 
     } catch (error) {
       console.error("خطأ في حفظ المنتج:", error);
+
       alert(
         error.message ||
         "تعذر حفظ المنتج. يرجى المحاولة مرة أخرى."
