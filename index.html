@@ -1153,7 +1153,8 @@ document.addEventListener('DOMContentLoaded', () => {
         description: description,
         price: price,
         image_url: image || null,
-        file_url: filePath
+        file_url: filePath,
+user_id: userId
       })
       .select()
       .single();
