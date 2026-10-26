@@ -792,14 +792,17 @@ document.getElementById('add-product-form').addEventListener('submit', async fun
     }
 
     const { error: insertError } = await client
-      .from('products')
-      .insert({
-        title: title,
-        description: description,
-        price: price,
-        image_url: null,
-        file_url: filePath
-      });
+.from('products')
+.insert({
+title: title,
+description: description,
+price: price,
+image_url: null,
+file_url: filePath,
+user_id: userId
+});
+
+      
 
     if (insertError) {
       console.error('خطأ حفظ المنتج:', insertError);
