@@ -264,7 +264,11 @@ function connectProductForm() {
       const userId = userData.user.id;
 const { data: sessionData, error: sessionError } =
   await supabaseClient.auth.getSession();
-
+alert(
+  "User ID: " + userId +
+  "\nSession ID: " +
+  (sessionData?.session?.user?.id || "غير موجود")
+);
 console.log("DigiNest user ID:", userId);
 console.log(
   "DigiNest session user ID:",
