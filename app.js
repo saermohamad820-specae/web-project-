@@ -262,7 +262,15 @@ function connectProductForm() {
       }
 
       const userId = userData.user.id;
+const { data: sessionData, error: sessionError } =
+  await supabaseClient.auth.getSession();
 
+console.log("DigiNest user ID:", userId);
+console.log(
+  "DigiNest session user ID:",
+  sessionData?.session?.user?.id
+);
+console.log("DigiNest session error:", sessionError?.message || null);
       console.log("DigiNest user ID:", userId);
 console.log("DigiNest session:", !!userData.user);
       // رفع الملف إذا اختار المستخدم ملفًا
