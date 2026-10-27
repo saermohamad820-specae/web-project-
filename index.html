@@ -196,7 +196,22 @@
         <form id="add-product-form" class="form-grid">
           <label><span data-i18n="productTitle">اسم المنتج</span><input id="prod-title" class="form-control" type="text" required maxlength="120"></label>
           <label><span data-i18n="productDescription">الوصف</span><textarea id="prod-description" class="form-control" rows="3" maxlength="1000"></textarea></label>
-          <label><span data-i18n="priceUsd">السعر بالدولار (USD)</span><input id="prod-price" class="form-control" type="number" min="0.01" step="0.01" required></label>
+          <label><span data-i18n="priceUsd">السعر بالدولار (USD)</span><input id="prod-price" class="form-control" type="number" min="0.01" step="0.01" required></label> 
+          <label>
+  <span>صورة المنتج</span>
+  <input
+    id="prod-image"
+    class="form-control"
+    type="file"
+    accept="image/*"
+  >
+</label>
+
+<img
+  id="prod-image-preview"
+  alt="معاينة صورة المنتج"
+  style="display:none;max-width:180px;border-radius:12px;margin:10px 0;"
+>
           <label><span data-i18n="productFile">ملف المنتج</span><input id="prod-file" class="form-control" type="file" required></label>
 <p class="notice" data-i18n="uploadNotice">يُرجى تسجيل الدخول لرفع المنتجات وحفظها في قاعدة البيانات والتخزين السحابي.</p>
           <button type="submit" class="btn btn-emerald"><i class="fa-solid fa-plus"></i><span data-i18n="publishProduct">حفظ المنتج التجريبي</span></button>
