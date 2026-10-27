@@ -736,18 +736,50 @@ function renderLibrary(){
 
   const items = (() => {
     try{
-      return JSON.parse(localStorage.getItem('diginest_demo_purchases') || '[]');
+      return JSON.parse(
+        localStorage.getItem('diginest_demo_purchases') || '[]'
+      );
     }catch(e){
       return [];
     }
   })();
 
-  el.textContent = items.length
-    ? items.map(p => p.title).join(' · ')
-    : (currentLang === 'ar'
-      ? 'لا توجد مشتريات مؤكدة. لن تُضاف المشتريات إلا بعد التحقق من الدفع عبر خادم حقيقي.'
-      : 'No verified purchases. Purchases should only be added after server-side payment verification.');
+  if(!items.length){
+    el.textContent = currentLang === 'ar'
+      ? 'لا توجد مشتريات مؤكدة. ستظهر المنتجات هنا بعد التحقق من الدفع.'
+      : 'No verified purchases. Products will appear here after payment verification.';
+    return;
+  }
+
+  el.innerHTML = items.map((p, index) => `
+    <div class="library-item" style="margin:10px 0;padding:12px;border:1px solid #293247;border-radius:10px;">
+      <strong>${escapeLibraryText(p.title || 'منتج رقمي')}</strong>
+      <button
+        type="button"
+        disabled
+        style="display:block;margin-top:10px;padding:8px 14px;opacity:.65;cursor:not-allowed;"
+        title="${currentLang === 'ar' ? 'سيُفعّل بعد إعداد التحقق الآمن من الدفع' : 'Available after secure payment verification is configured'}"
+      >
+        ${currentLang === 'ar'
+          ? 'التحميل غير متاح حاليًا'
+          : 'Download unavailable'}
+      </button>
+    </div>
+  `).join('');
 }
+
+function escapeLibraryText(value){
+  return String(value).replace(/[&<>"']/g, function(char){
+    return {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    }[char];
+  });
+}
+
 
 document.getElementById('add-product-form').addEventListener('submit', async function(event) {
   event.preventDefault();
