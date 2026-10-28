@@ -795,6 +795,7 @@ document.getElementById('add-product-form').addEventListener('submit', async fun
   const description = document.getElementById('prod-description').value.trim();
   const price = Number(document.getElementById('prod-price').value);
   const file = document.getElementById('prod-file').files[0];
+const imageFile = document.getElementById('prod-image').files[0];
 
   if (!title) {
     showToast(t('productTitle'));
