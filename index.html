@@ -212,30 +212,12 @@
   alt="معاينة صورة المنتج"
   style="display:none;max-width:180px;border-radius:12px;margin:10px 0;"
 > 
-        <script>
-document.getElementById('prod-image').addEventListener('change', function () {
-  const imageFile = this.files[0];
-  const preview = document.getElementById('prod-image-preview');
+        
 
-  if (!imageFile) {
-    preview.removeAttribute('src');
-    preview.style.display = 'none';
-    return;
-  }
 
-  if (!imageFile.type.startsWith('image/')) {
-    showToast('يرجى اختيار ملف صورة صالح.');
-    this.value = '';
-    preview.removeAttribute('src');
-    preview.style.display = 'none';
-    return;
-  }
 
-  const imageUrl = URL.createObjectURL(imageFile);
-  preview.src = imageUrl;
-  preview.style.display = 'block';
-});
-</script>  
+
+
           <label><span data-i18n="productFile">ملف المنتج</span><input id="prod-file" class="form-control" type="file" required></label>
 <p class="notice" data-i18n="uploadNotice">يُرجى تسجيل الدخول لرفع المنتجات وحفظها في قاعدة البيانات والتخزين السحابي.</p>
           <button type="submit" class="btn btn-emerald"><i class="fa-solid fa-plus"></i><span data-i18n="publishProduct">حفظ المنتج التجريبي</span></button>
@@ -905,7 +887,28 @@ document.addEventListener('DOMContentLoaded', () => {
   applyLanguage();
   renderProducts();
   displayProducts();
-  renderLibrary();
+  renderLibrary(); 
+  document.getElementById('prod-image').addEventListener('change', function () {
+  const imageFile = this.files[0];
+  const preview = document.getElementById('prod-image-preview');
+
+  if (!imageFile) {
+    preview.removeAttribute('src');
+    preview.style.display = 'none';
+    return;
+  }
+
+  if (!imageFile.type.startsWith('image/')) {
+    showToast('يرجى اختيار ملف صورة صالح.');
+    this.value = '';
+    preview.removeAttribute('src');
+    preview.style.display = 'none';
+    return;
+  }
+
+  preview.src = URL.createObjectURL(imageFile);
+  preview.style.display = 'block';
+});
 });
 </script>  
   <!-- DigiNest Web3 Admin Panel -->
