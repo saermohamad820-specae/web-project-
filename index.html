@@ -551,7 +551,29 @@ function renderProducts(){
 
   const term = currentSearchTerm.trim().toLocaleLowerCase();
 
-  const filtered = PRODUCTS_DATA.filter(item =>
+  const allProducts = [
+...PRODUCTS_DATA,
+...(Array.isArray(window.digiNestProducts)
+? window.digiNestProducts.map(p => ({
+id: p.id,
+title: p.title || '',
+desc: p.description || '',
+category: 'all',
+categoryName: currentLang === 'ar' ? 'منتج رقمي' : 'Digital Product',
+author: currentLang === 'ar' ? 'بائع' : 'Seller',
+bannerClass: '',
+icon: '📦',
+rating: '—',
+downloads: 0,
+priceUsd: Number(p.price) || 0,
+cryptoRate: '',
+image_url: p.image_url,
+file_url: p.file_url
+}))
+: [])
+];
+
+const filtered = allProducts.filter(item =>
     (currentSelectedCategory === 'all' || item.category === currentSelectedCategory) &&
     (`${item.title} ${item.desc} ${item.categoryName} ${item.author}`)
       .toLocaleLowerCase().includes(term)
