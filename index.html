@@ -867,17 +867,38 @@ const imageFile = document.getElementById('prod-image').files[0];
       return;
     }
 
-    const { error: insertError } = await client
-.from('products')
-.insert({
-title: title,
-description: description,
-price: price,
-image_url: null,
-file_url: filePath,
-user_id: userId
-});
+    // رفع صورة المنتج إلى التخزين السحابي
+let imageUrl = null;
 
+const imageFile = document.getElementById('prod-image').files[0];
+
+if (imageFile) {
+  const imagePath = `${userId}/${Date.now()}_${imageFile.name}`;
+
+  const { error: imageError } = await client.storage
+    .from('product-images')
+    .upload(imagePath, imageFile);
+
+  if (imageError) {
+    console.error('خطأ رفع الصورة:', imageError);
+    showToast('فشل رفع صورة المنتج: ' + imageError.message);
+    return;
+  }
+
+  imageUrl = imagePath;
+}
+
+// حفظ بيانات المنتج
+const { error: insertError } = await client
+  .from('products')
+  .insert({
+    title: title,
+    description: description,
+    price: price,
+    image_url: imageUrl,
+    file_url: filePath,
+    user_id: userId
+  });
       
 
     if (insertError) {
