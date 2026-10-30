@@ -1040,7 +1040,8 @@ console.log("DigiNest: Supabase client initialized successfully");
     }
 
     window.digiNestProducts = Array.isArray(data) ? data : [];
-
+console.log("منتجات Supabase:", data);
+console.log("عدد المنتجات:", data?.length);
 console.log(
   "تم تحميل المنتجات من Supabase:",
   window.digiNestProducts.length
