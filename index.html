@@ -1007,11 +1007,15 @@ console.log("DigiNest: Supabase client initialized successfully");
       return;
     }
 
-    if (Array.isArray(data) && data.length > 0) {
-      window.digiNestProducts = data;
-      console.log("تم تحميل المنتجات من Supabase:", data.length);
-    } else {
-      console.log("لا توجد منتجات في قاعدة البيانات حتى الآن.");
+    window.digiNestProducts = Array.isArray(data) ? data : [];
+
+console.log(
+  "تم تحميل المنتجات من Supabase:",
+  window.digiNestProducts.length
+);
+
+// تحديث السوق بعد انتهاء تحميل المنتجات
+renderProducts();
     }
   } catch (error) {
     console.error("حدث خطأ أثناء الاتصال:", error);
