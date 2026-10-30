@@ -896,7 +896,12 @@ if (imageFile) {
     return;
   }
 
-  imageUrl = imagePath;
+  const { data: imageData } = client.storage
+  .from('product-images')
+  .getPublicUrl(imagePath);
+
+imageUrl = imageData.publicUrl;
+}
 }
 
 // حفظ بيانات المنتج
