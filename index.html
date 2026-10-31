@@ -670,7 +670,12 @@ function switchMainTab(tabKey, el){
 }
 
 function openCheckoutModal(productId){
-  const product = PRODUCTS_DATA.find(p => p.id === productId);
+  const allProducts = [
+  ...PRODUCTS_DATA,
+  ...(window.digiNestProducts || [])
+];
+
+const product = allProducts.find(p => String(p.id) === String(productId));
   if(!product) return;
 
   currentActiveProduct = product;
