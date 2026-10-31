@@ -592,27 +592,27 @@ const filtered = allProducts.filter(item =>
 
   container.innerHTML = filtered.map(item => `
     <article class="product-card">
-      <div class="card-banner ${escapeHTML(item.bannerClass)}">
-        <span>${escapeHTML(item.icon)}</span>
-        <span class="category-tag">${escapeHTML(item.categoryName)}</span>
-        <span class="rating-tag"><i class="fa-solid fa-star"></i> ${item.rating}</span>
-      </div>
-      <div class="card-banner ${escapeHTML(item.bannerClass)}">
+      
+<div class="card-banner ${escapeHTML(item.bannerClass)}">
 
-  ${item.image_url
-    ? `<img src="${escapeHTML(item.image_url)}"
-        alt="${escapeHTML(item.title)}"
-        style="width:100%;height:180px;object-fit:cover;display:block;">`
-    : `<span>${escapeHTML(item.icon)}</span>`
+  ${
+    item.image_url
+      ? `<img src="${escapeHTML(item.image_url)}"
+          alt="${escapeHTML(item.title)}"
+          style="width:100%;height:180px;object-fit:cover;display:block;">`
+      : `<span>${escapeHTML(item.icon)}</span>`
   }
 
-  <span class="category-tag">${escapeHTML(item.categoryName)}</span>
+  <span class="category-tag">
+    ${escapeHTML(item.categoryName)}
+  </span>
 
   <span class="rating-tag">
     <i class="fa-solid fa-star"></i> ${item.rating}
   </span>
 
 </div>
+
   
       
         <div class="card-footer">
