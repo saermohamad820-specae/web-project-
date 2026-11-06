@@ -242,13 +242,17 @@
           <h3 id="checkout-product-title">اسم المنتج</h3>
           <div class="modal-price-display" id="checkout-price-display">$0.00</div>
         </div>
-
-        <div class="crypto-grid">
-          <button class="crypto-option active" data-crypto="USDT" onclick="selectCryptoOption('USDT',this)"><i class="fa-solid fa-dollar-sign"></i><span>USDT</span></button>
-          <button class="crypto-option" data-crypto="ETH" onclick="selectCryptoOption('ETH',this)"><i class="fa-brands fa-ethereum"></i><span>ETH</span></button>
-          <button class="crypto-option" data-crypto="BNB" onclick="selectCryptoOption('BNB',this)"><i class="fa-solid fa-coins"></i><span>BNB</span></button>
-          <button class="crypto-option" data-crypto="MATIC" onclick="selectCryptoOption('MATIC',this)"><i class="fa-solid fa-bolt"></i><span>MATIC</span></button>
-        </div>
+<div class="crypto-grid">
+  <button class="crypto-option active"
+    data-crypto="USDT"
+    data-network="TRC20"
+    onclick="selectCryptoOption('USDT', this)"
+    type="button">
+    <i class="fa-solid fa-dollar-sign"></i>
+    <span>USDT (TRC20)</span>
+  </button>
+</div>
+        
 
         <div class="notice" data-i18n="paymentNotice">الدفع الحقيقي غير مفعّل في هذه النسخة. لا ترسل أموالاً إلى عنوان قبل إعداد بوابة دفع والتحقق من الشبكة والمبلغ.</div>
         <div class="qr-frame"><img id="checkout-qr-img" alt="رمز QR تجريبي" src=""></div>
@@ -676,12 +680,17 @@ function openCheckoutModal(productId){
 ];
 
 const product = allProducts.find(p => String(p.id) === String(productId));
-  if(!product) return;
-
+  if (!product) {
+  alert('المنتج غير موجود');
+  return;
+}
   currentActiveProduct = product;
 
   document.getElementById('checkout-product-title').textContent = product.title;
-  document.getElementById('checkout-price-display').textContent = `$${product.priceUsd.toFixed(2)}`;
+  const productPrice = Number(product.priceUsd ?? product.price ?? 0);
+
+document.getElementById('checkout-price-display').textContent =
+  `$${productPrice.toFixed(2)}`;
 
   document.getElementById('checkout-wallet-address').textContent =
     currentLang === 'ar' ? 'لم يتم إعداد عنوان دفع' : 'No payment address configured';
@@ -693,15 +702,18 @@ const product = allProducts.find(p => String(p.id) === String(productId));
 function closeCheckoutModal(){
   document.getElementById('checkout-modal').style.display = 'none';
 }
-
 function selectCryptoOption(symbol, el){
-  selectedCryptoSymbol = symbol;
+  if (symbol !== 'USDT') return;
+
+  selectedCryptoSymbol = 'USDT';
 
   document.querySelectorAll('.crypto-option').forEach(btn => {
     btn.classList.toggle('active', btn === el);
   });
 
   updateModalQr();
+}
+
 }
 
 function updateModalQr(){
