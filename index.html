@@ -714,7 +714,7 @@ function selectCryptoOption(symbol, el){
   updateModalQr();
 }
 
-}
+
 
 function updateModalQr(){
   const qr = document.getElementById('checkout-qr-img');
@@ -897,8 +897,6 @@ const imageFile = document.getElementById('prod-image').files[0];
 
     // رفع صورة المنتج إلى التخزين السحابي
 let imageUrl = null;
-
-const imageFile = document.getElementById('prod-image').files[0];
 
 if (imageFile) {
   const imagePath = `${userId}/${Date.now()}_${imageFile.name}`;
