@@ -734,8 +734,54 @@ async function copyWalletAddress(){
   showToast(t('paymentNotConfigured'));
 }
 
-function completeCryptoCheckout(){
-  showToast(t('paymentNotConfigured'));
+async function completeCryptoCheckout() {
+  try {
+    const client = window.digiNestSupabase;
+
+    if (!client) {
+      showToast('تعذر الاتصال بالخادم');
+      return;
+    }
+
+    if (!currentActiveProduct || !currentActiveProduct.id) {
+      showToast('لم يتم تحديد المنتج');
+      return;
+    }
+
+    if (selectedCryptoSymbol !== 'USDT') {
+      showToast('طريقة الدفع غير مدعومة');
+      return;
+    }
+
+    showToast('جارٍ إنشاء طلب الدفع...');
+
+    const { data, error } = await client.functions.invoke(
+      'create-payment',
+      {
+        body: {
+          product_id: String(currentActiveProduct.id)
+        }
+      }
+    );
+
+    if (error) {
+      console.error('Payment error:', error);
+      showToast('تعذر إنشاء عملية الدفع');
+      return;
+    }
+
+    if (!data || !data.success || !data.payment_url) {
+      console.error('Invalid payment response:', data);
+      showToast('لم يتم إنشاء رابط الدفع');
+      return;
+    }
+
+    window.location.href = data.payment_url;
+
+  } catch (error) {
+    console.error('Checkout error:', error);
+    showToast('حدث خطأ أثناء إنشاء الدفع');
+  }
 }
 
 function showToast(message){
